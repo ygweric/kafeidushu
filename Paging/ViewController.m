@@ -42,8 +42,8 @@
     //text 整个文本内容
     
     NSLog(@"-----pageString   -----before text:\n%@\n\n",content);
-    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
-    NSTimeInterval now=0;
+//    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    NSTimeInterval now=0;
     // 计算文本串的大小尺寸
     CGSize totalTextSize = [self.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
                                  constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
@@ -62,14 +62,15 @@
         
         // 申请最终保存页面NSRange信息的数组缓冲区
         int maxPages = referTotalPages;
+        rangeOfPages=nil;
         rangeOfPages = (NSRange *)malloc(referTotalPages*sizeof(NSRange));
         memset(rangeOfPages, 0x0, referTotalPages*sizeof(NSRange));
         
         // 页面索引
         int page = 0;
-        now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//        now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
         //            NSLog(@"time interval--viewDidLoad ---1--:%lf",now-timeStart);
-        timeStart=now;
+//        timeStart=now;
         for (NSUInteger location = 0; location < textLength; ) {
             // 先计算临界点（尺寸刚刚超过UILabel尺寸时的文本串）
             NSRange range = NSMakeRange(location, referCharatersPerPage);//首页range
@@ -82,9 +83,9 @@
             
             //得到合适的range
             //保证没有达到文章尾部
-            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
             //                NSLog(@"time interval--viewDidLoad ---2--:%lf",now-timeStart);
-            timeStart=now;
+//            timeStart=now;
             while (range.location + range.length < textLength) {
                 pageText = [self.text substringWithRange:range];
                 
@@ -101,9 +102,9 @@
                     range.length += referCharatersPerPage;
                 }
             }
-            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
             //                NSLog(@"time interval--viewDidLoad ---3--:%lf",now-timeStart);
-            timeStart=now;
+//            timeStart=now;
             //到文章结尾时候处理
             if (range.location + range.length >= textLength) {
                 range.length = textLength - range.location;
@@ -127,9 +128,9 @@
                     range.length -= 2;
                 }
             }
-            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
             //                NSLog(@"time interval--viewDidLoad ---4--:%lf",now-timeStart);
-            timeStart=now;
+//            timeStart=now;
             // 得到一个页面的显示范围
             if (page >= maxPages) {
                 maxPages += 10;
@@ -151,6 +152,10 @@
         lbContent.text = currentContent;
         int length= [currentContent lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         //            length=(length/2!=0)?(length-10):(length-11);
+        if (rangeOfPages) {
+            free(rangeOfPages);
+            rangeOfPages=nil;
+        }
         return length;
     }
     
@@ -216,7 +221,7 @@
     //    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"push实现.txt"];
 //    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖.txt"];
     NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
-    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     
     //    NSError* err=nil;
     //    NSString* mTxt=[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&err];
@@ -228,9 +233,9 @@
     [fileHandle seekToFileOffset:index];
     NSData *responseData = [fileHandle readDataOfLength:length];
     
-    NSTimeInterval now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    NSTimeInterval now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
 //    NSLog(@"time interval--loadString ---1--:%lf",now-timeStart);
-    timeStart=now;
+//    timeStart=now;
     
     
     //GBK encoding
@@ -239,13 +244,13 @@
 //    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8);
     unsigned long encode = NSUTF8StringEncoding;
 //    unsigned long encode = NSASCIIStringEncoding;
-    NSString *mTxt = [[NSString alloc] initWithData:responseData encoding:encode];
+    NSString *mTxt = [[[NSString alloc] initWithData:responseData encoding:encode]autorelease];
 
 
     
-    now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
 //    NSLog(@"time interval--loadString ---2--:%lf",now-timeStart);
-    timeStart=now;
+//    timeStart=now;
     
     //     NSLog(@"err:%@",err);
     
