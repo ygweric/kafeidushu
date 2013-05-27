@@ -109,7 +109,7 @@
             if (range.location + range.length >= textLength) {
                 range.length = textLength - range.location;
             }
-            
+            NSLog(@"---2---range.location:%d length:%d",range.location,range.length);
             // 然后一个个缩短字符串的长度，当缩短后的字符串尺寸小于lbContent的尺寸时即为满足
             while (range.length > 0) {
                 pageText = [self.text substringWithRange:range];
@@ -136,8 +136,8 @@
                 maxPages += 10;
                 rangeOfPages = (NSRange *)realloc(rangeOfPages, maxPages*sizeof(NSRange));
             }
-            rangeOfPages[page++] = range;
-            
+            rangeOfPages[0] = range;
+            break;
             // 更新游标
             location += range.length;
         }
@@ -146,9 +146,9 @@
         totalPages = page;
         
         // 更新UILabel内容
-        NSString* currentContent= [self.text substringWithRange:rangeOfPages[currentPage]];
+        NSString* currentContent= [self.text substringWithRange:rangeOfPages[0]];
         //            NSLog(@"+++++++++++\ncurrentContent:%@\n\n",currentContent);
-        NSLog(@"-----pageString   -----end text\n:%@\n\n",currentContent);
+        NSLog(@"-----pageString   -----end text:\n%@\n\n",currentContent);
         lbContent.text = currentContent;
         int length= [currentContent lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         //            length=(length/2!=0)?(length-10):(length-11);
@@ -160,7 +160,132 @@
     }
     
 }
+- (int)prePageString:(NSString*)content
+{
+    //text 整个文本内容
+    
+    NSLog(@"-----pageString   -----before text:\n%@\n\n",content);
+    //    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+    //    NSTimeInterval now=0;
+    // 计算文本串的大小尺寸
+    CGSize totalTextSize = [self.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
+                                 constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
+                                     lineBreakMode:NSLineBreakByWordWrapping];
+    
+    // 如果一页就能显示完，直接显示所有文本串即可。
+    if (totalTextSize.height < lbContent.frame.size.height) {
+        lbContent.text = self.text;
+        return -1;
+    }
+    else {
+        // 计算理想状态下的页面数量和每页所显示的字符数量，只是拿来作为参考值用而已！
+        NSUInteger textLength = [self.text length];//总字符数 524
+        NSLog(@"textLength:%d",textLength);
+        NSLog(@"totalTextSize.height:%f ;(int)lbContent.frame.size.height:%d",totalTextSize.height,(int)lbContent.frame.size.height+1);
+        referTotalPages = (int)totalTextSize.height/(int)lbContent.frame.size.height+1;//页数
+        referCharatersPerPage = textLength/referTotalPages;//每页字符数
+        
+        // 申请最终保存页面NSRange信息的数组缓冲区
+        int maxPages = referTotalPages;
+        rangeOfPages=nil;
+        rangeOfPages = (NSRange *)malloc(referTotalPages*sizeof(NSRange));
+        memset(rangeOfPages, 0x0, referTotalPages*sizeof(NSRange));
+        
+        // 页面索引
+        int page = 0;
 
+        
+
+            // 先计算临界点（尺寸刚刚超过UILabel尺寸时的文本串）
+            NSRange range = NSMakeRange(textLength-referCharatersPerPage, referCharatersPerPage);//首页range
+            
+            // reach end of text ?
+            NSString *pageText; //当前page的content
+            CGSize pageTextSize;//content做占用的单行最大长度
+            
+            
+            
+            //得到合适的range
+            //保证没有达到文章尾部
+            while (range.location >0) {
+                pageText = [self.text substringWithRange:range];
+                
+                pageTextSize = [pageText sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
+                                    constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
+                                        lineBreakMode:NSLineBreakByWordWrapping];
+                
+                //如果填充满，则停止
+                if (pageTextSize.height > lbContent.frame.size.height) {
+                    break;
+                }
+                else {
+                    //否则，再加下一页继续填充
+                    //range总长度加 referCharatersPerPage，起点前移referCharatersPerPage
+                    range.location-=referCharatersPerPage;
+                    range.length += referCharatersPerPage;
+                }
+            }
+            //到文章开头时候处理
+            if (range.location <= 0) {
+                range.location = 0;
+            }
+            if (range.location + range.length >= textLength) {
+                range.location = textLength - range.length;
+            }
+            NSLog(@"---1---range.location:%d length:%d",range.location,range.length);
+        
+            
+            // 然后一个个缩短字符串的长度，当缩短后的字符串尺寸小于lbContent的尺寸时即为满足
+            while (range.location > 0) {
+                pageText = [self.text substringWithRange:range];
+//                NSLog(@"[self.text substringWithRange:range]:%@",[self.text substringWithRange:range]);
+                //得到前面计算得到的当页string
+                pageTextSize = [pageText sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
+                                    constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
+                                        lineBreakMode:NSLineBreakByWordWrapping];
+                
+                //可能会大于lable长度(why？？)，逐个测试，逐渐减小，直到得到合适的长度
+                NSLog(@"pageTextSize.height:%f ;lbContent.frame.size.height:%f",pageTextSize.height,lbContent.frame.size.height);
+                if (pageTextSize.height <= lbContent.frame.size.height) {
+                    range.location = textLength-[pageText length];
+                    break;
+                }
+                else {
+                    range.location += 1;
+                    range.length-=1;
+                }
+            }
+            //            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+            //                NSLog(@"time interval--viewDidLoad ---4--:%lf",now-timeStart);
+            //            timeStart=now;
+            // 得到一个页面的显示范围
+            if (page >= maxPages) {
+                maxPages += 10;
+                rangeOfPages = (NSRange *)realloc(rangeOfPages, maxPages*sizeof(NSRange));
+            }
+            rangeOfPages[0] = range;
+
+        
+        
+        // 获取最终页面数量
+        totalPages = page;
+        
+        // 更新UILabel内容
+        NSString* currentContent= [self.text substringWithRange:rangeOfPages[0]];
+        //            NSLog(@"+++++++++++\ncurrentContent:%@\n\n",currentContent);
+        NSLog(@"-----pageString   -----end text:\n%@\n\n",currentContent);
+        lbContent.text = currentContent;
+        int length= [currentContent lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        //            length=(length/2!=0)?(length-10):(length-11);
+        if (rangeOfPages) {
+            free(rangeOfPages);
+            rangeOfPages=nil;
+        }
+        return length;
+    }
+    
+}
+#pragma mark -
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -262,45 +387,26 @@
     return mTxt;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
 // 上一页
 - (IBAction)actionPrevious:(id)sender {
-    return;
     // 从文件里加载文本串
+    NSLog(@"---1--preOffset:%d,currentOffset:%d,nextOffset:%d",preOffset,currentOffset,nextOffset);
+    int tmpLength=(currentOffset<MAX_CHARACTER_LENGHT)?currentOffset:MAX_CHARACTER_LENGHT;
     self.text=nil;
     while (!self.text) {
-        self.text=[self loadStringFrom:preOffset length:MAX_CHARACTER_LENGHT];
-        NSLog(@"preOffset:%d,text:",preOffset);
+        self.text=[self loadStringFrom:currentOffset-tmpLength length:tmpLength];
+        NSLog(@"tmpLength:%d",tmpLength);
         if (!self.text) {
-            preOffset++;
+            tmpLength--;
         }
     }
+     
+    int currentPageLength= [self prePageString:self.text];
+    nextOffset=currentOffset;
+    currentOffset=currentOffset-currentPageLength;
     
-    
-    int currentPageLength= [self pageString:self.text];
-    
-    
-    preOffset=currentOffset;
-    currentOffset=nextOffset;
-    //这里不能+1
-    nextOffset+=currentPageLength;
-    
-    NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
-
-    
-    /*
-    if (currentPage > 0) {
-        currentPage--;
-        
-        NSRange range = rangeOfPages[currentPage];
-        NSString *pageText = [self.text substringWithRange:range];
-        
-        lbContent.text = pageText;
-        
-        //
-        pageInfoLabel.text = [NSString stringWithFormat:@"%d/%d", currentPage+1, totalPages];
-    }
-     */
+    NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -308,17 +414,8 @@
 - (IBAction)actionNext:(id)sender {
     
     // 从文件里加载文本串
-    self.text=nil;
-    /*/
-    while (!self.text) {
-        self.text=[self loadStringFrom:nextOffset length:MAX_CHARACTER_LENGHT];
-        NSLog(@"nextOffset:%d,text:",nextOffset);
-        if (!self.text) {
-            nextOffset++;
-        }
-    }
-     /*/
     int tmpLength=MAX_CHARACTER_LENGHT;
+    self.text=nil;
     while (!self.text) {
         self.text=[self loadStringFrom:nextOffset length:tmpLength];
         NSLog(@"tmpLength:%d",tmpLength);
@@ -326,9 +423,6 @@
             tmpLength--;
         }
     }
-    //*/
-    
-    
     int currentPageLength= [self pageString:self.text];
     preOffset=currentOffset;
     currentOffset=nextOffset;
@@ -336,19 +430,6 @@
     
     NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
 
-    /*
-    if (currentPage < totalPages-1) {
-        currentPage++;
-        
-        NSRange range = rangeOfPages[currentPage];
-        NSString *pageText = [text substringWithRange:range];
-        
-        lbContent.text = pageText;
-        
-        //
-        pageInfoLabel.text = [NSString stringWithFormat:@"%d/%d", currentPage+1, totalPages];
-    }
-     */
 }
 
 - (void)dealloc {
