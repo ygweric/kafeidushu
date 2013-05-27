@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F574D0AC174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt in Resources */ = {isa = PBXBuildFile; fileRef = F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */; };
 		F5A7C619174DAA900040A3CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C618174DAA900040A3CB /* UIKit.framework */; };
 		F5A7C61B174DAA900040A3CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C61A174DAA900040A3CB /* Foundation.framework */; };
 		F5A7C61D174DAA900040A3CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C61C174DAA900040A3CB /* CoreGraphics.framework */; };
@@ -19,9 +20,11 @@
 		F5A7C632174DAA900040A3CB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7C631174DAA900040A3CB /* ViewController.m */; };
 		F5A7C635174DAA900040A3CB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C633174DAA900040A3CB /* ViewController.xib */; };
 		F5A7C63C174DC74D0040A3CB /* push实现.txt in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C63B174DC74D0040A3CB /* push实现.txt */; };
+		F5A7C63E174DE4630040A3CB /* 笑傲江湖.txt in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C63D174DE4630040A3CB /* 笑傲江湖.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖-utf8.txt"; sourceTree = "<group>"; };
 		F5A7C615174DAA900040A3CB /* Paging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A7C618174DAA900040A3CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F5A7C61A174DAA900040A3CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,6 +42,7 @@
 		F5A7C631174DAA900040A3CB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F5A7C634174DAA900040A3CB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		F5A7C63B174DC74D0040A3CB /* push实现.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "push实现.txt"; sourceTree = "<group>"; };
+		F5A7C63D174DE4630040A3CB /* 笑傲江湖.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				F5A7C63B174DC74D0040A3CB /* push实现.txt */,
+				F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */,
+				F5A7C63D174DE4630040A3CB /* 笑傲江湖.txt */,
 				F5A7C627174DAA900040A3CB /* AppDelegate.h */,
 				F5A7C628174DAA900040A3CB /* AppDelegate.m */,
 				F5A7C630174DAA900040A3CB /* ViewController.h */,
@@ -167,6 +173,8 @@
 				F5A7C62F174DAA900040A3CB /* Default-568h@2x.png in Resources */,
 				F5A7C635174DAA900040A3CB /* ViewController.xib in Resources */,
 				F5A7C63C174DC74D0040A3CB /* push实现.txt in Resources */,
+				F5A7C63E174DE4630040A3CB /* 笑傲江湖.txt in Resources */,
+				F574D0AC174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +273,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -276,6 +285,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -300,6 +310,7 @@
 				F5A7C63A174DAA900040A3CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
