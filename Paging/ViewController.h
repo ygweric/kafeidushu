@@ -12,7 +12,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *lbContent;
 @property (retain, nonatomic) IBOutlet UILabel *pageInfoLabel;
 @property NSString* text;
-
+@property (retain, nonatomic) NSString *filePath;
 
 - (IBAction)actionPrevious:(id)sender ;
 

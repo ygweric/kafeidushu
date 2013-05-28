@@ -33,10 +33,13 @@
     int currentLength;
     int maxLength;
     
+    long long fileLength;
+    
 }
 @synthesize  lbContent;
 @synthesize pageInfoLabel;
 @synthesize text=_text;
+@synthesize filePath=_filePath;
 
 // return current page character length
 - (int)pageString:(NSString*)content
@@ -317,6 +320,19 @@
     nextOffset=0;
     currentLength=0;
     maxLength=0;
+    fileLength=1; //初始化1，显示页数%时候，做除数，所以不为0
+    
+    
+    //    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"push实现.txt"];
+    //    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖.txt"];
+    self.filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
+    //    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+    
+    fileLength= [self getFileSize:_filePath];
+    if (fileLength==0) {
+        fileLength=1;
+        NSLog(@"file is empty!!!!");
+    }
     
     // 从文件里加载文本串
     self.text=nil;
@@ -348,28 +364,35 @@
     //这里不能+1是因为currentOffset从0开始
     nextOffset=currentOffset+ currentPageLength;
     NSLog(@"--currentPageLength:%d,preOffset:%d,currentOffset%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
+    [self updatePageInfo];
     
     
+}
+-(void)updatePageInfo{
     // 显示当前页面进度信息，格式为："8/100"
-    pageInfoLabel.text = [NSString stringWithFormat:@"%d/%d", currentPage+1, totalPages];
+    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@", (double)currentOffset/fileLength*100,@"%"];
 }
 -(NSString*)loadString{
     return [self loadStringFrom:0 length:MAX_CHARACTER_LENGHT];
 }
-
+-(long long)getFileSize:(NSString*)filePath{
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:0];
+    
+    NSNumber *fileSizeNumber = [fileAttributes objectForKey:NSFileSize];
+    long long fileSize = [fileSizeNumber longLongValue];
+    NSLog(@"fileSize:%lld",fileSize);
+    return fileSize;
+}
 
 -(NSString*)loadStringFrom:(int)index length:(int)length{
-    //    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"push实现.txt"];
-//    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖.txt"];
-    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
-//    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+
     
     //    NSError* err=nil;
     //    NSString* mTxt=[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&err];
     
     
     
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:filePath];
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
     //    fileHandle.l
     [fileHandle seekToFileOffset:index];
     NSData *responseData = [fileHandle readDataOfLength:length];
@@ -437,7 +460,7 @@
         NSLog(@"++++++++++++++\n it is the first page already !!!\n");
     }
     
-   
+   [self updatePageInfo];
     
     
 }
@@ -475,7 +498,7 @@
         NSLog(@"++preOffset:%d,currentOffset:%d,nextOffset:%d",preOffset,currentOffset,nextOffset);
         NSLog(@"++++++++++++++\n it is the last page already !!!\n");
     }
-    
+    [self updatePageInfo];
 }
 
 - (void)dealloc {
