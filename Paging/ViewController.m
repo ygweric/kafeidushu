@@ -10,9 +10,11 @@
 #define FONT_SIZE_MAX 12
 #define MAX_CHARACTER_LENGHT 2000
 
-@interface ViewController ()
+#define MAX_PAGING_STEP 40 //单位pixel,大概一行
 
-@end
+
+#define  e_can_show_one_page -1
+
 
 
 @implementation ViewController{
@@ -52,7 +54,8 @@
     // 如果一页就能显示完，直接显示所有文本串即可。
     if (totalTextSize.height < lbContent.frame.size.height) {
         lbContent.text = self.text;
-        return -1;
+        NSLog(@"----- all text can be show in only one page -----end \n\n");
+        return e_can_show_one_page;
     }
     else {
         // 计算理想状态下的页面数量和每页所显示的字符数量，只是拿来作为参考值用而已！
@@ -175,7 +178,8 @@
     // 如果一页就能显示完，直接显示所有文本串即可。
     if (totalTextSize.height < lbContent.frame.size.height) {
         lbContent.text = self.text;
-        return -1;
+        NSLog(@"----- all text can be show in only one page -----end \n\n");
+        return e_can_show_one_page;
     }
     else {
         // 计算理想状态下的页面数量和每页所显示的字符数量，只是拿来作为参考值用而已！
@@ -236,7 +240,9 @@
         
             
             // 然后一个个缩短字符串的长度，当缩短后的字符串尺寸小于lbContent的尺寸时即为满足
-            while (range.location > 0) {
+        int step=MAX_PAGING_STEP;
+        NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+            while (1) {
                 pageText = [self.text substringWithRange:range];
 //                NSLog(@"[self.text substringWithRange:range]:%@",[self.text substringWithRange:range]);
                 //得到前面计算得到的当页string
@@ -245,16 +251,25 @@
                                         lineBreakMode:NSLineBreakByWordWrapping];
                 
                 //可能会大于lable长度(why？？)，逐个测试，逐渐减小，直到得到合适的长度
+                //TODO 得到合适的，记录，不然循环太多
                 NSLog(@"pageTextSize.height:%f ;lbContent.frame.size.height:%f",pageTextSize.height,lbContent.frame.size.height);
                 if (pageTextSize.height <= lbContent.frame.size.height) {
-                    range.location = textLength-[pageText length];
-                    break;
+                    if (step==MAX_PAGING_STEP) {
+                        range.location -= step;
+                        range.length+=step;
+                        step=1;
+                    } else {
+                        range.location = textLength-[pageText length];
+                        break;
+                    }
+                    
                 }
                 else {
-                    range.location += 1;
-                    range.length-=1;
+                    range.location += step;
+                    range.length-=step;
                 }
             }
+         NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
             //            now=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
             //                NSLog(@"time interval--viewDidLoad ---4--:%lf",now-timeStart);
             //            timeStart=now;
@@ -392,27 +407,48 @@
 - (IBAction)actionPrevious:(id)sender {
     // 从文件里加载文本串
     NSLog(@"---1--preOffset:%d,currentOffset:%d,nextOffset:%d",preOffset,currentOffset,nextOffset);
+    if (currentOffset<=0) {
+         NSLog(@"++++++++++++++\n it is the first page already !!!\n");
+        return;
+    }
     int tmpLength=(currentOffset<MAX_CHARACTER_LENGHT)?currentOffset:MAX_CHARACTER_LENGHT;
     self.text=nil;
-    while (!self.text) {
+    while (!self.text
+           && tmpLength>=0) {
         self.text=[self loadStringFrom:currentOffset-tmpLength length:tmpLength];
         NSLog(@"tmpLength:%d",tmpLength);
         if (!self.text) {
             tmpLength--;
         }
     }
-     
-    int currentPageLength= [self prePageString:self.text];
-    nextOffset=currentOffset;
-    currentOffset=currentOffset-currentPageLength;
+    if (tmpLength!=0) {
+        int currentPageLength= [self prePageString:self.text];
+        nextOffset=currentOffset;
+        if (currentPageLength>0) {
+            currentOffset=currentOffset-currentPageLength;
+        }else if(currentPageLength==e_can_show_one_page){
+            currentOffset=0;
+        }
+        
+        NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
+    }else{
+        currentOffset=0;
+        NSLog(@"++++++++++++++\n it is the first page already !!!\n");
+    }
     
-    NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
+   
+    
+    
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // 下一页
 - (IBAction)actionNext:(id)sender {
-    
+    if (currentOffset==nextOffset
+        && currentOffset!=0) {
+         NSLog(@"++++++++++++++\n it is the last page already !!!!\n");
+        return;
+    }
     // 从文件里加载文本串
     int tmpLength=MAX_CHARACTER_LENGHT;
     self.text=nil;
@@ -426,7 +462,10 @@
     int currentPageLength= [self pageString:self.text];
     preOffset=currentOffset;
     currentOffset=nextOffset;
-    nextOffset+=currentPageLength;
+    if (currentPageLength>0) {
+        nextOffset+=currentPageLength;
+    }
+    
     
     NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
 
