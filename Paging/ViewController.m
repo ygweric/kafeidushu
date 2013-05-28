@@ -112,7 +112,7 @@
             if (range.location + range.length >= textLength) {
                 range.length = textLength - range.location;
             }
-            NSLog(@"---2---range.location:%d length:%d",range.location,range.length);
+//            NSLog(@"---2---range.location:%d length:%d",range.location,range.length);
             // 然后一个个缩短字符串的长度，当缩短后的字符串尺寸小于lbContent的尺寸时即为满足
             while (range.length > 0) {
                 pageText = [self.text substringWithRange:range];
@@ -154,6 +154,7 @@
         NSLog(@"-----pageString   -----end text:\n%@\n\n",currentContent);
         lbContent.text = currentContent;
         int length= [currentContent lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"length:%d",length);
         //            length=(length/2!=0)?(length-10):(length-11);
         if (rangeOfPages) {
             free(rangeOfPages);
@@ -320,7 +321,7 @@
     // 从文件里加载文本串
     self.text=nil;
     /*/
-    int tmpOffset=0;
+    int tmpOffset=987;
     while (!self.text) {
         self.text=[self loadStringFrom:tmpOffset length:MAX_CHARACTER_LENGHT];
         NSLog(@"tmpOffset:%d",tmpOffset);
@@ -344,9 +345,9 @@
    
     int currentPageLength= [self pageString:self.text];
     preOffset=0;
-    //这里+1是因为currentOffset从0开始
-    nextOffset=currentOffset+ currentPageLength+1;
-    NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
+    //这里不能+1是因为currentOffset从0开始
+    nextOffset=currentOffset+ currentPageLength;
+    NSLog(@"--currentPageLength:%d,preOffset:%d,currentOffset%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
     
     
     // 显示当前页面进度信息，格式为："8/100"
@@ -430,7 +431,7 @@
             currentOffset=0;
         }
         
-        NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
+        NSLog(@"++currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
     }else{
         currentOffset=0;
         NSLog(@"++++++++++++++\n it is the first page already !!!\n");
@@ -450,8 +451,9 @@
         return;
     }
     // 从文件里加载文本串
-    int tmpLength=MAX_CHARACTER_LENGHT;
     self.text=nil;
+    
+    int tmpLength=MAX_CHARACTER_LENGHT;    
     while (!self.text) {
         self.text=[self loadStringFrom:nextOffset length:tmpLength];
         NSLog(@"tmpLength:%d",tmpLength);
@@ -459,16 +461,21 @@
             tmpLength--;
         }
     }
-    int currentPageLength= [self pageString:self.text];
-    preOffset=currentOffset;
-    currentOffset=nextOffset;
-    if (currentPageLength>0) {
-        nextOffset+=currentPageLength;
+    if (tmpLength!=0) {
+        int currentPageLength= [self pageString:self.text];
+        preOffset=currentOffset;
+        currentOffset=nextOffset;
+        if (currentPageLength>0) {
+            nextOffset+=currentPageLength;
+        }
+
+        NSLog(@"++currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
+    }else{
+        currentOffset=0;
+        NSLog(@"++preOffset:%d,currentOffset:%d,nextOffset:%d",preOffset,currentOffset,nextOffset);
+        NSLog(@"++++++++++++++\n it is the last page already !!!\n");
     }
     
-    
-    NSLog(@"currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
-
 }
 
 - (void)dealloc {
