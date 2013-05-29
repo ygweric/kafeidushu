@@ -7,10 +7,14 @@
 //
 
 #import "ViewController.h"
-#define FONT_SIZE_MAX 12
-#define MAX_CHARACTER_LENGHT 2000
+#define FONT_SIZE_MAX 10
+
+#define MAX_CHARACTER_LENGHT IS_IPAD?8000:2000
 
 #define MAX_PAGING_STEP 40 //单位pixel,大概一行
+
+
+
 
 
 #define  e_can_show_one_page -1

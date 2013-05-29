@@ -8,29 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		F574D0AC174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt in Resources */ = {isa = PBXBuildFile; fileRef = F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */; };
+		F5846B451755D2B40022F878 /* ViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5846B431755D2B40022F878 /* ViewController_ipad.xib */; };
+		F5846B461755D2B40022F878 /* ViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5846B441755D2B40022F878 /* ViewController_iphone.xib */; };
 		F5A7C619174DAA900040A3CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C618174DAA900040A3CB /* UIKit.framework */; };
 		F5A7C61B174DAA900040A3CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C61A174DAA900040A3CB /* Foundation.framework */; };
 		F5A7C61D174DAA900040A3CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C61C174DAA900040A3CB /* CoreGraphics.framework */; };
-		F5A7C623174DAA900040A3CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C621174DAA900040A3CB /* InfoPlist.strings */; };
 		F5A7C625174DAA900040A3CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7C624174DAA900040A3CB /* main.m */; };
 		F5A7C629174DAA900040A3CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7C628174DAA900040A3CB /* AppDelegate.m */; };
 		F5A7C62B174DAA900040A3CB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C62A174DAA900040A3CB /* Default.png */; };
 		F5A7C62D174DAA900040A3CB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C62C174DAA900040A3CB /* Default@2x.png */; };
 		F5A7C62F174DAA900040A3CB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C62E174DAA900040A3CB /* Default-568h@2x.png */; };
 		F5A7C632174DAA900040A3CB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7C631174DAA900040A3CB /* ViewController.m */; };
-		F5A7C635174DAA900040A3CB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C633174DAA900040A3CB /* ViewController.xib */; };
 		F5A7C63C174DC74D0040A3CB /* push实现.txt in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C63B174DC74D0040A3CB /* push实现.txt */; };
-		F5A7C63E174DE4630040A3CB /* 笑傲江湖.txt in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C63D174DE4630040A3CB /* 笑傲江湖.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖-utf8.txt"; sourceTree = "<group>"; };
+		F5846B431755D2B40022F878 /* ViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_ipad.xib; sourceTree = "<group>"; };
+		F5846B441755D2B40022F878 /* ViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iphone.xib; sourceTree = "<group>"; };
+		F5846B471755D96B0022F878 /* PubHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PubHeader.h; sourceTree = "<group>"; };
 		F5A7C615174DAA900040A3CB /* Paging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A7C618174DAA900040A3CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F5A7C61A174DAA900040A3CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F5A7C61C174DAA900040A3CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F5A7C620174DAA900040A3CB /* Paging-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Paging-Info.plist"; sourceTree = "<group>"; };
-		F5A7C622174DAA900040A3CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5A7C624174DAA900040A3CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5A7C626174DAA900040A3CB /* Paging-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Paging-Prefix.pch"; sourceTree = "<group>"; };
 		F5A7C627174DAA900040A3CB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -40,9 +41,7 @@
 		F5A7C62E174DAA900040A3CB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F5A7C630174DAA900040A3CB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F5A7C631174DAA900040A3CB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F5A7C634174DAA900040A3CB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		F5A7C63B174DC74D0040A3CB /* push实现.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "push实现.txt"; sourceTree = "<group>"; };
-		F5A7C63D174DE4630040A3CB /* 笑傲江湖.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,13 +90,14 @@
 			children = (
 				F5A7C63B174DC74D0040A3CB /* push实现.txt */,
 				F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */,
-				F5A7C63D174DE4630040A3CB /* 笑傲江湖.txt */,
 				F5A7C627174DAA900040A3CB /* AppDelegate.h */,
 				F5A7C628174DAA900040A3CB /* AppDelegate.m */,
 				F5A7C630174DAA900040A3CB /* ViewController.h */,
 				F5A7C631174DAA900040A3CB /* ViewController.m */,
-				F5A7C633174DAA900040A3CB /* ViewController.xib */,
+				F5846B431755D2B40022F878 /* ViewController_ipad.xib */,
+				F5846B441755D2B40022F878 /* ViewController_iphone.xib */,
 				F5A7C61F174DAA900040A3CB /* Supporting Files */,
+				F5846B471755D96B0022F878 /* PubHeader.h */,
 			);
 			path = Paging;
 			sourceTree = "<group>";
@@ -106,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				F5A7C620174DAA900040A3CB /* Paging-Info.plist */,
-				F5A7C621174DAA900040A3CB /* InfoPlist.strings */,
 				F5A7C624174DAA900040A3CB /* main.m */,
 				F5A7C626174DAA900040A3CB /* Paging-Prefix.pch */,
 				F5A7C62A174DAA900040A3CB /* Default.png */,
@@ -167,14 +166,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5A7C623174DAA900040A3CB /* InfoPlist.strings in Resources */,
 				F5A7C62B174DAA900040A3CB /* Default.png in Resources */,
 				F5A7C62D174DAA900040A3CB /* Default@2x.png in Resources */,
 				F5A7C62F174DAA900040A3CB /* Default-568h@2x.png in Resources */,
-				F5A7C635174DAA900040A3CB /* ViewController.xib in Resources */,
 				F5A7C63C174DC74D0040A3CB /* push实现.txt in Resources */,
-				F5A7C63E174DE4630040A3CB /* 笑傲江湖.txt in Resources */,
 				F574D0AC174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt in Resources */,
+				F5846B451755D2B40022F878 /* ViewController_ipad.xib in Resources */,
+				F5846B461755D2B40022F878 /* ViewController_iphone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,25 +190,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		F5A7C621174DAA900040A3CB /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F5A7C622174DAA900040A3CB /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F5A7C633174DAA900040A3CB /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F5A7C634174DAA900040A3CB /* en */,
-			);
-			name = ViewController.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F5A7C636174DAA900040A3CB /* Debug */ = {
@@ -273,8 +252,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -285,8 +265,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
