@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LeavesViewController.h"
+#import "Utilities.h"
 
 @interface ViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UILabel *lbContent;
 @property (retain, nonatomic) IBOutlet UILabel *pageInfoLabel;
-@property NSString* text;
+@property (retain, nonatomic) NSString* text;
 @property (retain, nonatomic) NSString *filePath;
+@property (retain, nonatomic) IBOutlet UITextField *tvJumpTo;
+- (IBAction)jumpTo:(id)sender;
 
 - (IBAction)actionPrevious:(id)sender ;
 
@@ -20,5 +24,4 @@
 // 下一页
 - (IBAction)actionNext:(id)sender ;
 
--(NSString*)loadStringFrom:(int)index length:(int)length;
 @end

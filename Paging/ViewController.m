@@ -9,9 +9,11 @@
 #import "ViewController.h"
 #define FONT_SIZE_MAX 10
 
+#define READ_TRY_COUNT_MAX 4
+
 #define MAX_CHARACTER_LENGHT IS_IPAD?8000:2000
 
-#define MAX_PAGING_STEP 40 //单位pixel,大概一行
+#define MAX_PAGING_STEP 40 //单位piwxel,大概一行
 
 
 
@@ -222,6 +224,7 @@
     self.text=nil;
 
     int tmpLength=MAX_CHARACTER_LENGHT;
+    //*/
     while (!self.text) {
         self.text=[self loadStringFrom:0 length:tmpLength];
         NSLog(@"tmpLength:%d",tmpLength);
@@ -229,16 +232,60 @@
             tmpLength--;
         }
     }
+     /*/
+    
+    int tmpIndex=2431;
+    while (!self.text  ) {
+        int tmpCount=0;
+        while (!self.text   && tmpCount<READ_TRY_COUNT_MAX) {
+            self.text=[self loadStringFrom:tmpIndex length:tmpLength];
+            NSLog(@"tmpIndex:%d,tmpLength:%d,tmpCount:%d",tmpIndex,tmpLength,tmpCount);
+            if (!self.text) {
+                tmpCount++;
+                tmpLength--;
+            }
+        }
+        tmpIndex++;
+    }
+    //*/
+     
+     
    
+    [self updateOffsetInfo];
+    [self updatePageInfo];
+    
+    
+}
+
+-(NSString*)jumpToIndex:(long long) fromIndex{
+    NSString* content=nil;
+    int tmpLength=MAX_CHARACTER_LENGHT;
+    while (!content  ) {
+        int tmpCount=0;
+        while (!content  && tmpCount<READ_TRY_COUNT_MAX) {
+            content=[self loadStringFrom:fromIndex length:tmpLength];
+            NSLog(@"tmpIndex:%lld,tmpLength:%d,tmpCount:%d",fromIndex,tmpLength,tmpCount);
+            if (!content) {
+                tmpCount++;
+                tmpLength--;
+            }
+        }
+        if (!content) {
+             fromIndex++;
+        }
+    
+    }
+    currentOffset=fromIndex;    
+    return content;
+}
+-(void)updateOffsetInfo{
     int currentPageLength= [self pageString:self.text isNext:YES];
     preOffset=0;
     //这里不能+1是因为currentOffset从0开始
     nextOffset=currentOffset+ currentPageLength;
     NSLog(@"--currentPageLength:%d,preOffset:%d,currentOffset%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
-    [self updatePageInfo];
-    
-    
 }
+
 -(void)updatePageInfo{
     // 显示当前页面进度信息，格式为："8/100"
     pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@", (double)currentOffset/fileLength*100,@"%"];
@@ -255,7 +302,7 @@
     return fileSize;
 }
 
--(NSString*)loadStringFrom:(int)index length:(int)length{
+-(NSString*)loadStringFrom:(long long)index length:(int)length{
 
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
     [fileHandle seekToFileOffset:index];
@@ -269,6 +316,14 @@
 }
 
 #pragma mark -
+- (IBAction)jumpTo:(id)sender {
+    int index=self.tvJumpTo.text.intValue;
+    self.text= [self jumpToIndex:index* fileLength/100];
+    [self updateOffsetInfo];
+    [self updatePageInfo];
+    
+}
+
 // 上一页
 - (IBAction)actionPrevious:(id)sender {
     NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
@@ -346,10 +401,38 @@
     [self updatePageInfo];
     NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
 }
+#pragma mark leaves
+- (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavesView {
+	return 100;
+}
+
+- (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
+//	UIImage *image = [images objectAtIndex:index];
+    UIImage *image = nil;
+	CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
+	CGAffineTransform transform = aspectFit(imageRect,
+											CGContextGetClipBoundingBox(ctx));
+	CGContextConcatCTM(ctx, transform);
+	CGContextDrawImage(ctx, imageRect, [image CGImage]);
+}
+
+- (UIImage *) imageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
 
 - (void)dealloc {
     [lbContent release];
     [pageInfoLabel release];
+    [_tvJumpTo release];
     [super dealloc];
 }
 @end

@@ -10,6 +10,11 @@
 		F574D0AC174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt in Resources */ = {isa = PBXBuildFile; fileRef = F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */; };
 		F5846B451755D2B40022F878 /* ViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5846B431755D2B40022F878 /* ViewController_ipad.xib */; };
 		F5846B461755D2B40022F878 /* ViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5846B441755D2B40022F878 /* ViewController_iphone.xib */; };
+		F5846B4F1755E0FB0022F878 /* LeavesCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5846B4A1755E0FB0022F878 /* LeavesCache.m */; };
+		F5846B501755E0FB0022F878 /* LeavesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5846B4C1755E0FB0022F878 /* LeavesView.m */; };
+		F5846B511755E0FB0022F878 /* LeavesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5846B4E1755E0FB0022F878 /* LeavesViewController.m */; };
+		F5846B541755E7500022F878 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F5846B531755E7500022F878 /* Utilities.m */; };
+		F5846B561755F3960022F878 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5846B551755F3960022F878 /* QuartzCore.framework */; };
 		F5A7C619174DAA900040A3CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C618174DAA900040A3CB /* UIKit.framework */; };
 		F5A7C61B174DAA900040A3CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C61A174DAA900040A3CB /* Foundation.framework */; };
 		F5A7C61D174DAA900040A3CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C61C174DAA900040A3CB /* CoreGraphics.framework */; };
@@ -27,6 +32,15 @@
 		F5846B431755D2B40022F878 /* ViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_ipad.xib; sourceTree = "<group>"; };
 		F5846B441755D2B40022F878 /* ViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iphone.xib; sourceTree = "<group>"; };
 		F5846B471755D96B0022F878 /* PubHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PubHeader.h; sourceTree = "<group>"; };
+		F5846B491755E0FB0022F878 /* LeavesCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeavesCache.h; sourceTree = "<group>"; };
+		F5846B4A1755E0FB0022F878 /* LeavesCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesCache.m; sourceTree = "<group>"; };
+		F5846B4B1755E0FB0022F878 /* LeavesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeavesView.h; sourceTree = "<group>"; };
+		F5846B4C1755E0FB0022F878 /* LeavesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesView.m; sourceTree = "<group>"; };
+		F5846B4D1755E0FB0022F878 /* LeavesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeavesViewController.h; sourceTree = "<group>"; };
+		F5846B4E1755E0FB0022F878 /* LeavesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesViewController.m; sourceTree = "<group>"; };
+		F5846B521755E7500022F878 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		F5846B531755E7500022F878 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		F5846B551755F3960022F878 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F5A7C615174DAA900040A3CB /* Paging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A7C618174DAA900040A3CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F5A7C61A174DAA900040A3CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5846B561755F3960022F878 /* QuartzCore.framework in Frameworks */,
 				F5A7C619174DAA900040A3CB /* UIKit.framework in Frameworks */,
 				F5A7C61B174DAA900040A3CB /* Foundation.framework in Frameworks */,
 				F5A7C61D174DAA900040A3CB /* CoreGraphics.framework in Frameworks */,
@@ -58,6 +73,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F5846B481755E0FB0022F878 /* Leaves */ = {
+			isa = PBXGroup;
+			children = (
+				F5846B521755E7500022F878 /* Utilities.h */,
+				F5846B531755E7500022F878 /* Utilities.m */,
+				F5846B491755E0FB0022F878 /* LeavesCache.h */,
+				F5846B4A1755E0FB0022F878 /* LeavesCache.m */,
+				F5846B4B1755E0FB0022F878 /* LeavesView.h */,
+				F5846B4C1755E0FB0022F878 /* LeavesView.m */,
+				F5846B4D1755E0FB0022F878 /* LeavesViewController.h */,
+				F5846B4E1755E0FB0022F878 /* LeavesViewController.m */,
+			);
+			path = Leaves;
+			sourceTree = "<group>";
+		};
 		F5A7C60C174DAA8F0040A3CB = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +108,7 @@
 		F5A7C617174DAA900040A3CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F5846B551755F3960022F878 /* QuartzCore.framework */,
 				F5A7C618174DAA900040A3CB /* UIKit.framework */,
 				F5A7C61A174DAA900040A3CB /* Foundation.framework */,
 				F5A7C61C174DAA900040A3CB /* CoreGraphics.framework */,
@@ -88,6 +119,7 @@
 		F5A7C61E174DAA900040A3CB /* Paging */ = {
 			isa = PBXGroup;
 			children = (
+				F5846B481755E0FB0022F878 /* Leaves */,
 				F5A7C63B174DC74D0040A3CB /* push实现.txt */,
 				F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */,
 				F5A7C627174DAA900040A3CB /* AppDelegate.h */,
@@ -186,6 +218,10 @@
 				F5A7C625174DAA900040A3CB /* main.m in Sources */,
 				F5A7C629174DAA900040A3CB /* AppDelegate.m in Sources */,
 				F5A7C632174DAA900040A3CB /* ViewController.m in Sources */,
+				F5846B4F1755E0FB0022F878 /* LeavesCache.m in Sources */,
+				F5846B501755E0FB0022F878 /* LeavesView.m in Sources */,
+				F5846B511755E0FB0022F878 /* LeavesViewController.m in Sources */,
+				F5846B541755E7500022F878 /* Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
