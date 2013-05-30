@@ -10,12 +10,15 @@
 #import "LeavesViewController.h"
 #import "Utilities.h"
 
-@interface ViewController : UIViewController
-@property (retain, nonatomic) IBOutlet UILabel *lbContent;
-@property (retain, nonatomic) IBOutlet UILabel *pageInfoLabel;
+@interface ViewController : LeavesViewController
+@property (retain, nonatomic) UILabel *lbContent;
+@property (retain, nonatomic) UILabel *lbContentAdapter;
+@property (retain, nonatomic) UILabel *pageInfoLabel;
 @property (retain, nonatomic) NSString* text;
 @property (retain, nonatomic) NSString *filePath;
-@property (retain, nonatomic) IBOutlet UITextField *tvJumpTo;
+@property (retain, nonatomic) UITextField *tvJumpTo;
+
+
 - (IBAction)jumpTo:(id)sender;
 
 - (IBAction)actionPrevious:(id)sender ;

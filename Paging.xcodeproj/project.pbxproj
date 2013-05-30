@@ -25,6 +25,9 @@
 		F5A7C62F174DAA900040A3CB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C62E174DAA900040A3CB /* Default-568h@2x.png */; };
 		F5A7C632174DAA900040A3CB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7C631174DAA900040A3CB /* ViewController.m */; };
 		F5A7C63C174DC74D0040A3CB /* push实现.txt in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C63B174DC74D0040A3CB /* push实现.txt */; };
+		F5D2536617573E5400C11568 /* VIewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D2536517573E5400C11568 /* VIewUtil.m */; };
+		F5D25369175742D000C11568 /* PageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D25368175742D000C11568 /* PageInfo.m */; };
+		F5D2536C1757432800C11568 /* PageInfoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D2536B1757432800C11568 /* PageInfoManage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,12 @@
 		F5A7C630174DAA900040A3CB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F5A7C631174DAA900040A3CB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F5A7C63B174DC74D0040A3CB /* push实现.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "push实现.txt"; sourceTree = "<group>"; };
+		F5D2536417573E5300C11568 /* VIewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIewUtil.h; sourceTree = "<group>"; };
+		F5D2536517573E5400C11568 /* VIewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIewUtil.m; sourceTree = "<group>"; };
+		F5D25367175742D000C11568 /* PageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageInfo.h; sourceTree = "<group>"; };
+		F5D25368175742D000C11568 /* PageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfo.m; sourceTree = "<group>"; };
+		F5D2536A1757432800C11568 /* PageInfoManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageInfoManage.h; sourceTree = "<group>"; };
+		F5D2536B1757432800C11568 /* PageInfoManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfoManage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +135,16 @@
 				F5A7C628174DAA900040A3CB /* AppDelegate.m */,
 				F5A7C630174DAA900040A3CB /* ViewController.h */,
 				F5A7C631174DAA900040A3CB /* ViewController.m */,
+				F5D25367175742D000C11568 /* PageInfo.h */,
+				F5D25368175742D000C11568 /* PageInfo.m */,
+				F5D2536A1757432800C11568 /* PageInfoManage.h */,
+				F5D2536B1757432800C11568 /* PageInfoManage.m */,
 				F5846B431755D2B40022F878 /* ViewController_ipad.xib */,
 				F5846B441755D2B40022F878 /* ViewController_iphone.xib */,
 				F5A7C61F174DAA900040A3CB /* Supporting Files */,
 				F5846B471755D96B0022F878 /* PubHeader.h */,
+				F5D2536417573E5300C11568 /* VIewUtil.h */,
+				F5D2536517573E5400C11568 /* VIewUtil.m */,
 			);
 			path = Paging;
 			sourceTree = "<group>";
@@ -222,6 +237,9 @@
 				F5846B501755E0FB0022F878 /* LeavesView.m in Sources */,
 				F5846B511755E0FB0022F878 /* LeavesViewController.m in Sources */,
 				F5846B541755E7500022F878 /* Utilities.m in Sources */,
+				F5D2536617573E5400C11568 /* VIewUtil.m in Sources */,
+				F5D25369175742D000C11568 /* PageInfo.m in Sources */,
+				F5D2536C1757432800C11568 /* PageInfoManage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
-#define FONT_SIZE_MAX 10
+#import "PageInfo.h"
+#import "PageInfoManage.h"
+
+#define FONT_SIZE_MAX 18
 
 #define READ_TRY_COUNT_MAX 4
 
@@ -38,6 +41,9 @@
     int currentLength;
     int maxLength;
     
+    NSString* pagingContent; //解析出来的string
+    PageInfoManage* pageInfoManage;
+    
     long long fileLength;
     
 }
@@ -45,6 +51,7 @@
 @synthesize pageInfoLabel;
 @synthesize text=_text;
 @synthesize filePath=_filePath;
+@synthesize lbContentAdapter=_lbContentAdapter;
 
 // return current page character length
 - (int)pageString:(NSString*)content isNext:(BOOL)isNext
@@ -54,19 +61,19 @@
     NSLog(@"-----pageString   -----before text:\n%@\n\n",content);
     
     // 计算文本串的大小尺寸
-    CGSize totalTextSize = [self.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
+    CGSize totalTextSize = [content sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
                                  constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
                                      lineBreakMode:NSLineBreakByWordWrapping];
     
     // 如果一页就能显示完，直接显示所有文本串即可。
     if (totalTextSize.height < lbContent.frame.size.height) {
-        lbContent.text = self.text;
+        lbContent.text = content;
         NSLog(@"----- all text can be show in only one page -----end \n\n");
         return e_can_show_one_page;
     }
     else {
         // 计算理想状态下的页面数量和每页所显示的字符数量，只是拿来作为参考值用而已！
-        NSUInteger textLength = [self.text length];//总字符数 524
+        NSUInteger textLength = [content length];//总字符数 524
         referTotalPages = (int)totalTextSize.height/(int)lbContent.frame.size.height+1;//页数
         referCharatersPerPage = textLength/referTotalPages;//每页字符数
         
@@ -92,7 +99,7 @@
         //得到合适的range
         //保证没有达到文章尾部
         while (isNext?(range.location + range.length < textLength):(range.location >0)) {
-            pageText = [self.text substringWithRange:range];
+            pageText = [content substringWithRange:range];
             
             pageTextSize = [pageText sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
                                 constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
@@ -132,7 +139,7 @@
         int step=MAX_PAGING_STEP;
         NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
         while (1) {
-            pageText = [self.text substringWithRange:range];
+            pageText = [content substringWithRange:range];
 //            NSLog(@"range.location:%d range.length:%d",range.location,range.length);
 //            NSLog(@"pageText:%@",pageText);
             //得到前面计算得到的当页string
@@ -184,9 +191,9 @@
         
         
         // 更新UILabel内容
-        NSString* currentContent= [self.text substringWithRange:rangeOfPages[0]];
+        NSString* currentContent= [content substringWithRange:rangeOfPages[0]];
         NSLog(@"-----pageString   -----end text:\n%@\n\n",currentContent);
-        lbContent.text = currentContent;
+        pagingContent=currentContent;
         int length= [currentContent lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         if (rangeOfPages) {
             free(rangeOfPages);
@@ -202,8 +209,16 @@
 {
     [super viewDidLoad];
 
+    lbContent=[[UILabel alloc]initWithFrame:CGRectMake(15, 20, 748, 861)];
+    pageInfoLabel=[[UILabel alloc]initWithFrame:CGRectMake(92, 949, 89, 21)];
     lbContent.numberOfLines = 0;
     lbContent.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
+    pageInfoLabel.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
+    pageInfoLabel.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:pageInfoLabel];
+    
+    self.lbContentAdapter=(UILabel*)[VIewUtil clone:self.lbContent];
+    pageInfoManage=[[PageInfoManage alloc]init];
     
     preOffset=0;
     currentOffset=0;
@@ -220,11 +235,17 @@
         NSLog(@"file is empty!!!!");
     }
     
+    //--------
+    [self updatePageInfoWithCurrentOffsetIndex:0];
+    
+    
+    
+    /*
     // 从文件里加载文本串
     self.text=nil;
 
     int tmpLength=MAX_CHARACTER_LENGHT;
-    //*/
+
     while (!self.text) {
         self.text=[self loadStringFrom:0 length:tmpLength];
         NSLog(@"tmpLength:%d",tmpLength);
@@ -232,27 +253,9 @@
             tmpLength--;
         }
     }
-     /*/
-    
-    int tmpIndex=2431;
-    while (!self.text  ) {
-        int tmpCount=0;
-        while (!self.text   && tmpCount<READ_TRY_COUNT_MAX) {
-            self.text=[self loadStringFrom:tmpIndex length:tmpLength];
-            NSLog(@"tmpIndex:%d,tmpLength:%d,tmpCount:%d",tmpIndex,tmpLength,tmpCount);
-            if (!self.text) {
-                tmpCount++;
-                tmpLength--;
-            }
-        }
-        tmpIndex++;
-    }
-    //*/
-     
-     
-   
     [self updateOffsetInfo];
-    [self updatePageInfo];
+    [self updatePageContent];
+    */
     
     
 }
@@ -286,8 +289,9 @@
     NSLog(@"--currentPageLength:%d,preOffset:%d,currentOffset%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
 }
 
--(void)updatePageInfo{
+-(void)updatePageContent{
     // 显示当前页面进度信息，格式为："8/100"
+    lbContent.text = pagingContent;
     pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@", (double)currentOffset/fileLength*100,@"%"];
 }
 -(NSString*)loadString{
@@ -320,9 +324,11 @@
     int index=self.tvJumpTo.text.intValue;
     self.text= [self jumpToIndex:index* fileLength/100];
     [self updateOffsetInfo];
-    [self updatePageInfo];
+    [self updatePageContent];
     
 }
+
+
 
 // 上一页
 - (IBAction)actionPrevious:(id)sender {
@@ -358,7 +364,7 @@
         NSLog(@"++++++++++++++\n it is the first page already !!!\n");
     }
     
-   [self updatePageInfo];
+   [self updatePageContent];
     NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
 
     
@@ -398,17 +404,61 @@
         NSLog(@"++preOffset:%d,currentOffset:%d,nextOffset:%d",preOffset,currentOffset,nextOffset);
         NSLog(@"++++++++++++++\n it is the last page already !!!\n");
     }
-    [self updatePageInfo];
+    [self updatePageContent];
     NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
 }
 #pragma mark leaves
 - (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavesView {
 	return 100;
 }
+//根据当前offset来更新pageInfo
+-(void)updatePageInfoWithCurrentOffsetIndex:(int)index{
+
+    pageInfoManage.currentPI.pageIndex=index;
+    pageInfoManage.currentPI.dataOffset=currentOffset;
+    pageInfoManage.currentPI.isValid=YES;
+    int currentPageLength= [self viewWithPI:pageInfoManage.currentPI isNext:YES];
+    NSLog(@"currentPageLength---1--:%d",currentPageLength);
+    
+    pageInfoManage.currentPI_A.pageIndex=index+1;
+    pageInfoManage.currentPI_A.dataOffset=pageInfoManage.currentPI.dataOffset+currentPageLength;
+    pageInfoManage.currentPI_A.isValid=YES;
+    currentPageLength=[self viewWithPI:pageInfoManage.currentPI_A isNext:YES];
+    NSLog(@"currentPageLength---2--:%d",currentPageLength);
+
+    
+}
+//自动翻页时候更新
+-(void)updatePageInfoWithPaging{
+    
+}
+-(int)viewWithPI:(PageInfo*)pi  isNext:(BOOL)isNext{
+    // 从文件里加载文本串
+    NSString* txt=nil;
+    
+    int tmpLength=MAX_CHARACTER_LENGHT;
+    while (!txt) {
+        txt=[self loadStringFrom:pi.dataOffset length:tmpLength];
+        NSLog(@"tmpLength:%d",tmpLength);
+        if (!txt) {
+            tmpLength--;
+        }
+    }
+   int currentPageLength= [self pageString:txt isNext:isNext];
+    [self updatePageContent];
+    pi.pageView=[VIewUtil clone:lbContent];
+    return currentPageLength;
+}
+
+//-(UIView*)viewAtIndex:(int)index{
+//    
+//    
+//    return nil;
+//}
 
 - (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
-//	UIImage *image = [images objectAtIndex:index];
-    UIImage *image = nil;
+    UIView* view=[pageInfoManage getPageInfoAtIndex:index].pageView;
+    UIImage *image = [self imageWithView:view];
 	CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
 	CGAffineTransform transform = aspectFit(imageRect,
 											CGContextGetClipBoundingBox(ctx));
@@ -433,6 +483,8 @@
     [lbContent release];
     [pageInfoLabel release];
     [_tvJumpTo release];
+    [pageInfoManage release];
+    [_lbContentAdapter release];
     [super dealloc];
 }
 @end
