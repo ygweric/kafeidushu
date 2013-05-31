@@ -9,12 +9,13 @@
 #import "PageInfo.h"
 
 @implementation PageInfo
-@synthesize isValid,pageIndex,dataOffset,pageView;
+@synthesize isValid,pageIndex,dataOffset,pageLength,pageView;
 -(id)init{
     if ([super init]) {
         isValid=NO;
         pageIndex=0;
         dataOffset=0;
+        pageLength=0;
         pageView=nil;
     }
     return self;

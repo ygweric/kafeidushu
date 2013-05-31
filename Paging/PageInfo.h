@@ -12,6 +12,9 @@
 @property BOOL isValid;
 @property int pageIndex;
 @property int dataOffset;
+@property int pageLength;
 @property (retain,nonatomic) UIView* pageView;
 
+
 @end
+

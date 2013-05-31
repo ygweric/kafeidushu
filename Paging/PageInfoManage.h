@@ -9,13 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "PageInfo.h"
 
-enum{
+typedef enum{
     e_current_mm=101,
     e_current_m,
     e_current,
     e_current_a,
     e_current_aa,
-};
+}PageInfoType ;
+
+@interface  PageInfoScale: NSObject
+@property (nonatomic,retain) PageInfo* maxPageInfo;
+@property (nonatomic,retain) PageInfo* minPageInfo;
+@end
 
 @interface PageInfoManage : NSObject
 @property (retain,nonatomic) PageInfo* currentPI_MM; //minus
@@ -44,4 +49,14 @@ enum{
 
 
 -(PageInfo*)getPageInfoAtIndex:(int)index;
+-(PageInfoScale*)getPageInfoScale;
+-(PageInfo*)getPageInfoByType:(PageInfoType) pit;
 @end
+
+
+
+
+
+
+
+

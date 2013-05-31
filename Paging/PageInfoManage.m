@@ -8,7 +8,11 @@
 
 #import "PageInfoManage.h"
 
+@implementation PageInfoScale
 
+@synthesize maxPageInfo,minPageInfo;
+
+@end
 @implementation PageInfoManage
 @synthesize currentPI,currentPI_A,currentPI_AA,currentPI_M,currentPI_MM;
 
@@ -23,29 +27,30 @@
     return self;
 }
 
--(void)setPI:(PageInfo*)pi index:(int)index offset:(unsigned long long)offset{
+-(void)setPI:(PageInfo*)pi index:(int)index offset:(unsigned long long)offset length:(int)length{
     pi.pageIndex=index;
     pi.dataOffset=offset;
+    pi.pageLength=length;
     pi.isValid=YES;
 }
 -(void)invalidPI:(PageInfo*)pi {
     pi.isValid=NO;
 }
 #pragma mark setPI
--(void)setPICurrentMIndex:(int)index offset:(unsigned long long)offset{
-    [self setPI:currentPI_M index:index offset:offset];
+-(void)setPICurrentMIndex:(int)index offset:(unsigned long long)offset length:(int)length{
+    [self setPI:currentPI_M index:index offset:offset length:length];
 }
--(void)setPICurrentMMIndex:(int)index offset:(unsigned long long)offset{
-    [self setPI:currentPI_MM index:index offset:offset];
+-(void)setPICurrentMMIndex:(int)index offset:(unsigned long long)offset length:(int)length{
+    [self setPI:currentPI_MM index:index offset:offset length:length];
 }
--(void)setPICurrentIndex:(int)index offset:(unsigned long long)offset{
-    [self setPI:currentPI index:index offset:offset];
+-(void)setPICurrentIndex:(int)index offset:(unsigned long long)offset length:(int)length{
+    [self setPI:currentPI index:index offset:offset length:length];
 }
--(void)setPICurrentAIndex:(int)index offset:(unsigned long long)offset{
-    [self setPI:currentPI_A index:index offset:offset];
+-(void)setPICurrentAIndex:(int)index offset:(unsigned long long)offset length:(int)length{
+    [self setPI:currentPI_A index:index offset:offset length:length];
 }
--(void)setPICurrentAAIndex:(int)index offset:(unsigned long long)offset{
-    [self setPI:currentPI_AA index:index offset:offset];
+-(void)setPICurrentAAIndex:(int)index offset:(unsigned long long)offset length:(int)length{
+    [self setPI:currentPI_AA index:index offset:offset length:length];
 }
 #pragma mark invalid
 -(void)invalidPICurrent{
@@ -78,8 +83,51 @@
     } else {
         return nil;
     }
-    
-    
 }
 
+-(PageInfoScale*)getPageInfoScale{
+    PageInfoScale* pis=[[[PageInfoScale alloc]init]autorelease];
+    pis.maxPageInfo=currentPI;
+    pis.minPageInfo=currentPI;
+    
+    
+    if (currentPI_A.isValid) {
+        pis.maxPageInfo=currentPI_A;
+    }
+    if(currentPI_AA.isValid){
+        pis.maxPageInfo=currentPI_AA;
+    }
+    if (currentPI_M.isValid) {
+        pis.minPageInfo=currentPI_M;
+    }
+    if(currentPI_MM.isValid){
+        pis.minPageInfo=currentPI_M;
+    }
+    return pis;
+}
+
+-(PageInfo*)getPageInfoByType:(PageInfoType) pit{
+    switch (pit) {
+        case e_current:
+            return currentPI;
+            break;
+        case e_current_a:
+            return currentPI_A;
+            break;
+        case e_current_aa:
+            return currentPI_AA;
+            break;
+        case e_current_m:
+            return currentPI_M;
+            break;
+        case e_current_mm:
+            return currentPI_MM;
+            break;
+    }
+}
+
+
+
 @end
+
+

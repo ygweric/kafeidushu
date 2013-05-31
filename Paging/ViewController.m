@@ -207,15 +207,16 @@
 #pragma mark -
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-
+    
+    
+    
     lbContent=[[UILabel alloc]initWithFrame:CGRectMake(15, 20, 748, 861)];
     pageInfoLabel=[[UILabel alloc]initWithFrame:CGRectMake(92, 949, 89, 21)];
     lbContent.numberOfLines = 0;
     lbContent.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
     pageInfoLabel.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
     pageInfoLabel.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:pageInfoLabel];
+    
     
     self.lbContentAdapter=(UILabel*)[VIewUtil clone:self.lbContent];
     pageInfoManage=[[PageInfoManage alloc]init];
@@ -226,7 +227,7 @@
     currentLength=0;
     maxLength=0;
     fileLength=1; //初始化1，显示页数%时候，做除数，所以不为0
-
+    
     self.filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
     
     fileLength= [self getFileSize:_filePath];
@@ -237,6 +238,12 @@
     
     //--------
     [self updatePageInfoWithCurrentOffsetIndex:0];
+    
+    
+    
+    [super viewDidLoad];
+
+
     
     
     
@@ -257,7 +264,7 @@
     [self updatePageContent];
     */
     
-    
+    [self.view addSubview:pageInfoLabel];
 }
 
 -(NSString*)jumpToIndex:(long long) fromIndex{
@@ -411,34 +418,154 @@
 - (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavesView {
 	return 100;
 }
+
+//一般是初次进入，或是jump后使用更新
 //根据当前offset来更新pageInfo
 -(void)updatePageInfoWithCurrentOffsetIndex:(int)index{
-
+    
     pageInfoManage.currentPI.pageIndex=index;
     pageInfoManage.currentPI.dataOffset=currentOffset;
-    pageInfoManage.currentPI.isValid=YES;
-    int currentPageLength= [self viewWithPI:pageInfoManage.currentPI isNext:YES];
-    NSLog(@"currentPageLength---1--:%d",currentPageLength);
+    [self viewWithPI:pageInfoManage.currentPI isNext:YES];
+    NSLog(@"currentPageLength---currentPI--:%d",pageInfoManage.currentPI.pageLength);
     
-    pageInfoManage.currentPI_A.pageIndex=index+1;
-    pageInfoManage.currentPI_A.dataOffset=pageInfoManage.currentPI.dataOffset+currentPageLength;
-    pageInfoManage.currentPI_A.isValid=YES;
-    currentPageLength=[self viewWithPI:pageInfoManage.currentPI_A isNext:YES];
-    NSLog(@"currentPageLength---2--:%d",currentPageLength);
-
+    if (index>=1) {
+        pageInfoManage.currentPI_M.pageIndex=index-1;
+        //这里先设置结尾的offset
+        pageInfoManage.currentPI_M.dataOffset=pageInfoManage.currentPI.dataOffset;
+        //在这里将结尾offset换成开头offset
+        [self viewWithPI:pageInfoManage.currentPI_M isNext:NO];        
+        NSLog(@"currentPageLength---currentPI_M--:%d",pageInfoManage.currentPI_M.pageLength);
+    }else{
+        pageInfoManage.currentPI_M.isValid=NO;
+    }
     
+    if (index>=2) {
+        pageInfoManage.currentPI_MM.pageIndex=index-2;
+        //这里先设置结尾的offset
+        pageInfoManage.currentPI_MM.dataOffset=pageInfoManage.currentPI_M.dataOffset;
+        //在这里将结尾offset换成开头offset
+        [self viewWithPI:pageInfoManage.currentPI_MM isNext:NO];
+        NSLog(@"currentPageLength---currentPI_MM--:%d",pageInfoManage.currentPI_MM.pageLength);
+    }else{
+        pageInfoManage.currentPI_MM.isValid=NO;
+    }
+    
+    
+    int tmpOffset=pageInfoManage.currentPI.dataOffset+pageInfoManage.currentPI.pageLength;
+    if (tmpOffset<fileLength) {
+        pageInfoManage.currentPI_A.pageIndex=index+1;
+        pageInfoManage.currentPI_A.dataOffset=tmpOffset;
+        [self viewWithPI:pageInfoManage.currentPI_A isNext:YES];
+        NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_A.pageLength);
+        
+        tmpOffset=pageInfoManage.currentPI_A.dataOffset+pageInfoManage.currentPI_A.pageLength;
+        if (tmpOffset<fileLength) {
+            pageInfoManage.currentPI_AA.pageIndex=index+2;
+            pageInfoManage.currentPI_AA.dataOffset=pageInfoManage.currentPI_A.dataOffset+pageInfoManage.currentPI_A.pageLength;
+            [self viewWithPI:pageInfoManage.currentPI_AA isNext:YES];
+            NSLog(@"currentPageLength---currentPI_AA--:%d",pageInfoManage.currentPI_AA.pageLength);
+        } else {
+            pageInfoManage.currentPI_AA.isValid=NO;
+        }        
+    }else{
+        pageInfoManage.currentPI_A.isValid=NO;
+        pageInfoManage.currentPI_AA.isValid=NO;
+    }
 }
 //自动翻页时候更新
--(void)updatePageInfoWithPaging{
+-(void)updatePageInfoWithPaging:(int)index{
+    PageInfoScale* pis= [pageInfoManage getPageInfoScale];
+    if (pis.maxPageInfo.pageIndex<index) {
+        //向后翻页
+        PageInfoType firstValidepit=0;//最前一个页的valide位置,排除最头的一个
+        if (pageInfoManage.currentPI_M.isValid) {
+            firstValidepit=e_current_m;
+        }else if(pageInfoManage.currentPI.isValid) {
+            firstValidepit=e_current;
+        }
+        
+        
+        
+
+        pageInfoManage.currentPI_M=pageInfoManage.currentPI;
+        if (pageInfoManage.currentPI_A.isValid) {
+            pageInfoManage.currentPI=pageInfoManage.currentPI_A;
+            if (pageInfoManage.currentPI_AA.isValid) {
+                pageInfoManage.currentPI_A=pageInfoManage.currentPI_AA;
+            }
+        }
+        
+        
+        
+        int tmpOffset=0;
+        switch (firstValidepit) {
+            case e_current_mm:
+                pageInfoManage.currentPI_M=[[PageInfo alloc]init];
+                pageInfoManage.currentPI_M.isValid=YES;
+                tmpOffset=pageInfoManage.currentPI_MM.dataOffset+pageInfoManage.currentPI_MM.pageLength;
+                pageInfoManage.currentPI_M.pageIndex=pageInfoManage.currentPI_MM.pageIndex+1;
+                pageInfoManage.currentPI_M.dataOffset=tmpOffset;
+                [self viewWithPI:pageInfoManage.currentPI_M isNext:YES];
+                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_M.pageIndex);
+                NSLog(@"view--1:%@",pageInfoManage.currentPI_M.pageView);
+                NSLog(@"currentPageLength---currentPI_M--:%d",pageInfoManage.currentPI_M.pageLength);
+            case e_current_m:
+                pageInfoManage.currentPI=[[PageInfo alloc]init];
+                pageInfoManage.currentPI.isValid=YES;
+                tmpOffset=pageInfoManage.currentPI_M.dataOffset+pageInfoManage.currentPI_M.pageLength;
+                pageInfoManage.currentPI.pageIndex=pageInfoManage.currentPI_M.pageIndex+1;
+                pageInfoManage.currentPI.dataOffset=tmpOffset;
+                [self viewWithPI:pageInfoManage.currentPI isNext:YES];
+                NSLog(@"pageIndex:%d",pageInfoManage.currentPI.pageIndex);
+                NSLog(@"view--2:%@",pageInfoManage.currentPI.pageView);
+                NSLog(@"currentPageLength---currentPI--:%d",pageInfoManage.currentPI.pageLength);
+            case e_current:
+                pageInfoManage.currentPI_A=[[PageInfo alloc]init];
+                pageInfoManage.currentPI_A.isValid=YES;
+                tmpOffset=pageInfoManage.currentPI.dataOffset+pageInfoManage.currentPI.pageLength;
+                pageInfoManage.currentPI_A.pageIndex=pageInfoManage.currentPI.pageIndex+1;
+                pageInfoManage.currentPI_A.dataOffset=tmpOffset;
+                [self viewWithPI:pageInfoManage.currentPI_A isNext:YES];
+                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_A.pageIndex);
+                NSLog(@"view--3:%@",pageInfoManage.currentPI_A.pageView);
+                NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_A.pageLength);
+            case e_current_a:
+                pageInfoManage.currentPI_AA=[[PageInfo alloc]init];
+                pageInfoManage.currentPI_AA.isValid=YES;
+                tmpOffset=pageInfoManage.currentPI_A.dataOffset+pageInfoManage.currentPI_A.pageLength;
+                pageInfoManage.currentPI_AA.pageIndex=pageInfoManage.currentPI_A.pageIndex+1;
+                pageInfoManage.currentPI_AA.dataOffset=tmpOffset;
+                [self viewWithPI:pageInfoManage.currentPI_AA isNext:YES];
+                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_AA.pageIndex);
+                NSLog(@"view--4:%@",pageInfoManage.currentPI_AA.pageView);
+                NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_AA.pageLength);
+            default:
+                break;
+        }
+
+        
+        
+        
+        
+    } else if(pis.minPageInfo.pageIndex>index){
+        //向前翻页
+        
+    }
     
 }
 -(int)viewWithPI:(PageInfo*)pi  isNext:(BOOL)isNext{
     // 从文件里加载文本串
     NSString* txt=nil;
+    int tmpLength=0;
     
-    int tmpLength=MAX_CHARACTER_LENGHT;
-    while (!txt) {
-        txt=[self loadStringFrom:pi.dataOffset length:tmpLength];
+    if (isNext) {
+        tmpLength=MAX_CHARACTER_LENGHT;
+    } else {
+        tmpLength=(currentOffset<MAX_CHARACTER_LENGHT)?currentOffset:MAX_CHARACTER_LENGHT;
+    }
+    
+    while (!txt && tmpLength>=0) {
+        txt=[self loadStringFrom:(isNext?pi.dataOffset:pi.dataOffset-tmpLength) length:tmpLength];
         NSLog(@"tmpLength:%d",tmpLength);
         if (!txt) {
             tmpLength--;
@@ -447,6 +574,12 @@
    int currentPageLength= [self pageString:txt isNext:isNext];
     [self updatePageContent];
     pi.pageView=[VIewUtil clone:lbContent];
+    pi.pageLength=currentPageLength;
+    pi.isValid=YES;
+    if (!isNext) {
+        pi.dataOffset=pi.dataOffset-currentPageLength;
+    }
+    
     return currentPageLength;
 }
 
@@ -457,7 +590,15 @@
 //}
 
 - (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
-    UIView* view=[pageInfoManage getPageInfoAtIndex:index].pageView;
+    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:index];
+    NSLog(@"\nrenderPageAtIndex--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@,pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
+    if (!pi || !pi.isValid) {
+        [self updatePageInfoWithPaging:index];
+        pi= [pageInfoManage getPageInfoAtIndex:index];
+        NSLog(@"\nrenderPageAtIndex--2--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@, pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
+    }
+    
+    UIView* view=pi.pageView;
     UIImage *image = [self imageWithView:view];
 	CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
 	CGAffineTransform transform = aspectFit(imageRect,
