@@ -477,39 +477,28 @@
     PageInfoScale* pis= [pageInfoManage getPageInfoScale];
     if (pis.maxPageInfo.pageIndex<index) {
         //向后翻页
-        PageInfoType firstValidepit=0;//最前一个页的valide位置,排除最头的一个
-        if (pageInfoManage.currentPI_M.isValid) {
-            firstValidepit=e_current_m;
-        }else if(pageInfoManage.currentPI.isValid) {
-            firstValidepit=e_current;
-        }
         
-        
-        
+        PageInfoType validepit=0;//向后查询，得到最后一个valide的tag
 
+        
+        
+        //先逐层保存传递旧值
         pageInfoManage.currentPI_M=pageInfoManage.currentPI;
+        validepit=e_current;
         if (pageInfoManage.currentPI_A.isValid) {
             pageInfoManage.currentPI=pageInfoManage.currentPI_A;
+            validepit=e_current_a;
             if (pageInfoManage.currentPI_AA.isValid) {
                 pageInfoManage.currentPI_A=pageInfoManage.currentPI_AA;
+                validepit=e_current_aa;
             }
         }
         
         
         
         int tmpOffset=0;
-        switch (firstValidepit) {
-            case e_current_mm:
-                pageInfoManage.currentPI_M=[[PageInfo alloc]init];
-                pageInfoManage.currentPI_M.isValid=YES;
-                tmpOffset=pageInfoManage.currentPI_MM.dataOffset+pageInfoManage.currentPI_MM.pageLength;
-                pageInfoManage.currentPI_M.pageIndex=pageInfoManage.currentPI_MM.pageIndex+1;
-                pageInfoManage.currentPI_M.dataOffset=tmpOffset;
-                [self viewWithPI:pageInfoManage.currentPI_M isNext:YES];
-                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_M.pageIndex);
-                NSLog(@"view--1:%@",pageInfoManage.currentPI_M.pageView);
-                NSLog(@"currentPageLength---currentPI_M--:%d",pageInfoManage.currentPI_M.pageLength);
-            case e_current_m:
+        switch (validepit) {
+            case e_current:
                 pageInfoManage.currentPI=[[PageInfo alloc]init];
                 pageInfoManage.currentPI.isValid=YES;
                 tmpOffset=pageInfoManage.currentPI_M.dataOffset+pageInfoManage.currentPI_M.pageLength;
@@ -519,7 +508,7 @@
                 NSLog(@"pageIndex:%d",pageInfoManage.currentPI.pageIndex);
                 NSLog(@"view--2:%@",pageInfoManage.currentPI.pageView);
                 NSLog(@"currentPageLength---currentPI--:%d",pageInfoManage.currentPI.pageLength);
-            case e_current:
+            case e_current_a:
                 pageInfoManage.currentPI_A=[[PageInfo alloc]init];
                 pageInfoManage.currentPI_A.isValid=YES;
                 tmpOffset=pageInfoManage.currentPI.dataOffset+pageInfoManage.currentPI.pageLength;
@@ -529,7 +518,7 @@
                 NSLog(@"pageIndex:%d",pageInfoManage.currentPI_A.pageIndex);
                 NSLog(@"view--3:%@",pageInfoManage.currentPI_A.pageView);
                 NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_A.pageLength);
-            case e_current_a:
+            case e_current_aa:
                 pageInfoManage.currentPI_AA=[[PageInfo alloc]init];
                 pageInfoManage.currentPI_AA.isValid=YES;
                 tmpOffset=pageInfoManage.currentPI_A.dataOffset+pageInfoManage.currentPI_A.pageLength;
@@ -549,7 +538,62 @@
         
     } else if(pis.minPageInfo.pageIndex>index){
         //向前翻页
+        PageInfoType validepit=0;//向前查询，得到最头一个valide的tag
         
+        
+        
+        //先逐层保存传递旧值
+        pageInfoManage.currentPI_A=pageInfoManage.currentPI;
+        validepit=e_current;
+        if (pageInfoManage.currentPI_M.isValid) {
+            pageInfoManage.currentPI=pageInfoManage.currentPI_M;
+            validepit=e_current_m;
+            if (pageInfoManage.currentPI_MM.isValid) {
+                pageInfoManage.currentPI_M=pageInfoManage.currentPI_MM;
+                validepit=e_current_mm;
+            }
+        }
+        
+        
+        
+        int tmpOffset=0;
+        switch (validepit) {
+            case e_current:
+                pageInfoManage.currentPI=[[PageInfo alloc]init];
+                pageInfoManage.currentPI.isValid=YES;
+                tmpOffset=pageInfoManage.currentPI_A.dataOffset;
+                pageInfoManage.currentPI.pageIndex=pageInfoManage.currentPI_A.pageIndex-1;
+                pageInfoManage.currentPI.dataOffset=tmpOffset;
+                [self viewWithPI:pageInfoManage.currentPI isNext:NO];
+                NSLog(@"pageIndex:%d",pageInfoManage.currentPI.pageIndex);
+                NSLog(@"view--2:%@",pageInfoManage.currentPI.pageView);
+                NSLog(@"currentPageLength---currentPI--:%d",pageInfoManage.currentPI.pageLength);
+            case e_current_m:
+                pageInfoManage.currentPI_M=[[PageInfo alloc]init];
+                pageInfoManage.currentPI_M.isValid=YES;
+                tmpOffset=pageInfoManage.currentPI.dataOffset;
+                pageInfoManage.currentPI_M.pageIndex=pageInfoManage.currentPI.pageIndex-1;
+                pageInfoManage.currentPI_M.dataOffset=tmpOffset;
+                [self viewWithPI:pageInfoManage.currentPI_M isNext:NO];
+                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_M.pageIndex);
+                NSLog(@"view--3:%@",pageInfoManage.currentPI_M.pageView);
+                NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_M.pageLength);
+            case e_current_mm:
+                pageInfoManage.currentPI_MM=[[PageInfo alloc]init];
+                pageInfoManage.currentPI_MM.isValid=YES;
+                tmpOffset=pageInfoManage.currentPI_M.dataOffset+pageInfoManage.currentPI_A.pageLength;
+                pageInfoManage.currentPI_MM.pageIndex=pageInfoManage.currentPI_M.pageIndex+1;
+                pageInfoManage.currentPI_MM.dataOffset=tmpOffset;
+                [self viewWithPI:pageInfoManage.currentPI_MM isNext:NO];
+                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_MM.pageIndex);
+                NSLog(@"view--4:%@",pageInfoManage.currentPI_MM.pageView);
+                NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_MM.pageLength);
+            default:
+                break;
+        }
+        
+        
+
     }
     
 }
@@ -561,7 +605,7 @@
     if (isNext) {
         tmpLength=MAX_CHARACTER_LENGHT;
     } else {
-        tmpLength=(currentOffset<MAX_CHARACTER_LENGHT)?currentOffset:MAX_CHARACTER_LENGHT;
+        tmpLength=(pi.dataOffset<MAX_CHARACTER_LENGHT)?pi.dataOffset:MAX_CHARACTER_LENGHT;
     }
     
     while (!txt && tmpLength>=0) {
