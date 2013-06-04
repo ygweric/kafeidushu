@@ -46,6 +46,14 @@
 	
 }
 
+- (BOOL) hasPrevPage {
+	return YES;
+}
+
+- (BOOL) hasNextPage {
+	return YES;
+}
+
 #pragma mark  UIViewController methods
 
 - (void)loadView {

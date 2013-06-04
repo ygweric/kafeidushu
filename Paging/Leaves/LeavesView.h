@@ -68,6 +68,9 @@
 
 - (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavesView;
 - (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx;
+- (BOOL) hasPrevPage ;
+- (BOOL) hasNextPage ;
+
 
 @end
 

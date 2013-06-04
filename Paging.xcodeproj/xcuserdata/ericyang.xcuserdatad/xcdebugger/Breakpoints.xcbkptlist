@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/ViewController.m"
-         timestampString = "392023027.59668"
+         timestampString = "392033808.949552"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "540"
-         endingLineNumber = "540"
+         startingLineNumber = "573"
+         endingLineNumber = "573"
          landmarkName = "-updatePageInfoWithPaging:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,12 +21,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/ViewController.m"
-         timestampString = "392023027.59668"
+         timestampString = "392033808.949552"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "561"
-         endingLineNumber = "561"
+         startingLineNumber = "594"
+         endingLineNumber = "594"
          landmarkName = "-updatePageInfoWithPaging:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/ViewController.m"
+         timestampString = "392033808.949552"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "428"
+         endingLineNumber = "428"
+         landmarkName = "-hasPrevPage"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/PageInfoManage.m"
+         timestampString = "392033112.323498"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "-getPageInfoScale"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

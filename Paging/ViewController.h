@@ -17,7 +17,7 @@
 @property (retain, nonatomic) NSString* text;
 @property (retain, nonatomic) NSString *filePath;
 @property (retain, nonatomic) UITextField *tvJumpTo;
-
+@property (retain, nonatomic) NSString* pagingContent; //解析出来的string
 
 - (IBAction)jumpTo:(id)sender;
 

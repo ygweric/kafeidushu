@@ -51,6 +51,7 @@ typedef enum{
 -(PageInfo*)getPageInfoAtIndex:(int)index;
 -(PageInfoScale*)getPageInfoScale;
 -(PageInfo*)getPageInfoByType:(PageInfoType) pit;
+-(PageInfo*)getPageInfoByIndex:(int)index;
 @end
 
 

@@ -191,11 +191,11 @@ CGFloat distance(CGPoint a, CGPoint b);
 }
 
 - (BOOL) hasPrevPage {
-	return self.currentPageIndex > 0;
+	return [pageCache.dataSource hasPrevPage];
 }
 
 - (BOOL) hasNextPage {
-	return self.currentPageIndex < numberOfPages - 1;
+	return [pageCache.dataSource hasNextPage];
 }
 
 - (BOOL) touchedNextPage {

@@ -109,7 +109,7 @@
         pis.minPageInfo=currentPI_M;
     }
     if(currentPI_MM.isValid){
-        pis.minPageInfo=currentPI_M;
+        pis.minPageInfo=currentPI_MM;
     }
     return pis;
 }
@@ -132,6 +132,29 @@
             return currentPI_MM;
             break;
     }
+}
+
+-(PageInfo*)getPageInfoByIndex:(int)index{
+    [self printAllPageInfos];
+
+    if (currentPI.isValid && currentPI.pageIndex==index) {
+        return currentPI;
+    }
+    if (currentPI_A.isValid && currentPI_A.pageIndex==index) {
+        return currentPI_A;
+    }
+    if(currentPI_AA.isValid && currentPI_AA.pageIndex==index){
+        return currentPI_AA;
+    }
+    if (currentPI_M.isValid && currentPI_M.pageIndex==index) {
+        return currentPI_M;
+    }
+    if(currentPI_MM.isValid && currentPI_MM.pageIndex==index){
+        return currentPI_MM;
+    }
+    return nil;
+
+
 }
 
 

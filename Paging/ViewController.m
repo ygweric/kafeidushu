@@ -41,7 +41,7 @@
     int currentLength;
     int maxLength;
     
-    NSString* pagingContent; //解析出来的string
+    
     PageInfoManage* pageInfoManage;
     
     long long fileLength;
@@ -52,7 +52,10 @@
 @synthesize text=_text;
 @synthesize filePath=_filePath;
 @synthesize lbContentAdapter=_lbContentAdapter;
+@synthesize pagingContent=_pagingContent;
 
+
+#pragma mark paging
 // return current page character length
 - (int)pageString:(NSString*)content isNext:(BOOL)isNext
 {
@@ -68,8 +71,9 @@
     // 如果一页就能显示完，直接显示所有文本串即可。
     if (totalTextSize.height < lbContent.frame.size.height) {
         lbContent.text = content;
+        self.pagingContent=content;
         NSLog(@"----- all text can be show in only one page -----end \n\n");
-        return e_can_show_one_page;
+        return [content lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     }
     else {
         // 计算理想状态下的页面数量和每页所显示的字符数量，只是拿来作为参考值用而已！
@@ -193,7 +197,7 @@
         // 更新UILabel内容
         NSString* currentContent= [content substringWithRange:rangeOfPages[0]];
         NSLog(@"-----pageString   -----end text:\n%@\n\n",currentContent);
-        pagingContent=currentContent;
+        self.pagingContent=currentContent;
         int length= [currentContent lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         if (rangeOfPages) {
             free(rangeOfPages);
@@ -298,8 +302,8 @@
 
 -(void)updatePageContent{
     // 显示当前页面进度信息，格式为："8/100"
-    lbContent.text = pagingContent;
-    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@", (double)currentOffset/fileLength*100,@"%"];
+    lbContent.text = _pagingContent;
+    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@  %d", (double)currentOffset/fileLength*100,@"%",leavesView.currentPageIndex];
 }
 -(NSString*)loadString{
     return [self loadStringFrom:0 length:MAX_CHARACTER_LENGHT];
@@ -359,12 +363,12 @@
     if (tmpLength!=0) {
         int currentPageLength= [self pageString:self.text isNext:NO];
         nextOffset=currentOffset;
-        if (currentPageLength>0) {
-            currentOffset=currentOffset-currentPageLength;
-        }else if(currentPageLength==e_can_show_one_page){
-            currentOffset=0;
-        }
-        
+//        if (currentPageLength>0) {
+//            currentOffset=currentOffset-currentPageLength;
+//        }else if(currentPageLength==e_can_show_one_page){
+//            currentOffset=0;
+//        }
+        currentOffset=currentOffset-currentPageLength;
         NSLog(@"++currentPageLength:%d,preOffset:%d,currentOffset:%d,nextOffset:%d",currentPageLength,preOffset,currentOffset,nextOffset);
     }else{
         currentOffset=0;
@@ -418,7 +422,36 @@
 - (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavesView {
 	return 100;
 }
+- (BOOL) hasPrevPage {
+//    PageInfoScale* pis= [pageInfoManage getPageInfoScale];
+//    return pis.minPageInfo.dataOffset>0;
+    PageInfo* pi= [pageInfoManage getPageInfoByIndex:leavesView.currentPageIndex];
+    return pi.dataOffset>0;
+}
 
+- (BOOL) hasNextPage {
+    //TODO
+	PageInfoScale* pis= [pageInfoManage getPageInfoScale];
+    return pis.maxPageInfo.dataOffset<fileLength;
+}
+- (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
+    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:index];
+    NSLog(@"\nrenderPageAtIndex--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@,pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
+    if (!pi || !pi.isValid) {
+        [self updatePageInfoWithPaging:index];
+        pi= [pageInfoManage getPageInfoAtIndex:index];
+        NSLog(@"\nrenderPageAtIndex--2--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@, pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
+    }
+    
+    UIView* view=pi.pageView;
+    UIImage *image = [self imageWithView:view];
+	CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
+	CGAffineTransform transform = aspectFit(imageRect,
+											CGContextGetClipBoundingBox(ctx));
+	CGContextConcatCTM(ctx, transform);
+	CGContextDrawImage(ctx, imageRect, [image CGImage]);
+}
+#pragma mark -
 //一般是初次进入，或是jump后使用更新
 //根据当前offset来更新pageInfo
 -(void)updatePageInfoWithCurrentOffsetIndex:(int)index{
@@ -559,9 +592,7 @@
                 pageInfoManage.currentPI.pageIndex=pageInfoManage.currentPI_A.pageIndex-1;
                 pageInfoManage.currentPI.dataOffset=tmpOffset;
                 [self viewWithPI:pageInfoManage.currentPI isNext:NO];
-                NSLog(@"pageIndex:%d",pageInfoManage.currentPI.pageIndex);
                 NSLog(@"view--2:%@",pageInfoManage.currentPI);
-                NSLog(@"currentPageLength---currentPI--:%d",pageInfoManage.currentPI.pageLength);
             case e_current_m:
                 pageInfoManage.currentPI_M=[[PageInfo alloc]init];
                 pageInfoManage.currentPI_M.isValid=YES;
@@ -569,9 +600,7 @@
                 pageInfoManage.currentPI_M.pageIndex=pageInfoManage.currentPI.pageIndex-1;
                 pageInfoManage.currentPI_M.dataOffset=tmpOffset;
                 [self viewWithPI:pageInfoManage.currentPI_M isNext:NO];
-                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_M.pageIndex);
                 NSLog(@"view--3:%@",pageInfoManage.currentPI_M);
-                NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_M.pageLength);
             case e_current_mm:
                 pageInfoManage.currentPI_MM=[[PageInfo alloc]init];
                 pageInfoManage.currentPI_MM.isValid=YES;
@@ -579,9 +608,7 @@
                 pageInfoManage.currentPI_MM.pageIndex=pageInfoManage.currentPI_M.pageIndex-1;
                 pageInfoManage.currentPI_MM.dataOffset=tmpOffset;
                 [self viewWithPI:pageInfoManage.currentPI_MM isNext:NO];
-                NSLog(@"pageIndex:%d",pageInfoManage.currentPI_MM.pageIndex);
                 NSLog(@"view--4:%@",pageInfoManage.currentPI_MM);
-                NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_MM.pageLength);
             default:
                 break;
         }
@@ -621,29 +648,8 @@
     return currentPageLength;
 }
 
-//-(UIView*)viewAtIndex:(int)index{
-//    
-//    
-//    return nil;
-//}
 
-- (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
-    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:index];
-    NSLog(@"\nrenderPageAtIndex--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@,pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
-    if (!pi || !pi.isValid) {
-        [self updatePageInfoWithPaging:index];
-        pi= [pageInfoManage getPageInfoAtIndex:index];
-        NSLog(@"\nrenderPageAtIndex--2--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@, pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
-    }
-    
-    UIView* view=pi.pageView;
-    UIImage *image = [self imageWithView:view];
-	CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
-	CGAffineTransform transform = aspectFit(imageRect,
-											CGContextGetClipBoundingBox(ctx));
-	CGContextConcatCTM(ctx, transform);
-	CGContextDrawImage(ctx, imageRect, [image CGImage]);
-}
+
 
 - (UIImage *) imageWithView:(UIView *)view
 {
