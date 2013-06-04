@@ -20,4 +20,8 @@
     }
     return self;
 }
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"isValid:%d;pageIndex:%d;dataOffset:%d;pageLength:%d;pageView:%@;",isValid,pageIndex,dataOffset,pageLength,pageView];
+}
 @end
