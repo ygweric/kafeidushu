@@ -175,16 +175,19 @@ CGFloat distance(CGPoint a, CGPoint b);
 }
 
 - (void) didTurnToPageAtIndex:(NSUInteger)index {
+    NSLog(@"didTurnToPageAtIndex----index:%d",index);
 	if ([delegate respondsToSelector:@selector(leavesView:didTurnToPageAtIndex:)])
 		[delegate leavesView:self didTurnToPageAtIndex:index];
 }
 
 - (void) didTurnPageBackward {
+//    NSLog(@"didTurnPageBackward---------");
 	interactionLocked = NO;
 	[self didTurnToPageAtIndex:currentPageIndex];
 }
 
 - (void) didTurnPageForward {
+//    NSLog(@"didTurnPageForward---------");
 	interactionLocked = NO;
 	self.currentPageIndex = self.currentPageIndex + 1;	
 	[self didTurnToPageAtIndex:currentPageIndex];
@@ -339,6 +342,7 @@ CGFloat distance(CGPoint a, CGPoint b);
 				   withObject:nil 
 				   afterDelay:duration + 0.25];
 	}
+    NSLog(@"LeavesView----- currentPageIndex:%d",self.currentPageIndex);
 	[CATransaction setValue:[NSNumber numberWithFloat:duration]
 					 forKey:kCATransactionAnimationDuration];
 	[CATransaction commit];

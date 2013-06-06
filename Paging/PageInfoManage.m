@@ -85,7 +85,7 @@
     }
 }
 -(void)printAllPageInfos{
-    NSLog(@"printAllPageInfos----\n\
+//    NSLog(@"printAllPageInfos----\n\
           +++++++++++++++++++ start ++++\n\
           currentPI_MM:%@,\ncurrentPI_M:%@,\ncurrentPI:%@,\ncurrentPI_A:%@,\ncurrentPI_AA:%@\n\
           +++++++++++++++++++ end ++++",currentPI_MM,currentPI_M,currentPI,currentPI_A,currentPI_AA);
