@@ -142,7 +142,7 @@
         
         // 然后一个个缩短字符串的长度，当缩短后的字符串尺寸小于lbContent的尺寸时即为满足
         int step=MAX_PAGING_STEP;
-        NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//        NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
         while (1) {
             pageText = [content substringWithRange:range];
 //            NSLog(@"range.location:%d range.length:%d",range.location,range.length);
@@ -309,7 +309,8 @@
     
 }
 -(void)updatePageInfoContent{
-    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@  %d", (double)currentOffset/fileLength*100,@"%",currentPageIndex+1];
+    PageInfo* pi=[pageInfoManage getPageInfoAtIndex:currentPageIndex];
+    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@  %d", (double)pi.dataOffset/fileLength*100,@"%",currentPageIndex+1];
 }
 -(NSString*)loadString{
     return [self loadStringFrom:0 length:MAX_CHARACTER_LENGHT];
@@ -350,7 +351,7 @@
 
 // 上一页
 - (IBAction)actionPrevious:(id)sender {
-    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     // 从文件里加载文本串
     NSLog(@"---1--preOffset:%d,currentOffset:%d,nextOffset:%d",preOffset,currentOffset,nextOffset);
     if (currentOffset<=0) {
@@ -392,7 +393,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 // 下一页
 - (IBAction)actionNext:(id)sender {
-    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     if (currentOffset==nextOffset
         && currentOffset!=0) {
          NSLog(@"++++++++++++++\n it is the last page already !!!!\n");
@@ -434,14 +435,20 @@
 - (BOOL) hasPrevPage {
 //    PageInfoScale* pis= [pageInfoManage getPageInfoScale];
 //    return pis.minPageInfo.dataOffset>0;
-    PageInfo* pi= [pageInfoManage getPageInfoByIndex:leavesView.currentPageIndex];
+    PageInfo* pi= [pageInfoManage getPageInfoByIndex:currentPageIndex];
     return pi.dataOffset>0;
+    
+//    PageInfoScale* pis= [pageInfoManage getPageInfoScale];
+//    return pis.minPageInfo.dataOffset>0;
 }
 
 - (BOOL) hasNextPage {
     //TODO
-	PageInfoScale* pis= [pageInfoManage getPageInfoScale];
-    return pis.maxPageInfo.dataOffset<fileLength;
+//	PageInfoScale* pis= [pageInfoManage getPageInfoScale];
+//    return pis.maxPageInfo.dataOffset+pis.maxPageInfo.pageLength<fileLength;
+    
+    PageInfo* pi= [pageInfoManage getPageInfoByIndex:currentPageIndex];
+    return pi.dataOffset+pi.pageLength<fileLength;
 }
 - (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:index];
@@ -527,6 +534,7 @@
 }
 //自动翻页时候更新
 -(void)updatePageInfoWithPaging:(int)index{
+    NSLog(@"updatePageInfoWithPaging---start--currentPageIndex:%d-pageInfoManage:%@",currentPageIndex,pageInfoManage);
     PageInfoScale* pis= [pageInfoManage getPageInfoScale];
     if (pis.maxPageInfo.pageIndex<index) {
         //向后翻页
@@ -550,14 +558,20 @@
         
         
         int tmpOffset=0;
+        int offset=0;
         switch (validepit) {
             case e_current:
-                pageInfoManage.currentPI=[[PageInfo alloc]init];
-                pageInfoManage.currentPI.isValid=YES;
+                pageInfoManage.currentPI=[[PageInfo alloc]init];                
                 tmpOffset=pageInfoManage.currentPI_M.dataOffset+pageInfoManage.currentPI_M.pageLength;
                 pageInfoManage.currentPI.pageIndex=pageInfoManage.currentPI_M.pageIndex+1;
                 pageInfoManage.currentPI.dataOffset=tmpOffset;
-                [self viewWithPI:pageInfoManage.currentPI isNext:YES];
+                offset=[self viewWithPI:pageInfoManage.currentPI isNext:YES];
+                if (offset>0) {
+                    pageInfoManage.currentPI.isValid=YES;
+                }else{
+                    pageInfoManage.currentPI.isValid=NO;
+                    break;
+                }
 //                NSLog(@"view--2:%@",pageInfoManage.currentPI);
             case e_current_a:
                 pageInfoManage.currentPI_A=[[PageInfo alloc]init];
@@ -565,7 +579,13 @@
                 tmpOffset=pageInfoManage.currentPI.dataOffset+pageInfoManage.currentPI.pageLength;
                 pageInfoManage.currentPI_A.pageIndex=pageInfoManage.currentPI.pageIndex+1;
                 pageInfoManage.currentPI_A.dataOffset=tmpOffset;
-                [self viewWithPI:pageInfoManage.currentPI_A isNext:YES];
+                offset=[self viewWithPI:pageInfoManage.currentPI_A isNext:YES];
+                if (offset>0) {
+                    pageInfoManage.currentPI_A.isValid=YES;
+                }else{
+                    pageInfoManage.currentPI_A.isValid=NO;
+                    break;
+                }
 //                NSLog(@"view--3:%@",pageInfoManage.currentPI_A);
             case e_current_aa:
                 pageInfoManage.currentPI_AA=[[PageInfo alloc]init];
@@ -573,7 +593,13 @@
                 tmpOffset=pageInfoManage.currentPI_A.dataOffset+pageInfoManage.currentPI_A.pageLength;
                 pageInfoManage.currentPI_AA.pageIndex=pageInfoManage.currentPI_A.pageIndex+1;
                 pageInfoManage.currentPI_AA.dataOffset=tmpOffset;
-                [self viewWithPI:pageInfoManage.currentPI_AA isNext:YES];
+                offset=[self viewWithPI:pageInfoManage.currentPI_AA isNext:YES];
+                if (offset>0) {
+                    pageInfoManage.currentPI_AA.isValid=YES;
+                }else{
+                    pageInfoManage.currentPI_AA.isValid=NO;
+                    break;
+                }
 //                NSLog(@"view--4:%@",pageInfoManage.currentPI_AA);
             default:
                 break;
@@ -604,6 +630,7 @@
         
         
         int tmpOffset=0;
+        int offset=0;
         switch (validepit) {
             case e_current:
                 pageInfoManage.currentPI=[[PageInfo alloc]init];
@@ -611,7 +638,13 @@
                 tmpOffset=pageInfoManage.currentPI_A.dataOffset;
                 pageInfoManage.currentPI.pageIndex=pageInfoManage.currentPI_A.pageIndex-1;
                 pageInfoManage.currentPI.dataOffset=tmpOffset;
-                [self viewWithPI:pageInfoManage.currentPI isNext:NO];
+                offset= [self viewWithPI:pageInfoManage.currentPI isNext:NO];
+                if (offset>0) {
+                    pageInfoManage.currentPI.isValid=YES;
+                }else{
+                    pageInfoManage.currentPI.isValid=NO;
+                    break;
+                }
 //                NSLog(@"view--2:%@",pageInfoManage.currentPI);
             case e_current_m:
                 pageInfoManage.currentPI_M=[[PageInfo alloc]init];
@@ -619,7 +652,13 @@
                 tmpOffset=pageInfoManage.currentPI.dataOffset;
                 pageInfoManage.currentPI_M.pageIndex=pageInfoManage.currentPI.pageIndex-1;
                 pageInfoManage.currentPI_M.dataOffset=tmpOffset;
-                [self viewWithPI:pageInfoManage.currentPI_M isNext:NO];
+                offset=[self viewWithPI:pageInfoManage.currentPI_M isNext:NO];
+                if (offset>0) {
+                    pageInfoManage.currentPI_M.isValid=YES;
+                }else{
+                    pageInfoManage.currentPI_M.isValid=NO;
+                    break;
+                }
 //                NSLog(@"view--3:%@",pageInfoManage.currentPI_M);
             case e_current_mm:
                 pageInfoManage.currentPI_MM=[[PageInfo alloc]init];
@@ -627,7 +666,13 @@
                 tmpOffset=pageInfoManage.currentPI_M.dataOffset;
                 pageInfoManage.currentPI_MM.pageIndex=pageInfoManage.currentPI_M.pageIndex-1;
                 pageInfoManage.currentPI_MM.dataOffset=tmpOffset;
-                [self viewWithPI:pageInfoManage.currentPI_MM isNext:NO];
+                offset=[self viewWithPI:pageInfoManage.currentPI_MM isNext:NO];
+                if (offset>0) {
+                    pageInfoManage.currentPI_MM.isValid=YES;
+                }else{
+                    pageInfoManage.currentPI_MM.isValid=NO;
+                    break;
+                }
 //                NSLog(@"view--4:%@",pageInfoManage.currentPI_MM);
             default:
                 break;
@@ -636,7 +681,7 @@
         
 
     }
-    
+    NSLog(@"updatePageInfoWithPaging---end- currentPageIndex:%d--pageInfoManage:%@",currentPageIndex,pageInfoManage);
 }
 -(int)viewWithPI:(PageInfo*)pi  isNext:(BOOL)isNext{
     // 从文件里加载文本串

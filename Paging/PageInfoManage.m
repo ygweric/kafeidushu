@@ -84,16 +84,18 @@
         return nil;
     }
 }
--(void)printAllPageInfos{
-//    NSLog(@"printAllPageInfos----\n\
+
+-(NSString *)description{
+
+    return [NSString stringWithFormat:@"description----\n\
           +++++++++++++++++++ start ++++\n\
           currentPI_MM:%@,\ncurrentPI_M:%@,\ncurrentPI:%@,\ncurrentPI_A:%@,\ncurrentPI_AA:%@\n\
-          +++++++++++++++++++ end ++++",currentPI_MM,currentPI_M,currentPI,currentPI_A,currentPI_AA);
+          +++++++++++++++++++ end ++++",currentPI_MM,currentPI_M,currentPI,currentPI_A,currentPI_AA];
 }
 
 
 -(PageInfoScale*)getPageInfoScale{
-    [self printAllPageInfos];
+//    NSLog(@"");
     PageInfoScale* pis=[[[PageInfoScale alloc]init]autorelease];
     pis.maxPageInfo=currentPI;
     pis.minPageInfo=currentPI;
@@ -135,7 +137,6 @@
 }
 
 -(PageInfo*)getPageInfoByIndex:(int)index{
-    [self printAllPageInfos];
 
     if (currentPI.isValid && currentPI.pageIndex==index) {
         return currentPI;
