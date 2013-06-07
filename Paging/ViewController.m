@@ -219,6 +219,7 @@
     pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, 424, 89, 21)];
     lbContent.numberOfLines = 0;
     lbContent.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
+    
     pageInfoLabel.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
     pageInfoLabel.backgroundColor=[UIColor clearColor];
     
@@ -243,12 +244,15 @@
     }
     
     //--------
-    [self updatePageInfoWithCurrentOffsetIndex:0];
+    [self jumpToOffset:3223];
+    [self updatePageInfoWithCurrentOffset:currentOffset];
+    [leavesView reloadData];
+    leavesView.currentPageIndex=pageInfoManage.currentPI.pageIndex;
+    currentPageIndex=leavesView.currentPageIndex;
     [self updatePageInfoContent];
     
     
     
-    [super viewDidLoad];
 
 
     
@@ -270,17 +274,17 @@
     [self updateOffsetInfo];
     [self updatePageContent];
     */
-    
+    [super viewDidLoad];
     [self.view addSubview:pageInfoLabel];
 }
-
--(NSString*)jumpToIndex:(long long) fromIndex{
+//get sutiable offset when jump
+-(NSString*)jumpToOffset:(long long) fromOffset{
     NSString* content=nil;
     int tmpLength=MAX_CHARACTER_LENGHT;
     while (!content  ) {
         int tmpCount=0;
         while (!content  && tmpCount<READ_TRY_COUNT_MAX) {
-            content=[self loadStringFrom:fromIndex length:tmpLength];
+            content=[self loadStringFrom:fromOffset length:tmpLength];
 //            NSLog(@"tmpIndex:%lld,tmpLength:%d,tmpCount:%d",fromIndex,tmpLength,tmpCount);
             if (!content) {
                 tmpCount++;
@@ -288,11 +292,12 @@
             }
         }
         if (!content) {
-             fromIndex++;
+             fromOffset++;
         }
     
     }
-    currentOffset=fromIndex;    
+    currentOffset=fromOffset;
+    NSLog(@"jumpToOffset---:%d",currentOffset);
     return content;
 }
 -(void)updateOffsetInfo{
@@ -344,8 +349,8 @@
 
 #pragma mark -
 - (IBAction)jumpTo:(id)sender {
-    int index=self.tvJumpTo.text.intValue;
-    self.text= [self jumpToIndex:index* fileLength/100];
+    int offset=self.tvJumpTo.text.intValue;
+    self.text= [self jumpToOffset:offset* fileLength/100];
     [self updateOffsetInfo];
     [self updatePageContent];
     [self updatePageInfoContent];
@@ -498,26 +503,26 @@
 #pragma mark -
 //一般是初次进入，或是jump后使用更新
 //根据当前offset来更新pageInfo
--(void)updatePageInfoWithCurrentOffsetIndex:(int)index{
+-(void)updatePageInfoWithCurrentOffset:(int)offset{
     
-    pageInfoManage.currentPI.pageIndex=index;
+    pageInfoManage.currentPI.pageIndex=4;
     pageInfoManage.currentPI.dataOffset=currentOffset;
     [self viewWithPI:pageInfoManage.currentPI isNext:YES];
     NSLog(@"currentPageLength---currentPI--:%d",pageInfoManage.currentPI.pageLength);
     
-    if (index>=1) {
-        pageInfoManage.currentPI_M.pageIndex=index-1;
+    if (pageInfoManage.currentPI.dataOffset>0) {
+        pageInfoManage.currentPI_M.pageIndex=pageInfoManage.currentPI.pageIndex-1;
         //这里先设置结尾的offset
         pageInfoManage.currentPI_M.dataOffset=pageInfoManage.currentPI.dataOffset;
         //在这里将结尾offset换成开头offset
         [self viewWithPI:pageInfoManage.currentPI_M isNext:NO];        
-        NSLog(@"currentPageLength---currentPI_M--:%d",pageInfoManage.currentPI_M.pageLength);
+        NSLog(@"currentPageLength---currentPI_M--:%@",pageInfoManage.currentPI_M);
     }else{
         pageInfoManage.currentPI_M.isValid=NO;
     }
     
-    if (index>=2) {
-        pageInfoManage.currentPI_MM.pageIndex=index-2;
+    if (pageInfoManage.currentPI_M.dataOffset>0) {
+        pageInfoManage.currentPI_MM.pageIndex=pageInfoManage.currentPI_M.pageIndex-1;
         //这里先设置结尾的offset
         pageInfoManage.currentPI_MM.dataOffset=pageInfoManage.currentPI_M.dataOffset;
         //在这里将结尾offset换成开头offset
@@ -530,14 +535,14 @@
     
     int tmpOffset=pageInfoManage.currentPI.dataOffset+pageInfoManage.currentPI.pageLength;
     if (tmpOffset<fileLength) {
-        pageInfoManage.currentPI_A.pageIndex=index+1;
+        pageInfoManage.currentPI_A.pageIndex=pageInfoManage.currentPI.pageIndex+1;
         pageInfoManage.currentPI_A.dataOffset=tmpOffset;
         [self viewWithPI:pageInfoManage.currentPI_A isNext:YES];
         NSLog(@"currentPageLength---currentPI_A--:%d",pageInfoManage.currentPI_A.pageLength);
         
         tmpOffset=pageInfoManage.currentPI_A.dataOffset+pageInfoManage.currentPI_A.pageLength;
         if (tmpOffset<fileLength) {
-            pageInfoManage.currentPI_AA.pageIndex=index+2;
+            pageInfoManage.currentPI_AA.pageIndex=pageInfoManage.currentPI_A.pageIndex+1;
             pageInfoManage.currentPI_AA.dataOffset=pageInfoManage.currentPI_A.dataOffset+pageInfoManage.currentPI_A.pageLength;
             [self viewWithPI:pageInfoManage.currentPI_AA isNext:YES];
             NSLog(@"currentPageLength---currentPI_AA--:%d",pageInfoManage.currentPI_AA.pageLength);

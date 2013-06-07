@@ -17,6 +17,6 @@
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle;
 
 - (id)init;
-
+-(void)setCurrentPageIndex:(int)index;
 @end
 

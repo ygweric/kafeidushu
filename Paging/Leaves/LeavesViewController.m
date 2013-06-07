@@ -69,5 +69,8 @@
 	leavesView.delegate = self;
 	[leavesView reloadData];
 }
-
+-(void)setCurrentPageIndex:(int)index{
+    leavesView.currentPageIndex =index;
+    
+}
 @end
