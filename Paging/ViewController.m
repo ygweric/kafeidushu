@@ -436,7 +436,12 @@
 //    PageInfoScale* pis= [pageInfoManage getPageInfoScale];
 //    return pis.minPageInfo.dataOffset>0;
     PageInfo* pi= [pageInfoManage getPageInfoByIndex:currentPageIndex];
-    return pi.dataOffset>0;
+    if (pi) {
+        return pi.dataOffset>0;
+    }else{
+        return YES;
+    }
+    
     
 //    PageInfoScale* pis= [pageInfoManage getPageInfoScale];
 //    return pis.minPageInfo.dataOffset>0;
@@ -448,7 +453,12 @@
 //    return pis.maxPageInfo.dataOffset+pis.maxPageInfo.pageLength<fileLength;
     
     PageInfo* pi= [pageInfoManage getPageInfoByIndex:currentPageIndex];
-    return pi.dataOffset+pi.pageLength<fileLength;
+    if (pi) {
+        return pi.dataOffset+pi.pageLength<fileLength;
+    } else {
+        return YES;
+    }
+    
 }
 - (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:index];
@@ -534,7 +544,7 @@
 }
 //自动翻页时候更新
 -(void)updatePageInfoWithPaging:(int)index{
-    NSLog(@"updatePageInfoWithPaging---start--currentPageIndex:%d-pageInfoManage:%@",currentPageIndex,pageInfoManage);
+    NSLog(@"updatePageInfoWithPaging---start--currentPageIndex:%d,index:%d-pageInfoManage:%@",currentPageIndex,index,pageInfoManage);
     PageInfoScale* pis= [pageInfoManage getPageInfoScale];
     if (pis.maxPageInfo.pageIndex<index) {
         //向后翻页
@@ -681,7 +691,7 @@
         
 
     }
-    NSLog(@"updatePageInfoWithPaging---end- currentPageIndex:%d--pageInfoManage:%@",currentPageIndex,pageInfoManage);
+    NSLog(@"updatePageInfoWithPaging---end- currentPageIndex:%d,index:%d--pageInfoManage:%@",currentPageIndex,index,pageInfoManage);
 }
 -(int)viewWithPI:(PageInfo*)pi  isNext:(BOOL)isNext{
     // 从文件里加载文本串
