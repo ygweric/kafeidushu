@@ -310,6 +310,11 @@
 }
 -(void)updatePageInfoContent{
     PageInfo* pi=[pageInfoManage getPageInfoAtIndex:currentPageIndex];
+    if (!pi || !pi.isValid) {
+        [self updatePageInfoWithPaging:currentPageIndex];
+        pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
+        //        NSLog(@"\nrenderPageAtIndex--2--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@, pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
+    }
     pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@  %d", (double)pi.dataOffset/fileLength*100,@"%",currentPageIndex+1];
 }
 -(NSString*)loadString{
@@ -429,8 +434,8 @@
 //    NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
 }
 #pragma mark leaves
-- (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavesView {
-	return 100;
+- (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavelsView {
+	return INT32_MAX;
 }
 - (BOOL) hasPrevPage {
 //    PageInfoScale* pis= [pageInfoManage getPageInfoScale];
@@ -439,7 +444,8 @@
     if (pi) {
         return pi.dataOffset>0;
     }else{
-        return YES;
+        PageInfoScale* pis= [pageInfoManage getPageInfoScale];
+        return pis.minPageInfo.dataOffset>0;
     }
     
     
@@ -456,7 +462,8 @@
     if (pi) {
         return pi.dataOffset+pi.pageLength<fileLength;
     } else {
-        return YES;
+        PageInfoScale* pis= [pageInfoManage getPageInfoScale];
+        return pis.maxPageInfo.dataOffset+pis.maxPageInfo.pageLength<fileLength;
     }
     
 }
