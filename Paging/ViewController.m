@@ -14,7 +14,7 @@
 
 #define READ_TRY_COUNT_MAX 4
 
-#define MAX_CHARACTER_LENGHT IS_IPAD?8000:2000
+#define MAX_CHARACTER_LENGHT (IS_IPAD?8000:2000)
 
 #define MAX_PAGING_STEP 40 //单位piwxel,大概一行
 
@@ -71,11 +71,15 @@
     
 //    NSLog(@"-----pageString   -----before text:\n%@\n\n",content);
     
+    //NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     // 计算文本串的大小尺寸
     CGSize totalTextSize = [content sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
                                  constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
                                      lineBreakMode:NSLineBreakByWordWrapping];
-    
+//    //NSLog(@"time interval--pageString ---1--:%lf\n%@",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart,content);
+    //NSLog(@"time interval--pageString ---11--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
+    NSLog(@"content:%d",content.length);
+    //NSLog(@"time interval--pageString ---12--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     // 如果一页就能显示完，直接显示所有文本串即可。
     if (totalTextSize.height < lbContent.frame.size.height) {
         lbContent.text = content;
@@ -107,7 +111,7 @@
         CGSize pageTextSize;//content做占用的单行最大长度
         
         
-        
+        //NSLog(@"time interval--pageString ---2--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
         //得到合适的range
         //保证没有达到文章尾部
         while (isNext?(range.location + range.length < textLength):(range.location >0)) {
@@ -133,6 +137,7 @@
                 
             }
         }
+        //NSLog(@"time interval--pageString ---3--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
         //到文章结尾/开头时候处理
         if (range.location <= 0) {
             range.location = 0;
@@ -149,7 +154,7 @@
         
         // 然后一个个缩短字符串的长度，当缩短后的字符串尺寸小于lbContent的尺寸时即为满足
         int step=MAX_PAGING_STEP;
-//        NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//        //NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
         while (1) {
             pageText = [content substringWithRange:range];
 //            NSLog(@"range.location:%d range.length:%d",range.location,range.length);
@@ -192,7 +197,8 @@
                 
             }
         }
-//        NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
+        //NSLog(@"time interval--pageString ---5--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
+//        //NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
         
         // 得到一个页面的显示范围
         if (page >= maxPages) {
@@ -211,6 +217,7 @@
             free(rangeOfPages);
             rangeOfPages=nil;
         }
+        //NSLog(@"time interval--pageString ---6--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
         return length;
     }
     
@@ -222,8 +229,8 @@
     
     
     
-    lbContent=[[UILabel alloc]initWithFrame:IS_IPAD? CGRectMake(15, 20, 748, 861):CGRectMake(15, 20, 285, 328)];
-    pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, 424, 89, 21)];
+    lbContent=[[UILabel alloc]initWithFrame:IS_IPAD? CGRectMake(15, 20, 748, 861):CGRectMake(15, 20, 285, SCREEN_HEIGHT-128)];
+    pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, SCREEN_HEIGHT-56, 89, 21)];
     lbContent.numberOfLines = 0;
     lbContent.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
     
@@ -255,7 +262,7 @@
     //--------
     
     
-    [self jumpToOffsetWithLeaves:3223];
+    [self jumpToOffsetWithLeaves:32233];
     
 
 
@@ -376,7 +383,7 @@
 
 // 上一页
 - (IBAction)actionPrevious:(id)sender {
-//    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    //NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     // 从文件里加载文本串
     NSLog(@"---1--preOffset:%d,currentOffset:%d,nextOffset:%d",preOffset,currentOffset,nextOffset);
     if (currentOffset<=0) {
@@ -410,7 +417,7 @@
     
    [self updatePageContent];
     [self updatePageInfoContent];
-//    NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
+//    //NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
 
     
 }
@@ -418,7 +425,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 // 下一页
 - (IBAction)actionNext:(id)sender {
-//    NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+//    //NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     if (currentOffset==nextOffset
         && currentOffset!=0) {
          NSLog(@"++++++++++++++\n it is the last page already !!!!\n");
@@ -451,7 +458,7 @@
     }
     [self updatePageContent];
     [self updatePageInfoContent];
-//    NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
+//    //NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
 }
 #pragma mark leaves
 - (NSUInteger) numberOfPagesInLeavesView:(LeavesView*)leavelsView {
@@ -520,18 +527,19 @@
 //根据当前offset来更新pageInfo
 -(void)updatePageInfoWithCurrentOffset:(int)offset{
     
-    pageInfoManage.currentPI.pageIndex=4;
+    pageInfoManage.currentPI.pageIndex=2;
     pageInfoManage.currentPI.dataOffset=currentOffset;
     [self viewWithPI:pageInfoManage.currentPI isNext:YES];
     NSLog(@"currentPageLength---currentPI--:%d",pageInfoManage.currentPI.pageLength);
-    
+    //NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     if (pageInfoManage.currentPI.dataOffset>0) {
         pageInfoManage.currentPI_M.pageIndex=pageInfoManage.currentPI.pageIndex-1;
         //这里先设置结尾的offset
         pageInfoManage.currentPI_M.dataOffset=pageInfoManage.currentPI.dataOffset;
         //在这里将结尾offset换成开头offset
-        [self viewWithPI:pageInfoManage.currentPI_M isNext:NO];        
+        [self viewWithPI:pageInfoManage.currentPI_M isNext:NO];
         NSLog(@"currentPageLength---currentPI_M--:%@",pageInfoManage.currentPI_M);
+        //NSLog(@"time interval--viewDidLoad ---4--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     }else{
         pageInfoManage.currentPI_M.isValid=NO;
     }
@@ -722,6 +730,8 @@
 }
 -(int)viewWithPI:(PageInfo*)pi  isNext:(BOOL)isNext{
     // 从文件里加载文本串
+    //NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
+
     NSString* txt=nil;
     int tmpLength=0;
     
@@ -730,23 +740,28 @@
     } else {
         tmpLength=(pi.dataOffset<MAX_CHARACTER_LENGHT)?pi.dataOffset:MAX_CHARACTER_LENGHT;
     }
-    
+    NSLog(@"tmpLength--1:%d",tmpLength);
+    //NSLog(@"time interval--3--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     while (!txt && tmpLength>=0) {
         txt=[self loadStringFrom:(isNext?pi.dataOffset:pi.dataOffset-tmpLength) length:tmpLength];
-//        NSLog(@"tmpLength:%d",tmpLength);
+        NSLog(@"tmpLength:%d",tmpLength);
         if (!txt) {
             tmpLength--;
         }
     }
+    //NSLog(@"time interval--2--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
    int currentPageLength= [self pageString:txt isNext:isNext];
+    //NSLog(@"time interval--21--isNext:%d--:%lf",isNext,[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     [self updatePageContent];
+    //NSLog(@"time interval--22--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     pi.pageView=[VIewUtil clone:lbContent];
+    //NSLog(@"time interval--23--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     pi.pageLength=currentPageLength;
     pi.isValid=YES;
     if (!isNext) {
         pi.dataOffset=pi.dataOffset-currentPageLength;
     }
-    
+    //NSLog(@"time interval--1--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     return currentPageLength;
 }
 
