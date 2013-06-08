@@ -126,6 +126,16 @@ CGFloat distance(CGPoint a, CGPoint b);
 }
 
 - (void) getImages {
+    if (currentPageIndex > 0 && backgroundRendering)
+        [pageCache precacheImageForPageIndex:currentPageIndex-1];
+    topPage.contents = (id)[pageCache cachedImageForPageIndex:currentPageIndex];
+    topPageReverseImage.contents = (id)[pageCache cachedImageForPageIndex:currentPageIndex];
+    if (currentPageIndex < numberOfPages - 1)
+        bottomPage.contents = (id)[pageCache cachedImageForPageIndex:currentPageIndex + 1];
+    [pageCache minimizeToPageIndex:currentPageIndex];
+    
+    //不考虑numberOfPages，使用offset来判断是否有上下页
+    /*
 	if (currentPageIndex < numberOfPages) {
 		if (currentPageIndex > 0 && backgroundRendering)
 			[pageCache precacheImageForPageIndex:currentPageIndex-1];
@@ -139,6 +149,7 @@ CGFloat distance(CGPoint a, CGPoint b);
 		topPageReverseImage.contents = nil;
 		bottomPage.contents = nil;
 	}
+     */
 }
 
 - (void) setLayerFrames {

@@ -496,11 +496,11 @@
 }
 - (void) renderPageAtIndex:(NSUInteger)index inContext:(CGContextRef)ctx {
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:index];
-//    NSLog(@"\nrenderPageAtIndex--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@,pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
+    NSLog(@"\nrenderPageAtIndex----pi:%@",pi);
     if (!pi || !pi.isValid) {
         [self updatePageInfoWithPaging:index];
         pi= [pageInfoManage getPageInfoAtIndex:index];
-//        NSLog(@"\nrenderPageAtIndex--2--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@, pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
+        NSLog(@"\nrenderPageAtIndex--2--pi:%@",pi);
     }
     
     UIView* view=pi.pageView;
