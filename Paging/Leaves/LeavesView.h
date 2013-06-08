@@ -38,7 +38,7 @@
 	
 	CGPoint touchBeganPoint;
 	BOOL touchIsActive;
-	CGRect nextPageRect, prevPageRect;
+	CGRect nextPageRect, prevPageRect,midPageRect;
 	BOOL interactionLocked;
 }
 
@@ -85,5 +85,10 @@
 // called when the page-turn animation (following a touch-up or drag) completes 
 - (void) leavesView:(LeavesView *)leavesView didTurnToPageAtIndex:(NSUInteger)pageIndex;
 
+- (void) handlerTouchedMidPage;
+
+//return whether stop touch
+//YES stop touch chain
+- (BOOL) handlerTouched;
 @end
 

@@ -26,6 +26,7 @@
 
 
 
+
 @implementation ViewController{
 
     
@@ -47,6 +48,9 @@
     
     long long fileLength;
     
+    BOOL isBottomMenuShowing;
+    BOOL isSimpleViewShowing;
+    
 }
 @synthesize  lbContent;
 @synthesize pageInfoLabel;
@@ -54,6 +58,9 @@
 @synthesize filePath=_filePath;
 @synthesize lbContentAdapter=_lbContentAdapter;
 @synthesize pagingContent=_pagingContent;
+@synthesize vMenu=_vMenu;
+@synthesize vMenuTool=_vMenuTool;
+@synthesize vJump=_vJump;
 
 
 #pragma mark paging
@@ -234,6 +241,8 @@
     maxLength=0;
     fileLength=1; //初始化1，显示页数%时候，做除数，所以不为0
     currentPageIndex=0;
+    isBottomMenuShowing=NO;
+    isSimpleViewShowing=NO;
     
     self.filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
     
@@ -244,14 +253,9 @@
     }
     
     //--------
-    [self jumpToOffset:3223];
-    [self updatePageInfoWithCurrentOffset:currentOffset];
-    [leavesView reloadData];
-    leavesView.currentPageIndex=pageInfoManage.currentPI.pageIndex;
-    currentPageIndex=leavesView.currentPageIndex;
-    [self updatePageInfoContent];
     
     
+    [self jumpToOffsetWithLeaves:3223];
     
 
 
@@ -277,7 +281,17 @@
     [super viewDidLoad];
     [self.view addSubview:pageInfoLabel];
 }
+-(void)jumpToOffsetWithLeaves:(long long)offset{
+    [self jumpToOffset:offset];
+    [self updatePageInfoWithCurrentOffset:currentOffset];
+    [leavesView reloadData];
+    leavesView.currentPageIndex=pageInfoManage.currentPI.pageIndex;
+    currentPageIndex=leavesView.currentPageIndex;
+    [self updatePageInfoContent];
+}
+
 //get sutiable offset when jump
+
 -(NSString*)jumpToOffset:(long long) fromOffset{
     NSString* content=nil;
     int tmpLength=MAX_CHARACTER_LENGHT;
@@ -300,6 +314,7 @@
     NSLog(@"jumpToOffset---:%d",currentOffset);
     return content;
 }
+
 -(void)updateOffsetInfo{
     int currentPageLength= [self pageString:self.text isNext:YES];
     preOffset=0;
@@ -759,4 +774,146 @@
     [_lbContentAdapter release];
     [super dealloc];
 }
+#pragma mark menu
+
+#define TAG_MENU_MAIN 301
+#define TAG_MENU_SEGMENT 302
+#define TAG_MENU_CONTENT 303
+#define TAG_MENU_VIEW_TOOL 304
+#define TAG_MENU_VIEW_TOOL_BT_JUMP 305
+#define TAG_SIMPLE_VIEW_JUMP 306
+#define TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT 307
+#define TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT 308
+#define TAG_SIMPLE_VIEW_JUMP_SLIDE 309
+
+#define TAG_SIMPLE_VIEW_OK 501
+#define TAG_SIMPLE_VIEW_CANCEL 502
+
+
+-(UIView*)findViewWithTag:(NSArray*)views tag:(int)tag{
+    for (UIView* v in views) {
+        if (v.tag==tag) {
+            return v;
+        }
+    }
+    return nil;
+}
+
+-(BOOL)handlerTouched{
+    NSLog(@"handlerTouched---");
+    BOOL isYes=NO;
+    if (isBottomMenuShowing) {
+        [self showBottomMenu:NO];
+        isYes=YES;
+    }
+    if (isSimpleViewShowing) {
+        [self showJumpView:NO];
+        isYes=YES;
+    }
+    return isYes;
+}
+-(void)handlerTouchedMidPage{
+    NSLog(@"handlerTouchedMidPage---");
+    
+    if (!isBottomMenuShowing) {
+        [self showBottomMenu:YES];
+    }
+}
+
+-(void)showBottomMenu:(BOOL)toShow {
+    if (!_vMenu) {
+        NSArray* views= [[NSBundle mainBundle] loadNibNamed:@"BottomMenu_iphone" owner:self options:nil] ;
+        self.vMenu= [self findViewWithTag:views tag:TAG_MENU_MAIN];
+        self.vMenuTool= [self findViewWithTag:views tag:TAG_MENU_VIEW_TOOL];
+        [[self.vMenu viewWithTag:TAG_MENU_CONTENT] addSubview:_vMenuTool];
+        UIButton* btShowJump= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_JUMP];
+        [btShowJump addTarget:self action:@selector(showJumpView) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_vMenu];
+    }
+    
+    CGRect frame=self.view.frame;
+    if (toShow) {
+        _vMenu.frame=CGRectMake(0, frame.size.height, _vMenu.frame.size.width, _vMenu.frame.size.height);
+    }else{
+        _vMenu.frame=CGRectMake(0, frame.size.height-_vMenu.frame.size.height, _vMenu.frame.size.width, _vMenu.frame.size.height);
+    }
+    
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationDelay:0];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    
+    if (toShow) {
+        _vMenu.frame=CGRectMake(0, frame.size.height-_vMenu.frame.size.height, _vMenu.frame.size.width, _vMenu.frame.size.height);
+    }else{
+         _vMenu.frame=CGRectMake(0, frame.size.height, _vMenu.frame.size.width, _vMenu.frame.size.height);
+    }
+
+    [UIView commitAnimations];
+    isBottomMenuShowing=toShow;
+}
+-(void)showJumpView{
+    [self showJumpView:YES];
+}
+
+-(void)showJumpView:(BOOL)toShow{
+    if (isBottomMenuShowing) {
+        [self showBottomMenu:NO];
+        isBottomMenuShowing=NO;
+    }
+    if (!self.vJump) {
+        NSArray* views= [[NSBundle mainBundle] loadNibNamed:@"BottomMenu_iphone" owner:self options:nil] ;
+        self.vJump= [self findViewWithTag:views tag:TAG_SIMPLE_VIEW_JUMP];
+        UIButton* btOK=(UIButton*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_OK];
+        [btOK addTarget:self action:@selector(jumpOffset:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton* btCancel=(UIButton*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_CANCEL];
+        [btCancel addTarget:self action:@selector(jumpOffset:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+
+    if (toShow) {
+        CGRect frame=self.view.frame;
+        _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 30, _vJump.frame.size.width, _vJump.frame.size.height);
+        [self.view addSubview:_vJump];
+        isSimpleViewShowing=YES;
+    } else {
+        [_vJump removeFromSuperview];
+        isSimpleViewShowing=NO;
+    }
+   
+    [UIView commitAnimations];
+}
+
+
+-(void)jumpOffset:(UIButton*)sender{
+    switch (sender.tag) {
+        case TAG_SIMPLE_VIEW_OK:
+        {
+            UILabel* lbPerPreDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT];
+            UILabel* lbPerSuffDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT];
+            NSString* offsetValue=[NSString stringWithFormat:@"%@.%@",lbPerPreDot.text,lbPerSuffDot.text];
+            float tmpOffset=offsetValue.floatValue;
+            if (tmpOffset>=0 && tmpOffset<=100) {
+                 [self jumpToOffsetWithLeaves:(tmpOffset*fileLength/100)];
+            }else{
+                NSLog(@"error input page jump value");
+            }
+           
+        }
+            break;
+        case TAG_SIMPLE_VIEW_CANCEL:
+            
+            break;
+            
+        default:
+            break;
+    }
+    [self showJumpView:NO];
+    
+    
+}
+
+
+
 @end

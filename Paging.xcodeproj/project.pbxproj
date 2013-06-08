@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F51FDF7517630BA0008AD0E1 /* BottomMenu_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51FDF7417630BA0008AD0E1 /* BottomMenu_iphone.xib */; };
 		F574D0AC174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt in Resources */ = {isa = PBXBuildFile; fileRef = F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */; };
 		F5846B451755D2B40022F878 /* ViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5846B431755D2B40022F878 /* ViewController_ipad.xib */; };
 		F5846B461755D2B40022F878 /* ViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5846B441755D2B40022F878 /* ViewController_iphone.xib */; };
@@ -28,9 +29,11 @@
 		F5D2536617573E5400C11568 /* VIewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D2536517573E5400C11568 /* VIewUtil.m */; };
 		F5D25369175742D000C11568 /* PageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D25368175742D000C11568 /* PageInfo.m */; };
 		F5D2536C1757432800C11568 /* PageInfoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D2536B1757432800C11568 /* PageInfoManage.m */; };
+		F5EA4F781761DC2B00693D89 /* AlertChangeOffset-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5EA4F771761DC2B00693D89 /* AlertChangeOffset-ipad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F51FDF7417630BA0008AD0E1 /* BottomMenu_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMenu_iphone.xib; sourceTree = "<group>"; };
 		F574D0AB174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖-utf8.txt"; sourceTree = "<group>"; };
 		F5846B431755D2B40022F878 /* ViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_ipad.xib; sourceTree = "<group>"; };
 		F5846B441755D2B40022F878 /* ViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iphone.xib; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		F5D25368175742D000C11568 /* PageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfo.m; sourceTree = "<group>"; };
 		F5D2536A1757432800C11568 /* PageInfoManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageInfoManage.h; sourceTree = "<group>"; };
 		F5D2536B1757432800C11568 /* PageInfoManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfoManage.m; sourceTree = "<group>"; };
+		F5EA4F771761DC2B00693D89 /* AlertChangeOffset-ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "AlertChangeOffset-ipad.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,8 @@
 				F5A7C628174DAA900040A3CB /* AppDelegate.m */,
 				F5A7C630174DAA900040A3CB /* ViewController.h */,
 				F5A7C631174DAA900040A3CB /* ViewController.m */,
+				F5EA4F771761DC2B00693D89 /* AlertChangeOffset-ipad.xib */,
+				F51FDF7417630BA0008AD0E1 /* BottomMenu_iphone.xib */,
 				F5D25367175742D000C11568 /* PageInfo.h */,
 				F5D25368175742D000C11568 /* PageInfo.m */,
 				F5D2536A1757432800C11568 /* PageInfoManage.h */,
@@ -220,6 +226,8 @@
 				F574D0AC174F5E7B00BAE0E8 /* 笑傲江湖-utf8.txt in Resources */,
 				F5846B451755D2B40022F878 /* ViewController_ipad.xib in Resources */,
 				F5846B461755D2B40022F878 /* ViewController_iphone.xib in Resources */,
+				F5EA4F781761DC2B00693D89 /* AlertChangeOffset-ipad.xib in Resources */,
+				F51FDF7517630BA0008AD0E1 /* BottomMenu_iphone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

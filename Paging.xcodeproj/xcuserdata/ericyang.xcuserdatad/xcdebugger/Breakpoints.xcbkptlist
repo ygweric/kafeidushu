@@ -8,12 +8,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/ViewController.m"
-         timestampString = "392033808.949552"
+         timestampString = "392377382.136071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "573"
-         endingLineNumber = "573"
-         landmarkName = "-updatePageInfoWithPaging:"
+         startingLineNumber = "333"
+         endingLineNumber = "333"
+         landmarkName = "-updatePageInfoContent"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/Leaves/LeavesView.m"
+         timestampString = "392372161.937179"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "227"
+         endingLineNumber = "227"
+         landmarkName = "-targetWidth"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -21,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/ViewController.m"
-         timestampString = "392033808.949552"
+         timestampString = "392377382.136071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "594"
-         endingLineNumber = "594"
-         landmarkName = "-updatePageInfoWithPaging:"
+         startingLineNumber = "818"
+         endingLineNumber = "818"
+         landmarkName = "-handlerTouchedMidPage"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -34,25 +47,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/ViewController.m"
-         timestampString = "392033808.949552"
+         timestampString = "392377382.136071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "428"
-         endingLineNumber = "428"
-         landmarkName = "-hasPrevPage"
+         startingLineNumber = "835"
+         endingLineNumber = "835"
+         landmarkName = "-showBottomMenu:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Paging/PageInfoManage.m"
-         timestampString = "392033112.323498"
+         filePath = "Paging/ViewController.m"
+         timestampString = "392377382.136071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "102"
-         endingLineNumber = "102"
-         landmarkName = "-getPageInfoScale"
+         startingLineNumber = "795"
+         endingLineNumber = "795"
+         landmarkName = "-findViewWithTag:tag:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/ViewController.m"
+         timestampString = "392377547.119422"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "902"
+         endingLineNumber = "902"
+         landmarkName = "-jumpOffset:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

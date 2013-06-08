@@ -19,6 +19,10 @@
 @property (retain, nonatomic) UITextField *tvJumpTo;
 @property (retain, nonatomic) NSString* pagingContent; //解析出来的string
 
+@property (retain, nonatomic) UIView* vMenu;
+@property (retain, nonatomic) UIView* vMenuTool;
+@property (retain, nonatomic) UIView* vJump;
+
 - (IBAction)jumpTo:(id)sender;
 
 - (IBAction)actionPrevious:(id)sender ;

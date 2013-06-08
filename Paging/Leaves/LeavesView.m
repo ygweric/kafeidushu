@@ -201,12 +201,20 @@ CGFloat distance(CGPoint a, CGPoint b);
 	return [pageCache.dataSource hasNextPage];
 }
 
+- (void) handlerTouchedMidPage {
+	[delegate handlerTouchedMidPage];
+}
+
 - (BOOL) touchedNextPage {
 	return CGRectContainsPoint(nextPageRect, touchBeganPoint);
 }
 
 - (BOOL) touchedPrevPage {
 	return CGRectContainsPoint(prevPageRect, touchBeganPoint);
+}
+
+- (BOOL) touchedMidPage {
+	return CGRectContainsPoint(midPageRect, touchBeganPoint);
 }
 
 - (CGFloat) dragThreshold {
@@ -231,6 +239,10 @@ CGFloat distance(CGPoint a, CGPoint b);
 	prevPageRect = CGRectMake(0,
 							  0,
 							  targetWidth,
+							  self.bounds.size.height);
+    midPageRect = CGRectMake(targetWidth,
+							  0,
+							  self.bounds.size.width - 2*targetWidth,
 							  self.bounds.size.height);
 }
 
@@ -275,6 +287,9 @@ CGFloat distance(CGPoint a, CGPoint b);
 #pragma mark UIResponder methods
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if ([delegate handlerTouched]) {
+        return;
+    }
 	if (interactionLocked)
 		return;
 	
@@ -292,7 +307,9 @@ CGFloat distance(CGPoint a, CGPoint b);
 	} 
 	else if ([self touchedNextPage] && [self hasNextPage])
 		touchIsActive = YES;
-	
+	else if([self touchedMidPage]){
+        [self handlerTouchedMidPage];
+    }
 	else 
 		touchIsActive = NO;
 }
