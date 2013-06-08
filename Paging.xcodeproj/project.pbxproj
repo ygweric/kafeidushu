@@ -21,17 +21,26 @@
 		5F3AEED2176386E80082BCBE /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEC3176386E80082BCBE /* Utilities.m */; };
 		5F3AEED3176386E80082BCBE /* PageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEC6176386E80082BCBE /* PageInfo.m */; };
 		5F3AEED4176386E80082BCBE /* PageInfoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEC8176386E80082BCBE /* PageInfoManage.m */; };
-		5F3AEED5176386E80082BCBE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEECA176386E80082BCBE /* ViewController.m */; };
+		5F3AEED5176386E80082BCBE /* ReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEECA176386E80082BCBE /* ReaderViewController.m */; };
 		5F3AEED6176386E80082BCBE /* VIewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEECE176386E80082BCBE /* VIewUtil.m */; };
-		5F3AEEDD176387B70082BCBE /* push实现.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEED8176387B70082BCBE /* push实现.txt */; };
 		5F3AEEDE176387B70082BCBE /* 笑傲江湖-utf8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEED9176387B70082BCBE /* 笑傲江湖-utf8.txt */; };
 		5F3AEEDF176387B70082BCBE /* 笑傲江湖-utf8ee.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEDA176387B70082BCBE /* 笑傲江湖-utf8ee.txt */; };
 		5F3AEEE0176387B70082BCBE /* 笑傲江湖-utf8xee.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEDB176387B70082BCBE /* 笑傲江湖-utf8xee.txt */; };
 		5F3AEEE1176387B70082BCBE /* 笑傲江湖.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEDC176387B70082BCBE /* 笑傲江湖.txt */; };
 		5F3AEEE6176388300082BCBE /* AlertChangeOffset-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE2176388300082BCBE /* AlertChangeOffset-ipad.xib */; };
 		5F3AEEE7176388300082BCBE /* BottomMenu_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE3176388300082BCBE /* BottomMenu_iphone.xib */; };
-		5F3AEEE8176388300082BCBE /* ViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE4176388300082BCBE /* ViewController_ipad.xib */; };
-		5F3AEEE9176388300082BCBE /* ViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE5176388300082BCBE /* ViewController_iphone.xib */; };
+		5F3AEEE8176388300082BCBE /* ReaderViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE4176388300082BCBE /* ReaderViewController_ipad.xib */; };
+		5F3AEEE9176388300082BCBE /* ReaderViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE5176388300082BCBE /* ReaderViewController_iphone.xib */; };
+		5F3AEEEE176389980082BCBE /* RJBookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEEC176389980082BCBE /* RJBookListViewController.m */; };
+		5F3AEEEF176389980082BCBE /* RJBookListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEED176389980082BCBE /* RJBookListViewController.xib */; };
+		5F3AEEF417638AA20082BCBE /* RJBookList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEF117638AA20082BCBE /* RJBookList.m */; };
+		5F3AEEF517638AA20082BCBE /* RJCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEF317638AA20082BCBE /* RJCommentView.m */; };
+		5F3AEEF817638AB60082BCBE /* RJBookData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEF717638AB60082BCBE /* RJBookData.m */; };
+		5F3AEEFA17638B8E0082BCBE /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEF917638B8E0082BCBE /* placeholder.png */; };
+		5F3AEEFC17638C1A0082BCBE /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEFB17638C1A0082BCBE /* button.png */; };
+		5F3AEEFE17638C730082BCBE /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEFD17638C730082BCBE /* background.jpg */; };
+		5F3AEF0117638CD00082BCBE /* shelf_row.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEFF17638CD00082BCBE /* shelf_row.png */; };
+		5F3AEF0217638CD00082BCBE /* shelf_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEF0017638CD00082BCBE /* shelf_top.png */; };
 		F5846B561755F3960022F878 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5846B551755F3960022F878 /* QuartzCore.framework */; };
 		F5A7C619174DAA900040A3CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C618174DAA900040A3CB /* UIKit.framework */; };
 		F5A7C61B174DAA900040A3CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7C61A174DAA900040A3CB /* Foundation.framework */; };
@@ -64,20 +73,33 @@
 		5F3AEEC6176386E80082BCBE /* PageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfo.m; sourceTree = "<group>"; };
 		5F3AEEC7176386E80082BCBE /* PageInfoManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageInfoManage.h; sourceTree = "<group>"; };
 		5F3AEEC8176386E80082BCBE /* PageInfoManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfoManage.m; sourceTree = "<group>"; };
-		5F3AEEC9176386E80082BCBE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5F3AEECA176386E80082BCBE /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5F3AEEC9176386E80082BCBE /* ReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderViewController.h; sourceTree = "<group>"; };
+		5F3AEECA176386E80082BCBE /* ReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderViewController.m; sourceTree = "<group>"; };
 		5F3AEECC176386E80082BCBE /* PubHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PubHeader.h; sourceTree = "<group>"; };
 		5F3AEECD176386E80082BCBE /* VIewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIewUtil.h; sourceTree = "<group>"; };
 		5F3AEECE176386E80082BCBE /* VIewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIewUtil.m; sourceTree = "<group>"; };
-		5F3AEED8176387B70082BCBE /* push实现.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "push实现.txt"; sourceTree = "<group>"; };
 		5F3AEED9176387B70082BCBE /* 笑傲江湖-utf8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖-utf8.txt"; sourceTree = "<group>"; };
 		5F3AEEDA176387B70082BCBE /* 笑傲江湖-utf8ee.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖-utf8ee.txt"; sourceTree = "<group>"; };
 		5F3AEEDB176387B70082BCBE /* 笑傲江湖-utf8xee.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖-utf8xee.txt"; sourceTree = "<group>"; };
 		5F3AEEDC176387B70082BCBE /* 笑傲江湖.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖.txt"; sourceTree = "<group>"; };
 		5F3AEEE2176388300082BCBE /* AlertChangeOffset-ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "AlertChangeOffset-ipad.xib"; sourceTree = "<group>"; };
 		5F3AEEE3176388300082BCBE /* BottomMenu_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMenu_iphone.xib; sourceTree = "<group>"; };
-		5F3AEEE4176388300082BCBE /* ViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_ipad.xib; sourceTree = "<group>"; };
-		5F3AEEE5176388300082BCBE /* ViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iphone.xib; sourceTree = "<group>"; };
+		5F3AEEE4176388300082BCBE /* ReaderViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderViewController_ipad.xib; sourceTree = "<group>"; };
+		5F3AEEE5176388300082BCBE /* ReaderViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderViewController_iphone.xib; sourceTree = "<group>"; };
+		5F3AEEEB176389980082BCBE /* RJBookListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJBookListViewController.h; sourceTree = "<group>"; };
+		5F3AEEEC176389980082BCBE /* RJBookListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJBookListViewController.m; sourceTree = "<group>"; };
+		5F3AEEED176389980082BCBE /* RJBookListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RJBookListViewController.xib; sourceTree = "<group>"; };
+		5F3AEEF017638AA20082BCBE /* RJBookList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJBookList.h; sourceTree = "<group>"; };
+		5F3AEEF117638AA20082BCBE /* RJBookList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJBookList.m; sourceTree = "<group>"; };
+		5F3AEEF217638AA20082BCBE /* RJCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCommentView.h; sourceTree = "<group>"; };
+		5F3AEEF317638AA20082BCBE /* RJCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCommentView.m; sourceTree = "<group>"; };
+		5F3AEEF617638AB60082BCBE /* RJBookData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJBookData.h; sourceTree = "<group>"; };
+		5F3AEEF717638AB60082BCBE /* RJBookData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJBookData.m; sourceTree = "<group>"; };
+		5F3AEEF917638B8E0082BCBE /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		5F3AEEFB17638C1A0082BCBE /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		5F3AEEFD17638C730082BCBE /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		5F3AEEFF17638CD00082BCBE /* shelf_row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_row.png; sourceTree = "<group>"; };
+		5F3AEF0017638CD00082BCBE /* shelf_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_top.png; sourceTree = "<group>"; };
 		F5846B551755F3960022F878 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F5A7C615174DAA900040A3CB /* Paging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A7C618174DAA900040A3CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -111,6 +133,11 @@
 		5F3AEEA517637DB50082BCBE /* image */ = {
 			isa = PBXGroup;
 			children = (
+				5F3AEEFF17638CD00082BCBE /* shelf_row.png */,
+				5F3AEF0017638CD00082BCBE /* shelf_top.png */,
+				5F3AEEFD17638C730082BCBE /* background.jpg */,
+				5F3AEEFB17638C1A0082BCBE /* button.png */,
+				5F3AEEF917638B8E0082BCBE /* placeholder.png */,
 				5F3AEEAE17637E080082BCBE /* logo57.png */,
 				5F3AEEAF17637E080082BCBE /* logo114.png */,
 				5F3AEEA717637DB50082BCBE /* logo144.png */,
@@ -122,6 +149,7 @@
 		5F3AEEBA176386E80082BCBE /* class */ = {
 			isa = PBXGroup;
 			children = (
+				5F3AEEEA176389980082BCBE /* shelf */,
 				5F3AEEBB176386E80082BCBE /* Leaves */,
 				5F3AEEC4176386E80082BCBE /* reader */,
 				5F3AEECB176386E80082BCBE /* utils */,
@@ -149,14 +177,14 @@
 			children = (
 				5F3AEEE2176388300082BCBE /* AlertChangeOffset-ipad.xib */,
 				5F3AEEE3176388300082BCBE /* BottomMenu_iphone.xib */,
-				5F3AEEE4176388300082BCBE /* ViewController_ipad.xib */,
-				5F3AEEE5176388300082BCBE /* ViewController_iphone.xib */,
+				5F3AEEE4176388300082BCBE /* ReaderViewController_ipad.xib */,
+				5F3AEEE5176388300082BCBE /* ReaderViewController_iphone.xib */,
 				5F3AEEC5176386E80082BCBE /* PageInfo.h */,
 				5F3AEEC6176386E80082BCBE /* PageInfo.m */,
 				5F3AEEC7176386E80082BCBE /* PageInfoManage.h */,
 				5F3AEEC8176386E80082BCBE /* PageInfoManage.m */,
-				5F3AEEC9176386E80082BCBE /* ViewController.h */,
-				5F3AEECA176386E80082BCBE /* ViewController.m */,
+				5F3AEEC9176386E80082BCBE /* ReaderViewController.h */,
+				5F3AEECA176386E80082BCBE /* ReaderViewController.m */,
 			);
 			path = reader;
 			sourceTree = "<group>";
@@ -174,13 +202,28 @@
 		5F3AEED7176387B70082BCBE /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				5F3AEED8176387B70082BCBE /* push实现.txt */,
 				5F3AEED9176387B70082BCBE /* 笑傲江湖-utf8.txt */,
 				5F3AEEDA176387B70082BCBE /* 笑傲江湖-utf8ee.txt */,
 				5F3AEEDB176387B70082BCBE /* 笑傲江湖-utf8xee.txt */,
 				5F3AEEDC176387B70082BCBE /* 笑傲江湖.txt */,
 			);
 			path = resource;
+			sourceTree = "<group>";
+		};
+		5F3AEEEA176389980082BCBE /* shelf */ = {
+			isa = PBXGroup;
+			children = (
+				5F3AEEF617638AB60082BCBE /* RJBookData.h */,
+				5F3AEEF717638AB60082BCBE /* RJBookData.m */,
+				5F3AEEF017638AA20082BCBE /* RJBookList.h */,
+				5F3AEEF117638AA20082BCBE /* RJBookList.m */,
+				5F3AEEF217638AA20082BCBE /* RJCommentView.h */,
+				5F3AEEF317638AA20082BCBE /* RJCommentView.m */,
+				5F3AEEEB176389980082BCBE /* RJBookListViewController.h */,
+				5F3AEEEC176389980082BCBE /* RJBookListViewController.m */,
+				5F3AEEED176389980082BCBE /* RJBookListViewController.xib */,
+			);
+			path = shelf;
 			sourceTree = "<group>";
 		};
 		F5A7C60C174DAA8F0040A3CB = {
@@ -303,15 +346,20 @@
 				5F3AEEB517637E120082BCBE /* logo114.png in Resources */,
 				5F3AEEB717637E170082BCBE /* logo72.png in Resources */,
 				5F3AEEB917637E1A0082BCBE /* logo144.png in Resources */,
-				5F3AEEDD176387B70082BCBE /* push实现.txt in Resources */,
 				5F3AEEDE176387B70082BCBE /* 笑傲江湖-utf8.txt in Resources */,
 				5F3AEEDF176387B70082BCBE /* 笑傲江湖-utf8ee.txt in Resources */,
 				5F3AEEE0176387B70082BCBE /* 笑傲江湖-utf8xee.txt in Resources */,
 				5F3AEEE1176387B70082BCBE /* 笑傲江湖.txt in Resources */,
 				5F3AEEE6176388300082BCBE /* AlertChangeOffset-ipad.xib in Resources */,
 				5F3AEEE7176388300082BCBE /* BottomMenu_iphone.xib in Resources */,
-				5F3AEEE8176388300082BCBE /* ViewController_ipad.xib in Resources */,
-				5F3AEEE9176388300082BCBE /* ViewController_iphone.xib in Resources */,
+				5F3AEEE8176388300082BCBE /* ReaderViewController_ipad.xib in Resources */,
+				5F3AEEE9176388300082BCBE /* ReaderViewController_iphone.xib in Resources */,
+				5F3AEEEF176389980082BCBE /* RJBookListViewController.xib in Resources */,
+				5F3AEEFA17638B8E0082BCBE /* placeholder.png in Resources */,
+				5F3AEEFC17638C1A0082BCBE /* button.png in Resources */,
+				5F3AEEFE17638C730082BCBE /* background.jpg in Resources */,
+				5F3AEF0117638CD00082BCBE /* shelf_row.png in Resources */,
+				5F3AEF0217638CD00082BCBE /* shelf_top.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,8 +378,12 @@
 				5F3AEED2176386E80082BCBE /* Utilities.m in Sources */,
 				5F3AEED3176386E80082BCBE /* PageInfo.m in Sources */,
 				5F3AEED4176386E80082BCBE /* PageInfoManage.m in Sources */,
-				5F3AEED5176386E80082BCBE /* ViewController.m in Sources */,
+				5F3AEED5176386E80082BCBE /* ReaderViewController.m in Sources */,
 				5F3AEED6176386E80082BCBE /* VIewUtil.m in Sources */,
+				5F3AEEEE176389980082BCBE /* RJBookListViewController.m in Sources */,
+				5F3AEEF417638AA20082BCBE /* RJBookList.m in Sources */,
+				5F3AEEF517638AA20082BCBE /* RJCommentView.m in Sources */,
+				5F3AEEF817638AB60082BCBE /* RJBookData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

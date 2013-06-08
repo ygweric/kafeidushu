@@ -10,7 +10,7 @@
 #import "LeavesViewController.h"
 #import "Utilities.h"
 
-@interface ViewController : LeavesViewController
+@interface ReaderViewController : LeavesViewController
 @property (retain, nonatomic) UILabel *lbContent;
 @property (retain, nonatomic) UILabel *lbContentAdapter;
 @property (retain, nonatomic) UILabel *pageInfoLabel;

@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
+#import "ReaderViewController.h"
+#import "RJBookListViewController.h"
+
 
 
 
@@ -26,7 +28,7 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
 //    self.viewController = [[[ViewController alloc] initWithNibName:IS_IPAD?@"ViewController_ipad": @"ViewController_iphone" bundle:nil] autorelease];
-    self.viewController = [[[ViewController alloc] init] autorelease];
+    self.viewController = [[[RJBookListViewController alloc] init] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

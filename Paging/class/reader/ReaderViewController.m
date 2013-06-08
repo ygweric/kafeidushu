@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 Eric Yang. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ReaderViewController.h"
 #import "PageInfo.h"
 #import "PageInfoManage.h"
 
@@ -27,7 +27,7 @@
 
 
 
-@implementation ViewController{
+@implementation ReaderViewController{
 
     
     
