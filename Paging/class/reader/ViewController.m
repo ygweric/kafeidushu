@@ -342,7 +342,7 @@
         pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
         //        NSLog(@"\nrenderPageAtIndex--2--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@, pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
     }
-    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@  %d", (double)pi.dataOffset/fileLength*100,@"%",currentPageIndex+1];
+    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@", (double)pi.dataOffset/fileLength*100,@"%"];
 }
 -(NSString*)loadString{
     return [self loadStringFrom:0 length:MAX_CHARACTER_LENGHT];
