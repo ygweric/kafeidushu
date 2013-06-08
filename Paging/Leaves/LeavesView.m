@@ -22,15 +22,18 @@ CGFloat distance(CGPoint a, CGPoint b);
 @synthesize leafEdge, currentPageIndex, backgroundRendering, preferredTargetWidth;
 
 - (void) setUpLayers {
+	int scaleValue = [[UIScreen mainScreen] scale];
 	self.clipsToBounds = YES;
 	
 	topPage = [[CALayer alloc] init];
 	topPage.masksToBounds = YES;
 	topPage.contentsGravity = kCAGravityLeft;
 	topPage.backgroundColor = [[UIColor whiteColor] CGColor];
+	topPage.contentsScale = scaleValue;
 	
 	topPageOverlay = [[CALayer alloc] init];
 	topPageOverlay.backgroundColor = [[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor];
+	topPageOverlay.contentsScale = scaleValue;
 	
 	topPageShadow = [[CAGradientLayer alloc] init];
 	topPageShadow.colors = [NSArray arrayWithObjects:
@@ -39,17 +42,21 @@ CGFloat distance(CGPoint a, CGPoint b);
 							nil];
 	topPageShadow.startPoint = CGPointMake(1,0.5);
 	topPageShadow.endPoint = CGPointMake(0,0.5);
+	topPageShadow.contentsScale = scaleValue;
 	
 	topPageReverse = [[CALayer alloc] init];
 	topPageReverse.backgroundColor = [[UIColor whiteColor] CGColor];
 	topPageReverse.masksToBounds = YES;
+	topPageReverse.contentsScale = scaleValue;
 	
 	topPageReverseImage = [[CALayer alloc] init];
 	topPageReverseImage.masksToBounds = YES;
 	topPageReverseImage.contentsGravity = kCAGravityRight;
+	topPageReverseImage.contentsScale = scaleValue;
 	
 	topPageReverseOverlay = [[CALayer alloc] init];
 	topPageReverseOverlay.backgroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.8] CGColor];
+	topPageReverseOverlay.contentsScale = scaleValue;
 	
 	topPageReverseShading = [[CAGradientLayer alloc] init];
 	topPageReverseShading.colors = [NSArray arrayWithObjects:
@@ -58,10 +65,12 @@ CGFloat distance(CGPoint a, CGPoint b);
 									nil];
 	topPageReverseShading.startPoint = CGPointMake(1,0.5);
 	topPageReverseShading.endPoint = CGPointMake(0,0.5);
+	topPageReverseShading.contentsScale = scaleValue;
 	
 	bottomPage = [[CALayer alloc] init];
 	bottomPage.backgroundColor = [[UIColor whiteColor] CGColor];
 	bottomPage.masksToBounds = YES;
+	bottomPage.contentsScale = scaleValue;
 	
 	bottomPageShadow = [[CAGradientLayer alloc] init];
 	bottomPageShadow.colors = [NSArray arrayWithObjects:
@@ -70,6 +79,7 @@ CGFloat distance(CGPoint a, CGPoint b);
 							   nil];
 	bottomPageShadow.startPoint = CGPointMake(0,0.5);
 	bottomPageShadow.endPoint = CGPointMake(1,0.5);
+	bottomPageShadow.contentsScale = scaleValue;
 	
 	[topPage addSublayer:topPageShadow];
 	[topPage addSublayer:topPageOverlay];
@@ -80,6 +90,8 @@ CGFloat distance(CGPoint a, CGPoint b);
 	[self.layer addSublayer:bottomPage];
 	[self.layer addSublayer:topPage];
 	[self.layer addSublayer:topPageReverse];
+	
+	self.layer.contentsScale = scaleValue;
 	
 	self.leafEdge = 1.0;
 }
