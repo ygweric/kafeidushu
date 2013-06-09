@@ -439,15 +439,15 @@
 		F5A7C639174DAA900040A3CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eric Yang (64WP457TN6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eric Yang (64WP457TN6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Wei Yang (49Z4RM6R4R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Wei Yang (49Z4RM6R4R)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BB676E89-1C9E-41E6-9503-73EF5CDB0D9C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB676E89-1C9E-41E6-9503-73EF5CDB0D9C";
+				PROVISIONING_PROFILE = "EC33EDF2-EE5F-4CFA-BE02-73FE30468BC9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC33EDF2-EE5F-4CFA-BE02-73FE30468BC9";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -456,15 +456,15 @@
 		F5A7C63A174DAA900040A3CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eric Yang (64WP457TN6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eric Yang (64WP457TN6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Wei Yang (49Z4RM6R4R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Wei Yang (49Z4RM6R4R)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BB676E89-1C9E-41E6-9503-73EF5CDB0D9C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9416C352-2935-4942-918B-7F5FFFF497F5";
+				PROVISIONING_PROFILE = "EC33EDF2-EE5F-4CFA-BE02-73FE30468BC9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC33EDF2-EE5F-4CFA-BE02-73FE30468BC9";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

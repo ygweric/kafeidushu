@@ -250,7 +250,7 @@ CGFloat distance(CGPoint a, CGPoint b);
 	if (preferredTargetWidth > 0 && preferredTargetWidth < self.bounds.size.width / 2)
 		return preferredTargetWidth;
 	else
-		return MAX(28, self.bounds.size.width / 5);
+		return MAX(80, self.bounds.size.width / 4);
 }
 
 - (void) updateTargetRects {

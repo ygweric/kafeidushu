@@ -55,7 +55,7 @@ static RJBookData *shareBookData = nil;
 -(void)loadBookList{
     
     
-    NSString *dicpath = [NSString stringWithFormat:@"%@/Documents/books",NSHomeDirectory()];
+    NSString *dicpath = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
     
 
     NSFileManager* fm= [NSFileManager defaultManager];
@@ -64,12 +64,15 @@ static RJBookData *shareBookData = nil;
     
     for (NSString *fname  in levelList) {
         NSString *fpath = [NSString stringWithFormat:@"%@/%@",dicpath,fname];
+        if ([fname hasSuffix:@".txt"]) {
+            RJSingleBook* singleBook = [[[RJSingleBook alloc]init]autorelease];
+            singleBook.name=fname;
+            singleBook.icon =@"default_icon.png";
+            singleBook.bookPath=fpath;
+            [books addObject:singleBook];
+        }
         
-        RJSingleBook* singleBook = [[[RJSingleBook alloc]init]autorelease];
-        singleBook.name=fname;
-        singleBook.icon =@"default_icon.png";
-        singleBook.bookPath=fpath;
-        [books addObject:singleBook];
+       
     }
 //    for (int i=0; i<60; i++) {
 //        RJSingleBook* singleBook = [[RJSingleBook alloc]init];
