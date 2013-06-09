@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[RJBookData sharedRJBookData] loadBookList];
     // Do any additional setup after loading the view from its nib.
     
     UINavigationBar *navBar = self.navigationController.navigationBar;

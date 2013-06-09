@@ -33,5 +33,5 @@
 @property(nonatomic,retain) NSMutableArray* books;
 
 +(RJBookData *)sharedRJBookData;
-
+-(void)loadBookList;
 @end

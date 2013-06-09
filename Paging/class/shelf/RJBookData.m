@@ -52,5 +52,20 @@ static RJBookData *shareBookData = nil;
 	return self;
 }
 
+-(void)loadBookList{
+    for (int i=0; i<60; i++) {
+        RJSingleBook* singleBook = [[RJSingleBook alloc]init];
+        singleBook.name=[NSString stringWithFormat:@"name-%d",i];
+        singleBook.icon =@"default_icon.png";
+        [books addObject:singleBook];
+        [singleBook release];
+
+        
+    }
+    
+    
+    
+}
+
 
 @end

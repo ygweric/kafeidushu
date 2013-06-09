@@ -34,7 +34,7 @@
     [self addSubview:imageView];
     [imageView release];
 
-    rect = CGRectMake(0, 45, 320, 480-45);
+    rect = CGRectMake(0, 45, 320, 145*4);
     FirstView = [[UIScrollView alloc]initWithFrame:rect];
     
     UIImage* rowImage = [UIImage imageNamed:@"shelf_row.png"];
@@ -56,14 +56,25 @@
     [FirstView addSubview:row3];
     [row3 release];
     
-    if([bookData.books count]>9)
-    {
-        FirstView.contentSize = CGSizeMake(320, 480-45+145);
-        rect = CGRectMake(0, 138*3, 320, 145);
-        UIImageView * row4 = [[UIImageView alloc] initWithFrame:rect];
-        row4.image = rowImage;
-        [FirstView addSubview:row4];
-        [row4 release];
+    rect = CGRectMake(0, 138*3, 320, 145);
+    UIImageView * row4 = [[UIImageView alloc] initWithFrame:rect];
+    row4.image = rowImage;
+    [FirstView addSubview:row4];
+    [row4 release];
+    
+    int bookCount= [bookData.books count];
+   int rowCount=(bookCount-1)/3 + 1;
+    
+    
+    if(rowCount>4)
+    {        
+        FirstView.contentSize = CGSizeMake(320, rowCount*145);        
+        for (int i=4; i<rowCount; i++) {
+            rect = CGRectMake(0, 138*i, 320, 145);
+            UIImageView * rowN = [[[UIImageView alloc] initWithFrame:rect]autorelease];
+            rowN.image = rowImage;
+            [FirstView addSubview:rowN];
+        }        
     }
     
     [self addSubview:FirstView];
@@ -72,16 +83,28 @@
     
     for(int i=0;i<[bookData.books count];i++)
     {
-        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138, 65, 85);
+        
         RJSingleBook* singleBook = [bookData.books objectAtIndex:i];
-        UIButton* button= [[UIButton alloc]initWithFrame:rect];
+        
+        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138, 65, 85);
+        UIButton* button= [[[UIButton alloc]initWithFrame:rect]autorelease];
         button.tag = i;
         [button setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:singleBook.icon ofType:nil]] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(doReadBook:) forControlEvents:UIControlEventTouchUpInside];
-
         [FirstView addSubview:button];
         [FirstView bringSubviewToFront:button];
-        [button release];
+        
+        
+        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138+85, 65, 20);
+        UILabel* lbTitle= [[[UILabel alloc]initWithFrame:rect]autorelease];
+        lbTitle.text=singleBook.name;
+        lbTitle.backgroundColor=[UIColor clearColor];
+        lbTitle.numberOfLines=1;
+        lbTitle.lineBreakMode=NSLineBreakByWordWrapping;
+        lbTitle.textAlignment = UITextAlignmentCenter;
+        [FirstView addSubview:lbTitle];
+        [FirstView bringSubviewToFront:lbTitle];
+        
     }
     
     imageView = [[UIImageView alloc] initWithImage:
