@@ -23,7 +23,6 @@
 		5F3AEED4176386E80082BCBE /* PageInfoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEC8176386E80082BCBE /* PageInfoManage.m */; };
 		5F3AEED5176386E80082BCBE /* ReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEECA176386E80082BCBE /* ReaderViewController.m */; };
 		5F3AEED6176386E80082BCBE /* VIewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEECE176386E80082BCBE /* VIewUtil.m */; };
-		5F3AEEDE176387B70082BCBE /* 笑傲江湖-utf8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEED9176387B70082BCBE /* 笑傲江湖-utf8.txt */; };
 		5F3AEEE6176388300082BCBE /* AlertChangeOffset-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE2176388300082BCBE /* AlertChangeOffset-ipad.xib */; };
 		5F3AEEE7176388300082BCBE /* BottomMenu_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE3176388300082BCBE /* BottomMenu_iphone.xib */; };
 		5F3AEEE8176388300082BCBE /* ReaderViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE4176388300082BCBE /* ReaderViewController_ipad.xib */; };
@@ -48,6 +47,7 @@
 		F5A7C62B174DAA900040A3CB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C62A174DAA900040A3CB /* Default.png */; };
 		F5A7C62D174DAA900040A3CB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C62C174DAA900040A3CB /* Default@2x.png */; };
 		F5A7C62F174DAA900040A3CB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A7C62E174DAA900040A3CB /* Default-568h@2x.png */; };
+		F5D2F9DC176465EF006C5DF7 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D2F9DB176465EF006C5DF7 /* StringUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,7 +76,6 @@
 		5F3AEECC176386E80082BCBE /* PubHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PubHeader.h; sourceTree = "<group>"; };
 		5F3AEECD176386E80082BCBE /* VIewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIewUtil.h; sourceTree = "<group>"; };
 		5F3AEECE176386E80082BCBE /* VIewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIewUtil.m; sourceTree = "<group>"; };
-		5F3AEED9176387B70082BCBE /* 笑傲江湖-utf8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "笑傲江湖-utf8.txt"; sourceTree = "<group>"; };
 		5F3AEEE2176388300082BCBE /* AlertChangeOffset-ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "AlertChangeOffset-ipad.xib"; sourceTree = "<group>"; };
 		5F3AEEE3176388300082BCBE /* BottomMenu_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMenu_iphone.xib; sourceTree = "<group>"; };
 		5F3AEEE4176388300082BCBE /* ReaderViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderViewController_ipad.xib; sourceTree = "<group>"; };
@@ -109,6 +108,8 @@
 		F5A7C62A174DAA900040A3CB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F5A7C62C174DAA900040A3CB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F5A7C62E174DAA900040A3CB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F5D2F9DA176465EF006C5DF7 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
+		F5D2F9DB176465EF006C5DF7 /* StringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				5F3AEECC176386E80082BCBE /* PubHeader.h */,
+				F5D2F9DA176465EF006C5DF7 /* StringUtil.h */,
+				F5D2F9DB176465EF006C5DF7 /* StringUtil.m */,
 				5F3AEECD176386E80082BCBE /* VIewUtil.h */,
 				5F3AEECE176386E80082BCBE /* VIewUtil.m */,
 			);
@@ -199,7 +202,6 @@
 		5F3AEED7176387B70082BCBE /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				5F3AEED9176387B70082BCBE /* 笑傲江湖-utf8.txt */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -340,7 +342,6 @@
 				5F3AEEB517637E120082BCBE /* logo114.png in Resources */,
 				5F3AEEB717637E170082BCBE /* logo72.png in Resources */,
 				5F3AEEB917637E1A0082BCBE /* logo144.png in Resources */,
-				5F3AEEDE176387B70082BCBE /* 笑傲江湖-utf8.txt in Resources */,
 				5F3AEEE6176388300082BCBE /* AlertChangeOffset-ipad.xib in Resources */,
 				5F3AEEE7176388300082BCBE /* BottomMenu_iphone.xib in Resources */,
 				5F3AEEE8176388300082BCBE /* ReaderViewController_ipad.xib in Resources */,
@@ -376,6 +377,7 @@
 				5F3AEEF417638AA20082BCBE /* RJBookList.m in Sources */,
 				5F3AEEF517638AA20082BCBE /* RJCommentView.m in Sources */,
 				5F3AEEF817638AB60082BCBE /* RJBookData.m in Sources */,
+				F5D2F9DC176465EF006C5DF7 /* StringUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -51,6 +51,8 @@
     BOOL isBottomMenuShowing;
     BOOL isSimpleViewShowing;
     
+    CFStringEncoding suitableEncoding; //init is INT32_MAX 
+    
 }
 @synthesize  lbContent;
 @synthesize pageInfoLabel;
@@ -250,6 +252,7 @@
     currentPageIndex=0;
     isBottomMenuShowing=NO;
     isSimpleViewShowing=NO;
+    suitableEncoding=INT32_MAX;
     
 //    self.filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
     
@@ -261,8 +264,8 @@
     
     //--------
     
-    
-    [self jumpToOffsetWithLeaves:32233];
+    [self checkEncoding:_filePath];
+    [self jumpToOffsetWithLeaves:0];
     
 
 
@@ -364,10 +367,98 @@
     
     //GBK encoding
 //    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8);
-    NSString *mTxt = [[[NSString alloc] initWithData:responseData encoding:encode]autorelease];
+    
+    NSString *mTxt =nil;
+    if (suitableEncoding!=INT32_MAX) {
+        unsigned long encode = CFStringConvertEncodingToNSStringEncoding(suitableEncoding);
+        mTxt = [[[NSString alloc] initWithData:responseData encoding:encode]autorelease];
+    } 
     return mTxt;
 }
+
+-(void)checkEncoding:(NSString*)fp{
+    
+    
+    CFStringEncoding allEncodings[]={
+        kCFStringEncodingUTF8 ,
+        kCFStringEncodingGB_18030_2000,
+        kCFStringEncodingUTF16 ,
+        kCFStringEncodingUTF16BE ,
+        kCFStringEncodingUTF16LE ,
+        kCFStringEncodingUTF32 ,
+        kCFStringEncodingUTF32BE ,
+        kCFStringEncodingUTF32LE,
+        
+        
+        kCFStringEncodingWindowsLatin1,
+        kCFStringEncodingISOLatin1 ,
+        kCFStringEncodingNextStepLatin,
+        kCFStringEncodingASCII ,
+        kCFStringEncodingUnicode ,
+        kCFStringEncodingNonLossyASCII ,
+        
+    };
+    /*/
+    NSString *mTxt =nil;
+    unsigned long encode=0;
+    for (int i=0; i<ARRAR_COUNT(allEncodings); i++) {
+        NSLog(@"finding suitableEncoding:%lx",allEncodings[i]);
+        encode = CFStringConvertEncodingToNSStringEncoding(allEncodings[i]);
+        mTxt=[NSString stringWithContentsOfFile:fp encoding:encode error:0];
+        if (![StringUtil isNilOrEmpty:mTxt]) {
+            suitableEncoding=allEncodings[i];
+            NSLog(@"suitableEncoding:%lx,i:%d\nmTxt:%@",suitableEncoding,i,mTxt);
+            break;
+        }
+    }
+    /*/
+    NSLog(@"fp:%@",fp);
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:fp];
+    [fileHandle seekToFileOffset:0];
+    NSData *responseData = nil;
+    unsigned long encode=0;
+    NSString *mTxt =nil;
+    BOOL isFound=NO;
+    
+    /*
+    NSLog(@"\n++++++++++++++\n");
+    for (int i=0; i<60; i++) {
+        [fileHandle seekToFileOffset:0];
+        responseData= [fileHandle readDataOfLength:i];
+        NSLog(@"responseData:%@",responseData);
+        encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8);
+        mTxt = [[[NSString alloc] initWithData:responseData encoding:encode]autorelease];
+        NSLog(@"i:%d---mTxt:%@",i,mTxt);
+    }
+    NSLog(@"\n++++++++++++++\n");
+     */
+    
+    
+      
+    
+    for (int i=0; (i<ARRAR_COUNT(allEncodings))&& !isFound; i++) {
+     encode = CFStringConvertEncodingToNSStringEncoding(allEncodings[i]);
+        int tmpLength=10;
+        for (int j=0; (j<6) && !isFound; j++) {
+            [fileHandle seekToFileOffset:0];
+            responseData= [fileHandle readDataOfLength:tmpLength];
+            NSLog(@"finding suitableEncoding:%lx,tmpLength:%d",allEncodings[i],tmpLength);            
+            mTxt = [[[NSString alloc] initWithData:responseData encoding:encode]autorelease];
+            if (![StringUtil isNilOrEmpty:mTxt]) {
+                suitableEncoding=allEncodings[i];
+                NSLog(@"responseData:%@",responseData);
+                isFound=YES;
+                NSLog(@"suitableEncoding:%lx,i:%d\nmTxt:%@",suitableEncoding,i,mTxt);
+                break;
+            }else{
+                tmpLength--;
+            }
+        }        
+    }
+    //*/
+    
+}
+
 
 #pragma mark -
 - (IBAction)jumpTo:(id)sender {

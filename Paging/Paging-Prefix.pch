@@ -13,4 +13,5 @@
     #import <Foundation/Foundation.h>
 #import "PubHeader.h"
 #import "VIewUtil.h"
+#import "StringUtil.h"
 #endif

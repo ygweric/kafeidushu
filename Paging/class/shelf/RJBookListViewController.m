@@ -65,34 +65,43 @@
 
     UIButton* rightButton= [[UIButton alloc] initWithFrame:frame_1];
     [rightButton setBackgroundImage:image forState:UIControlStateNormal];
-    [rightButton setTitle:@"推荐" forState:UIControlStateNormal];
+    [rightButton setTitle:@"刷新" forState:UIControlStateNormal];
     [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     rightButton.titleLabel.font=[UIFont systemFontOfSize:14];
-    [rightButton addTarget:self action:@selector(doComment:) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton addTarget:self action:@selector(refreshBooks:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"推荐" style:UIBarButtonItemStyleBordered target:self action:@selector(doComment)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] init];
     rightItem.customView = rightButton;
     [rightButton release];
     self.navigationItem.rightBarButtonItem = rightItem;
     [rightItem release];
     
-    rect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    
+    [self showBookShelf];
+    
+//    rect = CGRectMake(150, 445, 20, 10);
+//    pageControl = [[UIPageControl alloc] initWithFrame:rect];
+//    pageControl.numberOfPages = 1;
+//    pageControl.currentPage = 0;
+//    [pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
+//    [self.view addSubview:pageControl];
+    
+    [pageControl release];
+}
+-(void)showBookShelf{
+    if (listView) {
+        [listView removeFromSuperview];
+        
+    }
+    
+    CGRect rect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     self.view.frame = rect;
-    listView = [[RJBookList alloc]initWithFrame:rect];
-    listView.contentSize = CGSizeMake(self.view.bounds.size.width*2, self.view.bounds.size.height);
+    listView = [[[RJBookList alloc]initWithFrame:rect] autorelease];
+    listView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
     listView.pagingEnabled = YES;
     listView.delegate = self;
     listView.nc = self.navigationController;
     [self.view addSubview:listView];
-    [listView release];
-    
-    rect = CGRectMake(150, 445, 20, 10);
-    pageControl = [[UIPageControl alloc] initWithFrame:rect];
-    pageControl.numberOfPages = 2;
-    pageControl.currentPage = 0;
-    [pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:pageControl];
-    [pageControl release];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
@@ -145,6 +154,12 @@
         [self gotoPage:1];
     else
         [self gotoPage:0];
+}
+
+- (IBAction)refreshBooks:(id)sender
+{
+     [[RJBookData sharedRJBookData] loadBookList];
+    [self showBookShelf];
 }
 
 - (void) gotoPage:(int) pageNum

@@ -36,7 +36,7 @@
     [imageView release];
 
     rect = CGRectMake(0, 45, 320, 145*4);
-    FirstView = [[UIScrollView alloc]initWithFrame:rect];
+    FirstView = [[[UIScrollView alloc]initWithFrame:rect]autorelease];
     
     UIImage* rowImage = [UIImage imageNamed:@"shelf_row.png"];
     rect = CGRectMake(0, 0, 320, 145);
@@ -69,7 +69,7 @@
     
     if(rowCount>4)
     {        
-        FirstView.contentSize = CGSizeMake(320, rowCount*145);        
+        FirstView.contentSize = CGSizeMake(320, (rowCount+1)*145);
         for (int i=4; i<rowCount; i++) {
             rect = CGRectMake(0, 138*i, 320, 145);
             UIImageView * rowN = [[[UIImageView alloc] initWithFrame:rect]autorelease];
@@ -80,7 +80,6 @@
     
     [self addSubview:FirstView];
     
-    [FirstView release];
     
     for(int i=0;i<[bookData.books count];i++)
     {
@@ -109,6 +108,7 @@
         
     }
     
+    /*
     imageView = [[UIImageView alloc] initWithImage:
                  [UIImage imageNamed:@"background.jpg"]];
     rect = CGRectMake(320, 0, 320, 45);
@@ -119,6 +119,7 @@
     rect = CGRectMake(320, 45, 320, 480-45);
     SecondView = [[RJCommentView alloc]initWithFrame:rect];
     [self addSubview:SecondView];
+     */
 
 }
 

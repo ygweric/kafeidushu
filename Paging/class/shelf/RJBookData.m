@@ -54,7 +54,7 @@ static RJBookData *shareBookData = nil;
 
 -(void)loadBookList{
     
-    
+    [books removeAllObjects];
     NSString *dicpath = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
     
 
