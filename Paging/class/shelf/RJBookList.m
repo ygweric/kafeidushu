@@ -7,6 +7,7 @@
 //
 
 #import "RJBookList.h"
+#import "ReaderViewController.h"
 
 
 @implementation RJBookList
@@ -94,12 +95,13 @@
         [FirstView addSubview:button];
         [FirstView bringSubviewToFront:button];
         
-        
-        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138+85, 65, 20);
+        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138-35, 65, 40);
+//        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138+85, 65, 20);
         UILabel* lbTitle= [[[UILabel alloc]initWithFrame:rect]autorelease];
         lbTitle.text=singleBook.name;
         lbTitle.backgroundColor=[UIColor clearColor];
-        lbTitle.numberOfLines=1;
+        lbTitle.font=[UIFont systemFontOfSize:12];
+        lbTitle.numberOfLines=0;
         lbTitle.lineBreakMode=NSLineBreakByWordWrapping;
         lbTitle.textAlignment = UITextAlignmentCenter;
         [FirstView addSubview:lbTitle];
@@ -129,7 +131,10 @@
 
 -(void) readBook:(NSInteger)i
 {
-   //TODO
+    ReaderViewController *readerVC = [[[ReaderViewController alloc]init]autorelease];
+     RJSingleBook* singleBook = [bookData.books objectAtIndex:i];
+    readerVC.filePath=singleBook.bookPath;
+	[self.nc pushViewController:readerVC animated:YES];
 }
 
 -(void) doTableViewShowOrHide
@@ -196,7 +201,7 @@
     RJSingleBook* singleBook = [bookData.books objectAtIndex:indexPath.row];
     
     [cell.imageView setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:singleBook.icon ofType:nil]]];
-    cell.text=singleBook.name;
+    cell.textLabel.text=singleBook.name;
     cell.textLabel.textColor = [UIColor blackColor];
     cell.textLabel.font = [UIFont systemFontOfSize:16];
     return cell;

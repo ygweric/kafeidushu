@@ -10,7 +10,7 @@
 
 @implementation RJSingleBook
 
-@synthesize name,icon,pages,pageSize,bookFile;
+@synthesize name,icon,pages,pageSize,bookFile,bookPath;
 
 @end
 
@@ -53,15 +53,33 @@ static RJBookData *shareBookData = nil;
 }
 
 -(void)loadBookList{
-    for (int i=0; i<60; i++) {
-        RJSingleBook* singleBook = [[RJSingleBook alloc]init];
-        singleBook.name=[NSString stringWithFormat:@"name-%d",i];
-        singleBook.icon =@"default_icon.png";
-        [books addObject:singleBook];
-        [singleBook release];
+    
+    
+    NSString *dicpath = [NSString stringWithFormat:@"%@/Documents/books",NSHomeDirectory()];
+    
 
+    NSFileManager* fm= [NSFileManager defaultManager];
+    [fm createDirectoryAtPath:dicpath withIntermediateDirectories:YES attributes:nil error:nil];
+    NSArray *levelList = [fm contentsOfDirectoryAtPath:dicpath error:nil ] ;
+    
+    for (NSString *fname  in levelList) {
+        NSString *fpath = [NSString stringWithFormat:@"%@/%@",dicpath,fname];
         
+        RJSingleBook* singleBook = [[[RJSingleBook alloc]init]autorelease];
+        singleBook.name=fname;
+        singleBook.icon =@"default_icon.png";
+        singleBook.bookPath=fpath;
+        [books addObject:singleBook];
     }
+//    for (int i=0; i<60; i++) {
+//        RJSingleBook* singleBook = [[RJSingleBook alloc]init];
+//        singleBook.name=[NSString stringWithFormat:@"name-%d",i];
+//        singleBook.icon =@"default_icon.png";
+//        [books addObject:singleBook];
+//        [singleBook release];
+//
+//        
+//    }
     
     
     

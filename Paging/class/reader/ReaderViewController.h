@@ -23,6 +23,8 @@
 @property (retain, nonatomic) UIView* vMenuTool;
 @property (retain, nonatomic) UIView* vJump;
 
+
+
 - (IBAction)jumpTo:(id)sender;
 
 - (IBAction)actionPrevious:(id)sender ;

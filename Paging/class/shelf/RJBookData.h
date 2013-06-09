@@ -23,6 +23,7 @@
 @property(nonatomic,retain) NSMutableArray* pages;
 @property(nonatomic,retain) NSMutableArray* pageSize;
 @property(nonatomic,retain) NSString* bookFile;
+@property(nonatomic,retain) NSString* bookPath;
 
 @end
 

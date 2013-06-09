@@ -251,7 +251,7 @@
     isBottomMenuShowing=NO;
     isSimpleViewShowing=NO;
     
-    self.filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
+//    self.filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
     
     fileLength= [self getFileSize:_filePath];
     if (fileLength==0) {
