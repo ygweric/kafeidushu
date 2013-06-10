@@ -216,7 +216,8 @@
         NSString* currentContent= [content substringWithRange:rangeOfPages[0]];
 //        NSLog(@"-----pageString   -----end text:\n%@\n\n",currentContent);
         self.pagingContent=currentContent;
-        int length= [currentContent lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        unsigned long encode = CFStringConvertEncodingToNSStringEncoding(suitableEncoding);
+        int length= [currentContent lengthOfBytesUsingEncoding:encode];
         if (rangeOfPages) {
             free(rangeOfPages);
             rangeOfPages=nil;
