@@ -13,6 +13,7 @@
 +(BookMarkManage*)share;
 
 -(BOOL)addBookMarkWithName:(NSString*)name offset:(long long)offset desc:(NSString*)desc;
+-(NSArray*)getBookMarksWithBookName:(NSString*)name;
 -(void)cacheBookMarks;
 -(NSMutableDictionary*)uncacheBookMarks;
 @end

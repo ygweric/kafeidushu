@@ -89,9 +89,10 @@
 		5F1D66C01765CAFF0087E2BB /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D666E1765CAFF0087E2BB /* placeholder.png */; };
 		5F1D66C11765CAFF0087E2BB /* shelf_row.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D666F1765CAFF0087E2BB /* shelf_row.png */; };
 		5F1D66C21765CAFF0087E2BB /* shelf_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66701765CAFF0087E2BB /* shelf_top.png */; };
-		5F1D66CA1765E60E0087E2BB /* BookMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66C91765E60E0087E2BB /* BookMark.m */; };
-		5F1D66CD1765E9440087E2BB /* BookMarkManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66CC1765E9440087E2BB /* BookMarkManage.m */; };
 		5F1D66D01765EC910087E2BB /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66CF1765EC910087E2BB /* FileUtil.m */; };
+		5F1D66D61765F9540087E2BB /* BookMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66D31765F9540087E2BB /* BookMark.m */; };
+		5F1D66D71765F9540087E2BB /* BookMarkManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66D51765F9540087E2BB /* BookMarkManage.m */; };
+		5F1D66DA1765F9C50087E2BB /* BookMarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66D91765F9C50087E2BB /* BookMarkViewController.m */; };
 		5F3AEEB317637E0D0082BCBE /* logo57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB217637E0D0082BCBE /* logo57.png */; };
 		5F3AEEB517637E120082BCBE /* logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB417637E120082BCBE /* logo114.png */; };
 		5F3AEEB717637E170082BCBE /* logo72.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB617637E170082BCBE /* logo72.png */; };
@@ -207,12 +208,14 @@
 		5F1D666E1765CAFF0087E2BB /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		5F1D666F1765CAFF0087E2BB /* shelf_row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_row.png; sourceTree = "<group>"; };
 		5F1D66701765CAFF0087E2BB /* shelf_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_top.png; sourceTree = "<group>"; };
-		5F1D66C81765E60E0087E2BB /* BookMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMark.h; sourceTree = "<group>"; };
-		5F1D66C91765E60E0087E2BB /* BookMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMark.m; sourceTree = "<group>"; };
-		5F1D66CB1765E9440087E2BB /* BookMarkManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMarkManage.h; sourceTree = "<group>"; };
-		5F1D66CC1765E9440087E2BB /* BookMarkManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMarkManage.m; sourceTree = "<group>"; };
 		5F1D66CE1765EC910087E2BB /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
 		5F1D66CF1765EC910087E2BB /* FileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtil.m; sourceTree = "<group>"; };
+		5F1D66D21765F9540087E2BB /* BookMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMark.h; sourceTree = "<group>"; };
+		5F1D66D31765F9540087E2BB /* BookMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMark.m; sourceTree = "<group>"; };
+		5F1D66D41765F9540087E2BB /* BookMarkManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMarkManage.h; sourceTree = "<group>"; };
+		5F1D66D51765F9540087E2BB /* BookMarkManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMarkManage.m; sourceTree = "<group>"; };
+		5F1D66D81765F9C50087E2BB /* BookMarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMarkViewController.h; sourceTree = "<group>"; };
+		5F1D66D91765F9C50087E2BB /* BookMarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMarkViewController.m; sourceTree = "<group>"; };
 		5F3AEEB217637E0D0082BCBE /* logo57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo57.png; sourceTree = "<group>"; };
 		5F3AEEB417637E120082BCBE /* logo114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo114.png; sourceTree = "<group>"; };
 		5F3AEEB617637E170082BCBE /* logo72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo72.png; sourceTree = "<group>"; };
@@ -367,15 +370,17 @@
 			path = image;
 			sourceTree = "<group>";
 		};
-		5F1D66C71765E60E0087E2BB /* Bean */ = {
+		5F1D66D11765F9540087E2BB /* BookMark */ = {
 			isa = PBXGroup;
 			children = (
-				5F1D66C81765E60E0087E2BB /* BookMark.h */,
-				5F1D66C91765E60E0087E2BB /* BookMark.m */,
-				5F1D66CB1765E9440087E2BB /* BookMarkManage.h */,
-				5F1D66CC1765E9440087E2BB /* BookMarkManage.m */,
+				5F1D66D21765F9540087E2BB /* BookMark.h */,
+				5F1D66D31765F9540087E2BB /* BookMark.m */,
+				5F1D66D41765F9540087E2BB /* BookMarkManage.h */,
+				5F1D66D51765F9540087E2BB /* BookMarkManage.m */,
+				5F1D66D81765F9C50087E2BB /* BookMarkViewController.h */,
+				5F1D66D91765F9C50087E2BB /* BookMarkViewController.m */,
 			);
-			path = Bean;
+			path = BookMark;
 			sourceTree = "<group>";
 		};
 		5F3AEEBA176386E80082BCBE /* class */ = {
@@ -383,7 +388,7 @@
 			children = (
 				5F3AEEEA176389980082BCBE /* shelf */,
 				5F3AEEBB176386E80082BCBE /* Leaves */,
-				5F1D66C71765E60E0087E2BB /* Bean */,
+				5F1D66D11765F9540087E2BB /* BookMark */,
 				5F3AEEC4176386E80082BCBE /* reader */,
 				5F3AEECB176386E80082BCBE /* utils */,
 			);
@@ -685,9 +690,10 @@
 				5F3AEEF517638AA20082BCBE /* RJCommentView.m in Sources */,
 				5F3AEEF817638AB60082BCBE /* RJBookData.m in Sources */,
 				F5D2F9DC176465EF006C5DF7 /* StringUtil.m in Sources */,
-				5F1D66CA1765E60E0087E2BB /* BookMark.m in Sources */,
-				5F1D66CD1765E9440087E2BB /* BookMarkManage.m in Sources */,
 				5F1D66D01765EC910087E2BB /* FileUtil.m in Sources */,
+				5F1D66D61765F9540087E2BB /* BookMark.m in Sources */,
+				5F1D66D71765F9540087E2BB /* BookMarkManage.m in Sources */,
+				5F1D66DA1765F9C50087E2BB /* BookMarkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

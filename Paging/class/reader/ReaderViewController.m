@@ -10,6 +10,8 @@
 #import "PageInfo.h"
 #import "PageInfoManage.h"
 #import "BookMarkManage.h"
+#import "BookMarkViewController.h"
+
 
 #define FONT_SIZE_MAX IS_IPAD?18:14
 
@@ -438,16 +440,16 @@
 -(NSString*)getBookMarkName{
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
-    [fileHandle seekToFileOffset:pi.dataOffset];
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:_filePath];    
     NSData *responseData = nil;
 
     NSString *mTxt =nil;
-    int tmpLength=20;
+    int tmpLength=40;
+    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(suitableEncoding);
     for (int j=0; (j<6); j++) {
-        [fileHandle seekToFileOffset:0];
+        [fileHandle seekToFileOffset:pi.dataOffset];
         responseData= [fileHandle readDataOfLength:tmpLength];
-        mTxt = [[[NSString alloc] initWithData:responseData encoding:suitableEncoding]autorelease];
+        mTxt = [[[NSString alloc] initWithData:responseData encoding:encode]autorelease];
         if (![StringUtil isNilOrEmpty:mTxt]) {
             return mTxt;
         }else{
@@ -967,9 +969,12 @@
         UIButton* btShowJump= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_JUMP];
         [btShowJump addTarget:self action:@selector(showJumpView) forControlEvents:UIControlEventTouchUpInside];
         
-        //add target
+
         UIButton* btAddBookMark= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_ADD_BOOKMARK];
         [btAddBookMark addTarget:self action:@selector(addBookMark:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton* btshowBookMark= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_BOOKMARK_MANAGE];
+        [btshowBookMark addTarget:self action:@selector(showAllBookMarks:) forControlEvents:UIControlEventTouchUpInside];
 
         
         
@@ -1091,8 +1096,17 @@
         [[BookMarkManage share]addBookMarkWithName:bookName offset:offset desc:bmName];
     }
     Alert2(@"添加书签成功");
+ 
+}
 
-    
+-(void)showAllBookMarks:(id)sender{
+    BookMarkViewController* bmVC=[[[BookMarkViewController alloc]init]autorelease];
+    NSArray *ps = [_filePath componentsSeparatedByString:@"/"];
+    if (ps.count>0) {
+        NSString* bookName=[ps objectAtIndex:ps.count-1];
+        bmVC.bookMarks=(NSArray*) [[BookMarkManage share] getBookMarksWithBookName:bookName];
+         [self.navigationController pushViewController:bmVC animated:YES];
+    }
     
 }
 

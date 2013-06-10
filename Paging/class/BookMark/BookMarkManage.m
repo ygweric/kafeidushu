@@ -41,7 +41,9 @@ static BookMarkManage* instance;
     [self cacheBookMarks];
     return YES;
 }
-
+-(NSArray*)getBookMarksWithBookName:(NSString*)name{
+    return [instance.bookMarks objectForKey:name];
+}
 #pragma mark archive
 #define DATA_DIR @"datas"
 #define DATA_BOOKMARKS @"bookmarks"
