@@ -1,4 +1,6 @@
 *.txt
+/build/*
+*.dat
 ######################
 .DS_Store
 .DS_Store?
