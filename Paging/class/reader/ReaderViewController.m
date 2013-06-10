@@ -1105,6 +1105,10 @@
     [self showJumpView:NO];
 }
 -(void)addBookMark:(id)sender{
+    if (isBottomMenuShowing) {
+        [self showBottomMenu:NO];
+        isBottomMenuShowing=NO;
+    }
     NSString* bmName=[self getBookMarkName];
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     long long offset=pi.dataOffset;
@@ -1115,8 +1119,13 @@
 }
 
 -(void)showAllBookMarks:(id)sender{
+    if (isBottomMenuShowing) {
+        [self showBottomMenu:NO];
+        isBottomMenuShowing=NO;
+    }
     BookMarkViewController* bmVC=[[[BookMarkViewController alloc]init]autorelease];
-    bmVC.bookMarks=(NSArray*) [[BookMarkManage share] getBookMarksWithBookName:_fileName];
+    bmVC.bookMarks=(NSMutableArray*) [[BookMarkManage share] getBookMarksWithBookName:_fileName];
+    bmVC.readerVC=self;
     [self.navigationController pushViewController:bmVC animated:YES];
     
 }

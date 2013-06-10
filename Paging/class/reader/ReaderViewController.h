@@ -36,4 +36,6 @@
 // 下一页
 - (IBAction)actionNext:(id)sender ;
 
+-(void)jumpToOffsetWithLeaves:(long long)offset;
+
 @end

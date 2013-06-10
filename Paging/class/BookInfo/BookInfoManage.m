@@ -19,7 +19,7 @@ static BookInfoManage* instance;
 +(BookInfoManage*)share{
     if (!instance) {
         instance=[[BookInfoManage alloc]init];
-        instance.bookInfos= [instance uncacheBookMarks];
+        instance.bookInfos= [instance uncacheBookInfos];
         if (!instance.bookInfos) {
             instance.bookInfos=[[NSMutableDictionary alloc]initWithCapacity:3];
         }
@@ -35,6 +35,7 @@ static BookInfoManage* instance;
         [_bookInfos setObject:bi forKey:name];
     }
     bi.lastOffset=offset;
+    [self cacheBookInfos];
 }
 -(BookInfo*)getBookInfo:(NSString*)name{
     return [_bookInfos objectForKey:name];
@@ -46,12 +47,12 @@ static BookInfoManage* instance;
 #define DATA_DIR @"datas"
 #define DATA_BOOKINFOS @"bookinfos"
 
--(void)cacheBookMarks{
+-(void)cacheBookInfos{
     NSString* bmsPath =[FileUtil getLibraryFilePathWithFile:DATA_BOOKINFOS dir:DATA_DIR, nil];
     [NSKeyedArchiver archiveRootObject:_bookInfos toFile:bmsPath];
 }
 
--(NSMutableDictionary*)uncacheBookMarks{
+-(NSMutableDictionary*)uncacheBookInfos{
     NSString* bmsPath =[FileUtil getLibraryFilePathWithFile:DATA_BOOKINFOS dir:DATA_DIR, nil];
     NSMutableDictionary* bms = [NSKeyedUnarchiver unarchiveObjectWithFile:bmsPath];
     return bms;

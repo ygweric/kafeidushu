@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ReaderViewController.h"
 
 @interface BookMarkViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic,retain) NSArray* bookMarks;
+@property (nonatomic,retain) NSMutableArray* bookMarks;
 @property (nonatomic,retain) UITableView* tbvBookMarks;
+@property (nonatomic,retain) ReaderViewController* readerVC;
 
 @end

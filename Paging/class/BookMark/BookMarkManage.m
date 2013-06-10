@@ -44,6 +44,11 @@ static BookMarkManage* instance;
 -(NSArray*)getBookMarksWithBookName:(NSString*)name{
     return [instance.bookMarks objectForKey:name];
 }
+-(void)removeBookMarkWithBookName:(NSString*)name index:(int)index{
+//    NSMutableArray* bms=[instance.bookMarks objectForKey:name];
+//    [bms removeObjectAtIndex:index];
+    
+}
 #pragma mark archive
 #define DATA_DIR @"datas"
 #define DATA_BOOKMARKS @"bookmarks"

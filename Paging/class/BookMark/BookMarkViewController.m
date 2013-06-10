@@ -8,6 +8,7 @@
 
 #import "BookMarkViewController.h"
 #import "BookMark.h"
+#import "BookMarkManage.h"
 
 @interface BookMarkViewController ()
 
@@ -15,6 +16,7 @@
 
 @implementation BookMarkViewController
 @synthesize bookMarks=_bookMarks,tbvBookMarks=_tbvBookMarks;
+@synthesize readerVC=_readerVC;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,5 +62,29 @@
     
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return  UITableViewCellEditingStyleDelete;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_bookMarks removeObjectAtIndex:indexPath.row];
+        [[BookMarkManage share]cacheBookMarks];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationLeft];
+        
+        
+    }
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BookMark* bi=[_bookMarks objectAtIndex:indexPath.row];
+    [_readerVC jumpToOffsetWithLeaves:bi.offset];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end
