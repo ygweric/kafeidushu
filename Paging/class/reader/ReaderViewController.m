@@ -998,7 +998,7 @@
         
         
         UISegmentedControl* segMenu=(UISegmentedControl*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT];
-        segMenu.selectedSegmentIndex=0;
+        segMenu.selectedSegmentIndex=2;
         [segMenu addTarget:self action:@selector(changeMenuSegment:) forControlEvents:UIControlEventValueChanged];
     }
     
