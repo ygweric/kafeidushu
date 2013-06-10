@@ -30,7 +30,8 @@
 //    self.viewController = [[[ViewController alloc] initWithNibName:IS_IPAD?@"ViewController_ipad": @"ViewController_iphone" bundle:nil] autorelease];
     
     self.viewController = [[[RJBookListViewController alloc] init] autorelease];
-    UINavigationController* navVC=[[UINavigationController alloc]initWithRootViewController:self.viewController];
+//    self.viewController =[[[UIViewController alloc]init]autorelease];
+    UINavigationController* navVC=[[[UINavigationController alloc]initWithRootViewController:self.viewController]autorelease];
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
     return YES;

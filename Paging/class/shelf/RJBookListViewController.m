@@ -15,11 +15,12 @@
 
 @implementation RJBookListViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
+    self = [super init];
     if (self) {
-        // Custom initialization
+//        self.view=[[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT)]autorelease];
     }
     return self;
 }
@@ -86,7 +87,7 @@
 //    [pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
 //    [self.view addSubview:pageControl];
     
-    [pageControl release];
+//    [pageControl release];
 }
 -(void)showBookShelf{
     if (listView) {
@@ -173,16 +174,5 @@
 }
 
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
 
 @end

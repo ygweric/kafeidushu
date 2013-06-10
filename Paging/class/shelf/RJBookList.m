@@ -35,42 +35,29 @@
     [self addSubview:imageView];
     [imageView release];
 
-    rect = CGRectMake(0, 45, 320, 145*4);
+    rect = CGRectMake(0, 45, 320, 145*7);
+    
     FirstView = [[[UIScrollView alloc]initWithFrame:rect]autorelease];
-    
+
     UIImage* rowImage = [UIImage imageNamed:@"shelf_row.png"];
-    rect = CGRectMake(0, 0, 320, 145);
-    UIImageView * row1 = [[UIImageView alloc] initWithFrame:rect];
-    row1.image = rowImage;
-    [FirstView addSubview:row1];
-    [row1 release];
     
-    rect = CGRectMake(0, 138, 320, 145);
-    UIImageView * row2 = [[UIImageView alloc] initWithFrame:rect];
-    row2.image = rowImage;
-    [FirstView addSubview:row2];
-    [row2 release];
+    for (int i=-2; i<5; i++) {
+        rect = CGRectMake(0, 138*i, 320, 145);
+        UIImageView * row = [[[UIImageView alloc] initWithFrame:rect]autorelease];
+        row.image = rowImage;
+        [FirstView addSubview:row];
+    }
     
-    rect = CGRectMake(0, 138*2, 320, 145);
-    UIImageView * row3 = [[UIImageView alloc] initWithFrame:rect];
-    row3.image = rowImage;
-    [FirstView addSubview:row3];
-    [row3 release];
-    
-    rect = CGRectMake(0, 138*3, 320, 145);
-    UIImageView * row4 = [[UIImageView alloc] initWithFrame:rect];
-    row4.image = rowImage;
-    [FirstView addSubview:row4];
-    [row4 release];
-    
+   
+
     int bookCount= [bookData.books count];
    int rowCount=(bookCount-1)/3 + 1;
     
-    
+    FirstView.contentSize=CGSizeMake(320, 145*8);
     if(rowCount>4)
     {        
-        FirstView.contentSize = CGSizeMake(320, (rowCount+1)*145);
-        for (int i=4; i<rowCount; i++) {
+        FirstView.contentSize = CGSizeMake(320, (rowCount+4)*145);
+        for (int i=4; i<rowCount+4; i++) {
             rect = CGRectMake(0, 138*i, 320, 145);
             UIImageView * rowN = [[[UIImageView alloc] initWithFrame:rect]autorelease];
             rowN.image = rowImage;

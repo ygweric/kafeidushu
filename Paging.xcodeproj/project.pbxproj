@@ -28,7 +28,6 @@
 		5F3AEEE8176388300082BCBE /* ReaderViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE4176388300082BCBE /* ReaderViewController_ipad.xib */; };
 		5F3AEEE9176388300082BCBE /* ReaderViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEE5176388300082BCBE /* ReaderViewController_iphone.xib */; };
 		5F3AEEEE176389980082BCBE /* RJBookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEEC176389980082BCBE /* RJBookListViewController.m */; };
-		5F3AEEEF176389980082BCBE /* RJBookListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEED176389980082BCBE /* RJBookListViewController.xib */; };
 		5F3AEEF417638AA20082BCBE /* RJBookList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEF117638AA20082BCBE /* RJBookList.m */; };
 		5F3AEEF517638AA20082BCBE /* RJCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEF317638AA20082BCBE /* RJCommentView.m */; };
 		5F3AEEF817638AB60082BCBE /* RJBookData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AEEF717638AB60082BCBE /* RJBookData.m */; };
@@ -82,7 +81,6 @@
 		5F3AEEE5176388300082BCBE /* ReaderViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderViewController_iphone.xib; sourceTree = "<group>"; };
 		5F3AEEEB176389980082BCBE /* RJBookListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJBookListViewController.h; sourceTree = "<group>"; };
 		5F3AEEEC176389980082BCBE /* RJBookListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJBookListViewController.m; sourceTree = "<group>"; };
-		5F3AEEED176389980082BCBE /* RJBookListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RJBookListViewController.xib; sourceTree = "<group>"; };
 		5F3AEEF017638AA20082BCBE /* RJBookList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJBookList.h; sourceTree = "<group>"; };
 		5F3AEEF117638AA20082BCBE /* RJBookList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJBookList.m; sourceTree = "<group>"; };
 		5F3AEEF217638AA20082BCBE /* RJCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCommentView.h; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 				5F3AEEF317638AA20082BCBE /* RJCommentView.m */,
 				5F3AEEEB176389980082BCBE /* RJBookListViewController.h */,
 				5F3AEEEC176389980082BCBE /* RJBookListViewController.m */,
-				5F3AEEED176389980082BCBE /* RJBookListViewController.xib */,
 			);
 			path = shelf;
 			sourceTree = "<group>";
@@ -346,7 +343,6 @@
 				5F3AEEE7176388300082BCBE /* BottomMenu_iphone.xib in Resources */,
 				5F3AEEE8176388300082BCBE /* ReaderViewController_ipad.xib in Resources */,
 				5F3AEEE9176388300082BCBE /* ReaderViewController_iphone.xib in Resources */,
-				5F3AEEEF176389980082BCBE /* RJBookListViewController.xib in Resources */,
 				5F3AEEFA17638B8E0082BCBE /* placeholder.png in Resources */,
 				5F3AEEFC17638C1A0082BCBE /* button.png in Resources */,
 				5F3AEEFE17638C730082BCBE /* background.jpg in Resources */,
