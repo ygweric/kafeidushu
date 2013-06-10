@@ -89,6 +89,9 @@
 		5F1D66C01765CAFF0087E2BB /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D666E1765CAFF0087E2BB /* placeholder.png */; };
 		5F1D66C11765CAFF0087E2BB /* shelf_row.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D666F1765CAFF0087E2BB /* shelf_row.png */; };
 		5F1D66C21765CAFF0087E2BB /* shelf_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66701765CAFF0087E2BB /* shelf_top.png */; };
+		5F1D66CA1765E60E0087E2BB /* BookMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66C91765E60E0087E2BB /* BookMark.m */; };
+		5F1D66CD1765E9440087E2BB /* BookMarkManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66CC1765E9440087E2BB /* BookMarkManage.m */; };
+		5F1D66D01765EC910087E2BB /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66CF1765EC910087E2BB /* FileUtil.m */; };
 		5F3AEEB317637E0D0082BCBE /* logo57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB217637E0D0082BCBE /* logo57.png */; };
 		5F3AEEB517637E120082BCBE /* logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB417637E120082BCBE /* logo114.png */; };
 		5F3AEEB717637E170082BCBE /* logo72.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB617637E170082BCBE /* logo72.png */; };
@@ -204,6 +207,12 @@
 		5F1D666E1765CAFF0087E2BB /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		5F1D666F1765CAFF0087E2BB /* shelf_row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_row.png; sourceTree = "<group>"; };
 		5F1D66701765CAFF0087E2BB /* shelf_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_top.png; sourceTree = "<group>"; };
+		5F1D66C81765E60E0087E2BB /* BookMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMark.h; sourceTree = "<group>"; };
+		5F1D66C91765E60E0087E2BB /* BookMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMark.m; sourceTree = "<group>"; };
+		5F1D66CB1765E9440087E2BB /* BookMarkManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMarkManage.h; sourceTree = "<group>"; };
+		5F1D66CC1765E9440087E2BB /* BookMarkManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMarkManage.m; sourceTree = "<group>"; };
+		5F1D66CE1765EC910087E2BB /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
+		5F1D66CF1765EC910087E2BB /* FileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtil.m; sourceTree = "<group>"; };
 		5F3AEEB217637E0D0082BCBE /* logo57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo57.png; sourceTree = "<group>"; };
 		5F3AEEB417637E120082BCBE /* logo114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo114.png; sourceTree = "<group>"; };
 		5F3AEEB617637E170082BCBE /* logo72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo72.png; sourceTree = "<group>"; };
@@ -358,11 +367,23 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		5F1D66C71765E60E0087E2BB /* Bean */ = {
+			isa = PBXGroup;
+			children = (
+				5F1D66C81765E60E0087E2BB /* BookMark.h */,
+				5F1D66C91765E60E0087E2BB /* BookMark.m */,
+				5F1D66CB1765E9440087E2BB /* BookMarkManage.h */,
+				5F1D66CC1765E9440087E2BB /* BookMarkManage.m */,
+			);
+			path = Bean;
+			sourceTree = "<group>";
+		};
 		5F3AEEBA176386E80082BCBE /* class */ = {
 			isa = PBXGroup;
 			children = (
 				5F3AEEEA176389980082BCBE /* shelf */,
 				5F3AEEBB176386E80082BCBE /* Leaves */,
+				5F1D66C71765E60E0087E2BB /* Bean */,
 				5F3AEEC4176386E80082BCBE /* reader */,
 				5F3AEECB176386E80082BCBE /* utils */,
 			);
@@ -404,6 +425,8 @@
 		5F3AEECB176386E80082BCBE /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				5F1D66CE1765EC910087E2BB /* FileUtil.h */,
+				5F1D66CF1765EC910087E2BB /* FileUtil.m */,
 				5F3AEECC176386E80082BCBE /* PubHeader.h */,
 				F5D2F9DA176465EF006C5DF7 /* StringUtil.h */,
 				F5D2F9DB176465EF006C5DF7 /* StringUtil.m */,
@@ -662,6 +685,9 @@
 				5F3AEEF517638AA20082BCBE /* RJCommentView.m in Sources */,
 				5F3AEEF817638AB60082BCBE /* RJBookData.m in Sources */,
 				F5D2F9DC176465EF006C5DF7 /* StringUtil.m in Sources */,
+				5F1D66CA1765E60E0087E2BB /* BookMark.m in Sources */,
+				5F1D66CD1765E9440087E2BB /* BookMarkManage.m in Sources */,
+				5F1D66D01765EC910087E2BB /* FileUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,14 +752,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Eric Yang (64WP457TN6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: YANG WEI";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eric Yang (64WP457TN6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "59B0F19E-44AF-4DE7-9D8B-53EB4C71D10E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0B69018B-7F1A-4273-9859-4DC029DF7B5D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "59B0F19E-44AF-4DE7-9D8B-53EB4C71D10E";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -743,14 +769,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Eric Yang (64WP457TN6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: YANG WEI";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eric Yang (64WP457TN6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "59B0F19E-44AF-4DE7-9D8B-53EB4C71D10E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0B69018B-7F1A-4273-9859-4DC029DF7B5D";
+				PROVISIONING_PROFILE = "BA9DFEE3-9802-427C-8CE2-20D421B8C3E7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "59B0F19E-44AF-4DE7-9D8B-53EB4C71D10E";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

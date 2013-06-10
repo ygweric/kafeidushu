@@ -9,3 +9,19 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen ] bounds ].size.height
 
 #define ARRAR_COUNT(x)  (sizeof(x) / sizeof(x[0]))
+
+
+#define Alert2(messageText) \
+{\
+UIAlertView * alert = [[[UIAlertView alloc]\
+initWithTitle:nil \
+message:messageText \
+delegate:nil \
+cancelButtonTitle:@"ok" \
+otherButtonTitles:nil]autorelease];\
+\
+[alert show];\
+alert = nil;\
+}\
+\
+

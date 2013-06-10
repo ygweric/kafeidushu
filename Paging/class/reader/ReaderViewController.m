@@ -9,6 +9,7 @@
 #import "ReaderViewController.h"
 #import "PageInfo.h"
 #import "PageInfoManage.h"
+#import "BookMarkManage.h"
 
 #define FONT_SIZE_MAX IS_IPAD?18:14
 
@@ -401,20 +402,7 @@
         kCFStringEncodingNonLossyASCII ,
         
     };
-    /*/
-    NSString *mTxt =nil;
-    unsigned long encode=0;
-    for (int i=0; i<ARRAR_COUNT(allEncodings); i++) {
-        NSLog(@"finding suitableEncoding:%lx",allEncodings[i]);
-        encode = CFStringConvertEncodingToNSStringEncoding(allEncodings[i]);
-        mTxt=[NSString stringWithContentsOfFile:fp encoding:encode error:0];
-        if (![StringUtil isNilOrEmpty:mTxt]) {
-            suitableEncoding=allEncodings[i];
-            NSLog(@"suitableEncoding:%lx,i:%d\nmTxt:%@",suitableEncoding,i,mTxt);
-            break;
-        }
-    }
-    /*/
+
     NSLog(@"fp:%@",fp);
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:fp];
     [fileHandle seekToFileOffset:0];
@@ -422,22 +410,7 @@
     unsigned long encode=0;
     NSString *mTxt =nil;
     BOOL isFound=NO;
-    
-    /*
-    NSLog(@"\n++++++++++++++\n");
-    for (int i=0; i<60; i++) {
-        [fileHandle seekToFileOffset:0];
-        responseData= [fileHandle readDataOfLength:i];
-        NSLog(@"responseData:%@",responseData);
-        encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8);
-        mTxt = [[[NSString alloc] initWithData:responseData encoding:encode]autorelease];
-        NSLog(@"i:%d---mTxt:%@",i,mTxt);
-    }
-    NSLog(@"\n++++++++++++++\n");
-     */
-    
-    
-      
+
     
     for (int i=0; (i<ARRAR_COUNT(allEncodings))&& !isFound; i++) {
      encode = CFStringConvertEncodingToNSStringEncoding(allEncodings[i]);
@@ -458,8 +431,31 @@
             }
         }        
     }
-    //*/
+
     
+}
+
+-(NSString*)getBookMarkName{
+    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
+    
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
+    [fileHandle seekToFileOffset:pi.dataOffset];
+    NSData *responseData = nil;
+
+    NSString *mTxt =nil;
+    int tmpLength=20;
+    for (int j=0; (j<6); j++) {
+        [fileHandle seekToFileOffset:0];
+        responseData= [fileHandle readDataOfLength:tmpLength];
+        mTxt = [[[NSString alloc] initWithData:responseData encoding:suitableEncoding]autorelease];
+        if (![StringUtil isNilOrEmpty:mTxt]) {
+            return mTxt;
+        }else{
+            tmpLength--;
+        }
+    }
+    return @"";
+
 }
 
 
@@ -964,9 +960,18 @@
         self.vMenuJump= [self findViewWithTag:views tag:TAG_MENU_VIEW_JUMP];
         self.vMenuSetting= [self findViewWithTag:views tag:TAG_MENU_VIEW_SETTING];
         [[self.vMenu viewWithTag:TAG_MENU_CONTENT] addSubview:_vMenuTool];
+        [self.view addSubview:_vMenu];
+        
+        
+        //add target
         UIButton* btShowJump= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_JUMP];
         [btShowJump addTarget:self action:@selector(showJumpView) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_vMenu];
+        
+        //add target
+        UIButton* btAddBookMark= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_ADD_BOOKMARK];
+        [btAddBookMark addTarget:self action:@selector(addBookMark:) forControlEvents:UIControlEventTouchUpInside];
+
+        
         
         UISegmentedControl* segMenu=(UISegmentedControl*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT];
         segMenu.selectedSegmentIndex=0;
@@ -1074,10 +1079,22 @@
             break;
     }
     [self showJumpView:NO];
+}
+-(void)addBookMark:(id)sender{
+    NSString* bmName=[self getBookMarkName];
+    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
+    long long offset=pi.dataOffset;
+    
+    NSArray *ps = [_filePath componentsSeparatedByString:@"/"];
+    if (ps.count>0) {
+        NSString* bookName=[ps objectAtIndex:ps.count-1];
+        [[BookMarkManage share]addBookMarkWithName:bookName offset:offset desc:bmName];
+    }
+    Alert2(@"添加书签成功");
+
     
     
 }
-
 
 
 @end
