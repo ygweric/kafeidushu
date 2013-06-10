@@ -47,24 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/class/reader/ReaderViewController.m"
-         timestampString = "392561142.64212"
+         timestampString = "392567071.528946"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1094"
-         endingLineNumber = "1094"
-         landmarkName = "-addBookMark:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Paging/class/reader/ReaderViewController.m"
-         timestampString = "392561142.64212"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "459"
-         endingLineNumber = "459"
+         startingLineNumber = "478"
+         endingLineNumber = "478"
          landmarkName = "-getBookMarkName"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/class/reader/ReaderViewController.m"
-         timestampString = "392561142.64212"
+         timestampString = "392567071.528946"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "454"
-         endingLineNumber = "454"
+         startingLineNumber = "473"
+         endingLineNumber = "473"
          landmarkName = "-getBookMarkName"
          landmarkType = "5">
       </FileBreakpoint>

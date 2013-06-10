@@ -93,6 +93,8 @@
 		5F1D66D61765F9540087E2BB /* BookMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66D31765F9540087E2BB /* BookMark.m */; };
 		5F1D66D71765F9540087E2BB /* BookMarkManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66D51765F9540087E2BB /* BookMarkManage.m */; };
 		5F1D66DA1765F9C50087E2BB /* BookMarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66D91765F9C50087E2BB /* BookMarkViewController.m */; };
+		5F1D66DE176610850087E2BB /* BookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66DD176610850087E2BB /* BookInfo.m */; };
+		5F1D66E1176610970087E2BB /* BookInfoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D66E0176610970087E2BB /* BookInfoManage.m */; };
 		5F3AEEB317637E0D0082BCBE /* logo57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB217637E0D0082BCBE /* logo57.png */; };
 		5F3AEEB517637E120082BCBE /* logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB417637E120082BCBE /* logo114.png */; };
 		5F3AEEB717637E170082BCBE /* logo72.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AEEB617637E170082BCBE /* logo72.png */; };
@@ -216,6 +218,10 @@
 		5F1D66D51765F9540087E2BB /* BookMarkManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMarkManage.m; sourceTree = "<group>"; };
 		5F1D66D81765F9C50087E2BB /* BookMarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookMarkViewController.h; sourceTree = "<group>"; };
 		5F1D66D91765F9C50087E2BB /* BookMarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookMarkViewController.m; sourceTree = "<group>"; };
+		5F1D66DC176610850087E2BB /* BookInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookInfo.h; path = Paging/class/BookInfo/BookInfo.h; sourceTree = SOURCE_ROOT; };
+		5F1D66DD176610850087E2BB /* BookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookInfo.m; path = Paging/class/BookInfo/BookInfo.m; sourceTree = SOURCE_ROOT; };
+		5F1D66DF176610970087E2BB /* BookInfoManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookInfoManage.h; path = Paging/class/BookInfo/BookInfoManage.h; sourceTree = SOURCE_ROOT; };
+		5F1D66E0176610970087E2BB /* BookInfoManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookInfoManage.m; path = Paging/class/BookInfo/BookInfoManage.m; sourceTree = SOURCE_ROOT; };
 		5F3AEEB217637E0D0082BCBE /* logo57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo57.png; sourceTree = "<group>"; };
 		5F3AEEB417637E120082BCBE /* logo114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo114.png; sourceTree = "<group>"; };
 		5F3AEEB617637E170082BCBE /* logo72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo72.png; sourceTree = "<group>"; };
@@ -383,11 +389,24 @@
 			path = BookMark;
 			sourceTree = "<group>";
 		};
+		5F1D66DB176610550087E2BB /* BookInfo */ = {
+			isa = PBXGroup;
+			children = (
+				5F1D66DC176610850087E2BB /* BookInfo.h */,
+				5F1D66DD176610850087E2BB /* BookInfo.m */,
+				5F1D66DF176610970087E2BB /* BookInfoManage.h */,
+				5F1D66E0176610970087E2BB /* BookInfoManage.m */,
+			);
+			name = BookInfo;
+			path = BookMark;
+			sourceTree = "<group>";
+		};
 		5F3AEEBA176386E80082BCBE /* class */ = {
 			isa = PBXGroup;
 			children = (
 				5F3AEEEA176389980082BCBE /* shelf */,
 				5F3AEEBB176386E80082BCBE /* Leaves */,
+				5F1D66DB176610550087E2BB /* BookInfo */,
 				5F1D66D11765F9540087E2BB /* BookMark */,
 				5F3AEEC4176386E80082BCBE /* reader */,
 				5F3AEECB176386E80082BCBE /* utils */,
@@ -694,6 +713,8 @@
 				5F1D66D61765F9540087E2BB /* BookMark.m in Sources */,
 				5F1D66D71765F9540087E2BB /* BookMarkManage.m in Sources */,
 				5F1D66DA1765F9C50087E2BB /* BookMarkViewController.m in Sources */,
+				5F1D66DE176610850087E2BB /* BookInfo.m in Sources */,
+				5F1D66E1176610970087E2BB /* BookInfoManage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

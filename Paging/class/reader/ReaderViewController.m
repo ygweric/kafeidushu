@@ -11,7 +11,8 @@
 #import "PageInfoManage.h"
 #import "BookMarkManage.h"
 #import "BookMarkViewController.h"
-
+#import "BookInfo.h"
+#import "BookInfoManage.h"
 
 #define FONT_SIZE_MAX IS_IPAD?18:14
 
@@ -61,6 +62,7 @@
 @synthesize pageInfoLabel;
 @synthesize text=_text;
 @synthesize filePath=_filePath;
+@synthesize fileName=_fileName;
 @synthesize lbContentAdapter=_lbContentAdapter;
 @synthesize pagingContent=_pagingContent;
 @synthesize vMenu=_vMenu;
@@ -260,6 +262,14 @@
     isSimpleViewShowing=NO;
     suitableEncoding=INT32_MAX;
     
+    NSArray *ps = [_filePath componentsSeparatedByString:@"/"];
+    if (ps.count>0) {
+        self.fileName=[ps objectAtIndex:ps.count-1];
+    }else{
+        NSLog(@"error !!!! fileName is nil");
+        self.fileName=@"";
+    }
+    
 //    self.filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"笑傲江湖-utf8.txt"];
     
     fileLength= [self getFileSize:_filePath];
@@ -271,7 +281,14 @@
     //--------
     
     [self checkEncoding:_filePath];
-    [self jumpToOffsetWithLeaves:0];
+    BookInfo* bi=[[BookInfoManage share]getBookInfo:_fileName];
+    if (bi) {
+        [self jumpToOffsetWithLeaves:bi.lastOffset];
+    }else{
+        [self jumpToOffsetWithLeaves:0];
+    }
+    
+    
     
 
 
@@ -349,9 +366,11 @@
     if (!pi || !pi.isValid) {
         [self updatePageInfoWithPaging:currentPageIndex];
         pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
-        //        NSLog(@"\nrenderPageAtIndex--2--index:%d,pi.isValid:%d,pi.pageIndex:%d,pi.dataOffset:%d,pi.pageLength:%d,\npi:%@, pi.pageView:%@",index,pi.isValid,pi.pageIndex,pi.dataOffset,pi.pageLength,pi,pi.pageView);
     }
     pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@", (double)pi.dataOffset/fileLength*100,@"%"];
+    
+    [[BookInfoManage share]updateBookInfo:_fileName offset:pi.dataOffset];
+    
 }
 -(NSString*)loadString{
     return [self loadStringFrom:0 length:MAX_CHARACTER_LENGHT];
@@ -1090,23 +1109,15 @@
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     long long offset=pi.dataOffset;
     
-    NSArray *ps = [_filePath componentsSeparatedByString:@"/"];
-    if (ps.count>0) {
-        NSString* bookName=[ps objectAtIndex:ps.count-1];
-        [[BookMarkManage share]addBookMarkWithName:bookName offset:offset desc:bmName];
-    }
+   [[BookMarkManage share]addBookMarkWithName:_fileName offset:offset desc:bmName];
     Alert2(@"添加书签成功");
  
 }
 
 -(void)showAllBookMarks:(id)sender{
     BookMarkViewController* bmVC=[[[BookMarkViewController alloc]init]autorelease];
-    NSArray *ps = [_filePath componentsSeparatedByString:@"/"];
-    if (ps.count>0) {
-        NSString* bookName=[ps objectAtIndex:ps.count-1];
-        bmVC.bookMarks=(NSArray*) [[BookMarkManage share] getBookMarksWithBookName:bookName];
-         [self.navigationController pushViewController:bmVC animated:YES];
-    }
+    bmVC.bookMarks=(NSArray*) [[BookMarkManage share] getBookMarksWithBookName:_fileName];
+    [self.navigationController pushViewController:bmVC animated:YES];
     
 }
 
