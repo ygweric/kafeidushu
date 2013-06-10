@@ -14,5 +14,9 @@
     NSData *tempArchiveView = [NSKeyedArchiver archivedDataWithRootObject:v];
     return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchiveView];
 }
-
++(void)removeAllSubviews:(UIView*)view{
+    for(UIView *subview in [view subviews]) {
+        [subview removeFromSuperview];
+    }
+}
 @end

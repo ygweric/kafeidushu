@@ -21,6 +21,8 @@
 
 @property (retain, nonatomic) UIView* vMenu;
 @property (retain, nonatomic) UIView* vMenuTool;
+@property (retain, nonatomic) UIView* vMenuJump;
+@property (retain, nonatomic) UIView* vMenuSetting;
 @property (retain, nonatomic) UIView* vJump;
 
 

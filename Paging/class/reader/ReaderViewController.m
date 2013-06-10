@@ -62,6 +62,8 @@
 @synthesize pagingContent=_pagingContent;
 @synthesize vMenu=_vMenu;
 @synthesize vMenuTool=_vMenuTool;
+@synthesize vMenuJump=_vMenuJump;
+@synthesize vMenuSetting=_vMenuSetting;
 @synthesize vJump=_vJump;
 
 
@@ -882,20 +884,46 @@
 }
 #pragma mark menu
 
+#define INDEX_TOOL 0
+#define INDEX_JUMP 1
+#define INDEX_SETTING 2
+
 #define TAG_MENU_MAIN 301
 #define TAG_MENU_SEGMENT 302
 #define TAG_MENU_CONTENT 303
+
 #define TAG_MENU_VIEW_TOOL 304
-#define TAG_MENU_VIEW_TOOL_BT_JUMP 305
-#define TAG_SIMPLE_VIEW_JUMP 306
-#define TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT 307
-#define TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT 308
-#define TAG_SIMPLE_VIEW_JUMP_SLIDE 309
+#define TAG_MENU_VIEW_TOOL_BT_CHAPTER 3041
+#define TAG_MENU_VIEW_TOOL_BT_ADD_BOOKMARK 3042
+#define TAG_MENU_VIEW_TOOL_BT_BOOKMARK_MANAGE 3043
+#define TAG_MENU_VIEW_TOOL_BT_JUMP 3044
+
+#define TAG_MENU_VIEW_JUMP 305
+#define TAG_MENU_VIEW_JUMP_PRE_CHARPTER 3051
+#define TAG_MENU_VIEW_JUMP_NEXT_CHARPTER 3052
+
+#define TAG_MENU_VIEW_SETTING 306
+#define TAG_MENU_VIEW_SETTING_THEME 3061
+#define TAG_MENU_VIEW_SETTING_FONT 3062
+#define TAG_MENU_VIEW_SETTING_ENCODING 3063
+#define TAG_MENU_VIEW_SETTING_SET 3064
+#define TAG_MENU_VIEW_SETTING_HELP 3065
+
+
+
 
 #define TAG_SIMPLE_VIEW_OK 501
 #define TAG_SIMPLE_VIEW_CANCEL 502
 
 
+#define TAG_SIMPLE_VIEW_JUMP 601
+#define TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT 602
+#define TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT 603
+#define TAG_SIMPLE_VIEW_JUMP_SLIDE 604
+
+
+
+#pragma mark -
 -(UIView*)findViewWithTag:(NSArray*)views tag:(int)tag{
     for (UIView* v in views) {
         if (v.tag==tag) {
@@ -928,13 +956,20 @@
 
 -(void)showBottomMenu:(BOOL)toShow {
     if (!_vMenu) {
+        //得到所有的menu并添加事件
         NSArray* views= [[NSBundle mainBundle] loadNibNamed:@"BottomMenu_iphone" owner:self options:nil] ;
         self.vMenu= [self findViewWithTag:views tag:TAG_MENU_MAIN];
         self.vMenuTool= [self findViewWithTag:views tag:TAG_MENU_VIEW_TOOL];
+        self.vMenuJump= [self findViewWithTag:views tag:TAG_MENU_VIEW_JUMP];
+        self.vMenuSetting= [self findViewWithTag:views tag:TAG_MENU_VIEW_SETTING];
         [[self.vMenu viewWithTag:TAG_MENU_CONTENT] addSubview:_vMenuTool];
         UIButton* btShowJump= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_JUMP];
         [btShowJump addTarget:self action:@selector(showJumpView) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_vMenu];
+        
+        UISegmentedControl* segMenu=(UISegmentedControl*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT];
+        segMenu.selectedSegmentIndex=0;
+        [segMenu addTarget:self action:@selector(changeMenuSegment:) forControlEvents:UIControlEventValueChanged];
     }
     
     CGRect frame=self.view.frame;
@@ -959,6 +994,28 @@
     [UIView commitAnimations];
     isBottomMenuShowing=toShow;
 }
+-(void)changeMenuSegment:(UISegmentedControl*)sender{
+    UIView* vContent=[self.vMenu viewWithTag:TAG_MENU_CONTENT] ;
+    [VIewUtil removeAllSubviews:vContent];
+    switch (sender.selectedSegmentIndex) {
+        case INDEX_TOOL:
+        {
+            [vContent addSubview:_vMenuTool];
+        }
+            break;
+        case INDEX_JUMP:
+        {
+            [vContent addSubview:_vMenuJump];
+        }
+            break;
+        case INDEX_SETTING:
+        {
+            [vContent addSubview:_vMenuSetting];
+        }
+            break;
+    }
+}
+
 -(void)showJumpView{
     [self showJumpView:YES];
 }

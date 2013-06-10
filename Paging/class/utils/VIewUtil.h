@@ -10,4 +10,5 @@
 
 @interface VIewUtil : NSObject
 +(UIView*)clone:(UIView*)v;
++(void)removeAllSubviews:(UIView*)v;
 @end
