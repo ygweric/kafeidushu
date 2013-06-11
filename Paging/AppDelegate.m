@@ -34,6 +34,37 @@
     UINavigationController* navVC=[[[UINavigationController alloc]initWithRootViewController:self.viewController]autorelease];
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
+    
+    
+    
+    /*
+     升级须知
+     每次app生新版本，
+     1、appVersion加一
+     2、然后在case中做对应修改
+     */
+    int appVersion=1;
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    int currentVersion=[def integerForKey:UDF_CURRENT_VERSION];
+    if (appVersion!=currentVersion) { //未升级
+        switch (currentVersion) {
+            case 0:
+                //首次初始化
+                [def setInteger:DEFAULT_FONT_SIZE forKey:UDF_FONT_SIZE];
+            case 1:
+                break;
+        }
+        [def setInteger:appVersion forKey:UDF_CURRENT_VERSION];
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
     return YES;
 }
 

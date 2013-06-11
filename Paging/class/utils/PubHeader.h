@@ -3,6 +3,7 @@
 //  Copyright (c) 2013年 Eric Yang. All rights reserved.
 //
 
+
 #define IS_IPAD UI_USER_INTERFACE_IDIOM()== UIUserInterfaceIdiomPad
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
@@ -24,4 +25,22 @@ otherButtonTitles:nil]autorelease];\
 alert = nil;\
 }\
 \
+
+
+//====== constants ======
+#define DEFAULT_FONT_SIZE 14
+
+#define UDF_FONT_SIZE @"UDF_FONT_SIZE"
+#define UDF_CURRENT_VERSION @"UDF_CURRENT_VERSION"
+
+
+
+
+
+
+
+
+
+
+
 

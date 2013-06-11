@@ -14,11 +14,25 @@
 #import "BookInfo.h"
 #import "BookInfoManage.h"
 
-#define FONT_SIZE_MAX IS_IPAD?18:14
+/*
+ fontSize vs offset  (iphone5)
+ 8-24
+ 
+ 24	393
+ 20	717
+ 14	883
+ 12	1224
+ 10	1998
+ 8	2524
+ */
+
+#define FONT_VALUE_WITH_SLIDE(v) (16*v +8)
+#define SLIDE_VALUE_WITH_FONT(v) ((v-8)/16.0)
+
 
 #define READ_TRY_COUNT_MAX 4
 
-#define MAX_CHARACTER_LENGHT (IS_IPAD?8000:2000)
+#define MAX_CHARACTER_LENGHT (4000)
 
 #define MAX_PAGING_STEP 40 //单位piwxel,大概一行
 
@@ -55,6 +69,8 @@
     BOOL isBottomMenuShowing;
     BOOL isSimpleViewShowing;
     
+    int fontSize;
+    
     CFStringEncoding suitableEncoding; //init is INT32_MAX 
     
 }
@@ -70,6 +86,8 @@
 @synthesize vMenuJump=_vMenuJump;
 @synthesize vMenuSetting=_vMenuSetting;
 @synthesize vJump=_vJump;
+@synthesize vTheme=_vTheme;
+@synthesize vFont=_vFont;
 
 
 #pragma mark paging
@@ -82,7 +100,7 @@
     
     //NSTimeInterval timeStart=[[[[NSDate alloc]init]autorelease]timeIntervalSince1970];
     // 计算文本串的大小尺寸
-    CGSize totalTextSize = [content sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
+    CGSize totalTextSize = [content sizeWithFont:[UIFont systemFontOfSize:fontSize]
                                  constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
                                      lineBreakMode:NSLineBreakByWordWrapping];
 //    //NSLog(@"time interval--pageString ---1--:%lf\n%@",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart,content);
@@ -126,7 +144,7 @@
         while (isNext?(range.location + range.length < textLength):(range.location >0)) {
             pageText = [content substringWithRange:range];
             
-            pageTextSize = [pageText sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
+            pageTextSize = [pageText sizeWithFont:[UIFont systemFontOfSize:fontSize]
                                 constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
                                     lineBreakMode:NSLineBreakByWordWrapping];
             
@@ -169,7 +187,7 @@
 //            NSLog(@"range.location:%d range.length:%d",range.location,range.length);
 //            NSLog(@"pageText:%@",pageText);
             //得到前面计算得到的当页string
-            pageTextSize = [pageText sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE_MAX]
+            pageTextSize = [pageText sizeWithFont:[UIFont systemFontOfSize:fontSize]
                                 constrainedToSize:CGSizeMake(lbContent.frame.size.width, CGFLOAT_MAX)
                                     lineBreakMode:NSLineBreakByWordWrapping];
             
@@ -236,21 +254,6 @@
 #pragma mark - view control
 - (void)viewDidLoad
 {
-    
-    
-    
-    lbContent=[[UILabel alloc]initWithFrame:IS_IPAD? CGRectMake(15, 20, 748, 861):CGRectMake(15, 20, 285, SCREEN_HEIGHT-128)];
-    pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, SCREEN_HEIGHT-56, 89, 21)];
-    lbContent.numberOfLines = 0;
-    lbContent.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
-    
-    pageInfoLabel.font=[UIFont systemFontOfSize:FONT_SIZE_MAX];
-    pageInfoLabel.backgroundColor=[UIColor clearColor];
-    
-    
-    self.lbContentAdapter=(UILabel*)[VIewUtil clone:self.lbContent];
-    pageInfoManage=[[PageInfoManage alloc]init];
-    
     preOffset=0;
     currentOffset=0;
     nextOffset=0;
@@ -261,6 +264,24 @@
     isBottomMenuShowing=NO;
     isSimpleViewShowing=NO;
     suitableEncoding=INT32_MAX;
+    
+     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    fontSize=[def integerForKey:UDF_FONT_SIZE];
+    
+    
+    lbContent=[[UILabel alloc]initWithFrame:IS_IPAD? CGRectMake(15, 20, 748, 861):CGRectMake(15, 20, 285, SCREEN_HEIGHT-128)];
+    pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, SCREEN_HEIGHT-56, 89, 21)];
+    lbContent.numberOfLines = 0;
+    lbContent.font=[UIFont systemFontOfSize:fontSize];
+    
+    pageInfoLabel.font=[UIFont systemFontOfSize:fontSize];
+    pageInfoLabel.backgroundColor=[UIColor clearColor];
+    
+    
+    self.lbContentAdapter=(UILabel*)[VIewUtil clone:self.lbContent];
+    pageInfoManage=[[PageInfoManage alloc]init];
+    
+
     
     NSArray *ps = [_filePath componentsSeparatedByString:@"/"];
     if (ps.count>0) {
@@ -935,10 +956,12 @@
 
 
 #define TAG_SIMPLE_VIEW_JUMP 601
-#define TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT 602
-#define TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT 603
-#define TAG_SIMPLE_VIEW_JUMP_SLIDE 604
+#define TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT 6011
+#define TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT 6012
+#define TAG_SIMPLE_VIEW_JUMP_SLIDE 6013
 
+#define TAG_SIMPLE_VIEW_FONT 602
+#define TAG_SIMPLE_VIEW_FONT_SLIDE 6021
 
 
 #pragma mark -
@@ -960,6 +983,7 @@
     }
     if (isSimpleViewShowing) {
         [self showJumpView:NO];
+        [self showFontView:NO];
         isYes=YES;
     }
     return isYes;
@@ -984,7 +1008,7 @@
         [self.view addSubview:_vMenu];
         
         
-        //add target
+        //add target vMenuTool
         UIButton* btShowJump= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_JUMP];
         [btShowJump addTarget:self action:@selector(showJumpView) forControlEvents:UIControlEventTouchUpInside];
         
@@ -994,11 +1018,16 @@
         
         UIButton* btshowBookMark= (UIButton*)[_vMenuTool viewWithTag:TAG_MENU_VIEW_TOOL_BT_BOOKMARK_MANAGE];
         [btshowBookMark addTarget:self action:@selector(showAllBookMarks:) forControlEvents:UIControlEventTouchUpInside];
-
+        
+        //add target vMenuJump
+        //add target vMenuSetting
+        UIButton* btShowFont= (UIButton*)[_vMenuSetting viewWithTag:TAG_MENU_VIEW_SETTING_FONT];
+        [btShowFont addTarget:self action:@selector(showFontView) forControlEvents:UIControlEventTouchUpInside];
         
         
+        //=============
         UISegmentedControl* segMenu=(UISegmentedControl*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT];
-        segMenu.selectedSegmentIndex=2;
+        segMenu.selectedSegmentIndex=0;
         [segMenu addTarget:self action:@selector(changeMenuSegment:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -1073,11 +1102,53 @@
     } else {
         [_vJump removeFromSuperview];
         isSimpleViewShowing=NO;
-    }
-   
+    }   
     [UIView commitAnimations];
 }
 
+-(void)showFontView{
+    [self showFontView:YES];
+}
+-(void)showFontView:(BOOL)toShow{
+    if (isBottomMenuShowing) {
+        [self showBottomMenu:NO];
+        isBottomMenuShowing=NO;
+    }
+    if (!self.vFont) {
+        NSArray* views= [[NSBundle mainBundle] loadNibNamed:@"BottomMenu_iphone" owner:self options:nil] ;
+        self.vFont= [self findViewWithTag:views tag:TAG_SIMPLE_VIEW_FONT];
+        UISlider* sdFontSize= (UISlider*)[_vFont viewWithTag:TAG_SIMPLE_VIEW_FONT_SLIDE];
+        [sdFontSize addTarget:self action:@selector(changeFontSize:) forControlEvents:UIControlEventValueChanged];
+        NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+        sdFontSize.value=SLIDE_VALUE_WITH_FONT([def integerForKey:UDF_FONT_SIZE]);
+        
+    }
+    
+    if (toShow) {
+        CGRect frame=self.view.frame;
+        _vFont.frame=CGRectMake((frame.size.width-_vFont.frame.size.width)/2, 30, _vFont.frame.size.width, _vFont.frame.size.height);
+        [self.view addSubview:_vFont];
+        isSimpleViewShowing=YES;
+    } else {
+        [_vFont removeFromSuperview];
+        isSimpleViewShowing=NO;
+    }
+    [UIView commitAnimations];
+}
+-(void)changeFontSize:(UISlider*)sender{
+    fontSize=FONT_VALUE_WITH_SLIDE(sender.value);
+    NSLog(@"changeFontSize----fontSize:%d",fontSize);
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    [def setInteger:fontSize forKey:UDF_FONT_SIZE];
+    
+    
+    lbContent.font=[UIFont systemFontOfSize:fontSize];
+    
+    pageInfoLabel.font=[UIFont systemFontOfSize:fontSize];
+    
+    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
+    [self jumpToOffsetWithLeaves:pi.dataOffset];
+}
 
 -(void)jumpOffset:(UIButton*)sender{
     switch (sender.tag) {
