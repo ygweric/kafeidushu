@@ -48,6 +48,8 @@
     
 }
 -(void)goBack:(id)sender{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning
@@ -67,7 +69,7 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];    
     if (cell==nil) {
         cell=[[[UITableViewCell alloc]initWithFrame:CGRectMake(0, 0, 320, 46)]autorelease];
-        UILabel *lbPercent=[[[UILabel alloc]initWithFrame:CGRectMake(3, 2, 100, 22)]autorelease];
+        UILabel *lbPercent=[[[UILabel alloc]initWithFrame:CGRectMake(10, 2, 100, 22)]autorelease];
         lbPercent.font=[UIFont systemFontOfSize:10];
         lbPercent.tag=TAG_PERCENT;
         [cell addSubview:lbPercent];
@@ -75,7 +77,7 @@
         lbTime.font=[UIFont systemFontOfSize:10];
         lbTime.tag=TAG_TIME;
         [cell addSubview:lbTime];
-        UILabel *lbDesc=[[[UILabel alloc]initWithFrame:CGRectMake(3, 24, 310, 22)]autorelease];
+        UILabel *lbDesc=[[[UILabel alloc]initWithFrame:CGRectMake(5, 24, 310, 22)]autorelease];
         lbDesc.font=[UIFont systemFontOfSize:12];
         lbDesc.tag=TAG_DESC;
         [cell addSubview:lbDesc];

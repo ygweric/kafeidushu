@@ -1195,8 +1195,6 @@
     
     lbContent.font=[UIFont systemFontOfSize:fontSize];
     
-    pageInfoLabel.font=[UIFont systemFontOfSize:fontSize];
-    
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     [self jumpToOffsetWithLeaves:pi.dataOffset];
 }
