@@ -13,6 +13,7 @@
 @interface BookMark : NSObject
 
 @property  long long offset;
+@property float percent;
 @property (nonatomic,retain) NSString* desc;
 @property NSTimeInterval time;
 

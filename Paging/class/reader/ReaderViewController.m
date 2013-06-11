@@ -510,7 +510,7 @@
     NSData *responseData = nil;
 
     NSString *mTxt =nil;
-    int tmpLength=40;
+    int tmpLength=80;
     unsigned long encode = CFStringConvertEncodingToNSStringEncoding(suitableEncoding);
     for (int j=0; (j<6); j++) {
         [fileHandle seekToFileOffset:pi.dataOffset];
@@ -1235,7 +1235,8 @@
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     long long offset=pi.dataOffset;
     
-   [[BookMarkManage share]addBookMarkWithName:_fileName offset:offset desc:bmName];
+    float percent=(((double)offset)/fileLength);
+    [[BookMarkManage share]addBookMarkWithName:_fileName offset:offset percent:percent desc:bmName];
     Alert2(@"添加书签成功");
  
 }

@@ -59,15 +59,44 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _bookMarks.count;
 }
+#define TAG_PERCENT 101
+#define TAG_TIME 102
+#define TAG_DESC 103
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString* cellIdentifier = @"bookmark";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];    
     if (cell==nil) {
-        cell=[[[UITableViewCell alloc]initWithFrame:CGRectMake(0, 0, 320, 22)]autorelease];
+        cell=[[[UITableViewCell alloc]initWithFrame:CGRectMake(0, 0, 320, 46)]autorelease];
+        UILabel *lbPercent=[[[UILabel alloc]initWithFrame:CGRectMake(3, 2, 100, 22)]autorelease];
+        lbPercent.font=[UIFont systemFontOfSize:10];
+        lbPercent.tag=TAG_PERCENT;
+        [cell addSubview:lbPercent];
+        UILabel *lbTime=[[[UILabel alloc]initWithFrame:CGRectMake(200, 2, 100, 22)]autorelease];
+        lbTime.font=[UIFont systemFontOfSize:10];
+        lbTime.tag=TAG_TIME;
+        [cell addSubview:lbTime];
+        UILabel *lbDesc=[[[UILabel alloc]initWithFrame:CGRectMake(3, 24, 310, 22)]autorelease];
+        lbDesc.font=[UIFont systemFontOfSize:12];
+        lbDesc.tag=TAG_DESC;
+        [cell addSubview:lbDesc];
     }
     BookMark* bm= [ _bookMarks objectAtIndex:indexPath.row];
-    cell.textLabel.text=bm.desc;
-    cell.textLabel.font=[UIFont systemFontOfSize:12];
+    UILabel* lbPercent=(UILabel*)[cell viewWithTag:TAG_PERCENT];
+    lbPercent.text=[NSString stringWithFormat:@"%0.2f %@",bm.percent*100,@"%"];
+    
+    UILabel* lbTime=(UILabel*)[cell viewWithTag:TAG_TIME];
+    NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init]autorelease];
+    [dateFormatter setDateFormat:@"MM-dd h:MM:ss a"];
+    NSString* dataStr = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:bm.time]];
+    lbTime.text=dataStr;
+    
+
+    UILabel* lbDesc=(UILabel*)[cell viewWithTag:TAG_DESC];
+    
+    lbDesc.text=bm.desc;
+
+    
+    
     return cell;
     
 }

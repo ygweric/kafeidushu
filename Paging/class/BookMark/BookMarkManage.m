@@ -28,7 +28,7 @@ static BookMarkManage* instance;
 }
 #pragma mark -
 
--(BOOL)addBookMarkWithName:(NSString*)name offset:(long long)offset desc:(NSString*)desc{
+-(BOOL)addBookMarkWithName:(NSString*)name offset:(long long)offset percent:(float)percent desc:(NSString*)desc{
     NSMutableArray* bms =[instance.bookMarks objectForKey:name];
     if (!bms) {
         bms =[[[NSMutableArray alloc]initWithCapacity:3]autorelease];
@@ -36,6 +36,7 @@ static BookMarkManage* instance;
     }
     BookMark* bm=[[[BookMark alloc]init]autorelease];
     bm.offset=offset;
+    bm.percent=percent;
     bm.desc=desc;
     [bms addObject:bm];
     [self cacheBookMarks];

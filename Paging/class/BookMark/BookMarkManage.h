@@ -12,7 +12,7 @@
 @property (nonatomic,retain)NSMutableDictionary* bookMarks;
 +(BookMarkManage*)share;
 
--(BOOL)addBookMarkWithName:(NSString*)name offset:(long long)offset desc:(NSString*)desc;
+-(BOOL)addBookMarkWithName:(NSString*)name offset:(long long)offset percent:(float)percent desc:(NSString*)desc;
 -(NSArray*)getBookMarksWithBookName:(NSString*)name;
 -(void)cacheBookMarks;
 -(NSMutableDictionary*)uncacheBookMarks;
