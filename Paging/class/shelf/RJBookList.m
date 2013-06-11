@@ -28,14 +28,9 @@
 {
     bookData = [RJBookData sharedRJBookData];
     
-    UIImageView* imageView = [[UIImageView alloc] initWithImage:
-                 [UIImage imageNamed:@"shelf_top.png"]];
-    CGRect rect = CGRectMake(0, 0, 320, 45);
-    imageView.frame =rect;
-    [self addSubview:imageView];
-    [imageView release];
 
-    rect = CGRectMake(0, 45, 320, 145*7);
+
+    CGRect rect = CGRectMake(0, 44, 320, 145*7);
     
     FirstView = [[[UIScrollView alloc]initWithFrame:rect]autorelease];
 
@@ -119,10 +114,13 @@
 
 -(void) readBook:(NSInteger)i
 {
+    
     ReaderViewController *readerVC = [[[ReaderViewController alloc]init]autorelease];
      RJSingleBook* singleBook = [bookData.books objectAtIndex:i];
     readerVC.filePath=singleBook.bookPath;
-	[self.nc pushViewController:readerVC animated:YES];
+    UINavigationController* navVC=[[[UINavigationController alloc]initWithRootViewController:readerVC]autorelease];
+//	[self.nc pushViewController:readerVC animated:YES];
+    [self.nc presentModalViewController:navVC animated:YES];
 }
 
 -(void) doTableViewShowOrHide

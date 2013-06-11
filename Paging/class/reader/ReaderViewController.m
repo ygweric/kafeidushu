@@ -270,12 +270,13 @@
     
     
     lbContent=[[UILabel alloc]initWithFrame:IS_IPAD? CGRectMake(15, 20, 748, 861):CGRectMake(15, 20, 285, SCREEN_HEIGHT-128)];
-    pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, SCREEN_HEIGHT-56, 89, 21)];
+    pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, SCREEN_HEIGHT-36, 250, 21)];
     lbContent.numberOfLines = 0;
     lbContent.font=[UIFont systemFontOfSize:fontSize];
     
-    pageInfoLabel.font=[UIFont systemFontOfSize:fontSize];
+    pageInfoLabel.font=[UIFont systemFontOfSize:10];
     pageInfoLabel.backgroundColor=[UIColor clearColor];
+    pageInfoLabel.textColor=[UIColor grayColor];
     
     
     self.lbContentAdapter=(UILabel*)[VIewUtil clone:self.lbContent];
@@ -334,7 +335,25 @@
     */
     [super viewDidLoad];
     [self.view addSubview:pageInfoLabel];
+    UINavigationBar *navBar = self.navigationController.navigationBar;
+    navBar.barStyle = UIBarStyleBlackTranslucent;
+    self.wantsFullScreenLayout=YES;
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+
+    
+    UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"返回"
+                                   style:UIBarButtonItemStyleBordered
+                                   target:self
+                                   action:@selector(goBack:)];
+    self.navigationItem.leftBarButtonItem = flipButton;
+    
 }
+-(void)goBack:(id)sender{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 -(void)jumpToOffsetWithLeaves:(long long)offset{
     [self jumpToOffset:offset];
     [self updatePageInfoWithCurrentOffset:currentOffset];
@@ -388,7 +407,14 @@
         [self updatePageInfoWithPaging:currentPageIndex];
         pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     }
-    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@", (double)pi.dataOffset/fileLength*100,@"%"];
+    NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init]autorelease];
+    [dateFormatter setDateFormat:@"h:MM:ss a"];    
+    NSString* dataStr = [dateFormatter stringFromDate:[NSDate date]];
+    
+    
+    pageInfoLabel.text = [NSString stringWithFormat:@"%0.2f %@   %@", (double)pi.dataOffset/fileLength*100,@"%",dataStr];
+    
+    
     
     [[BookInfoManage share]updateBookInfo:_fileName offset:pi.dataOffset];
     
@@ -996,7 +1022,32 @@
     }
 }
 
+
+- (void)setControlsHidden:(BOOL)hidden animated:(BOOL)animated permanent:(BOOL)permanent withStatusbar:(BOOL)withStatusbar{
+    
+  
+    // Status Bar
+    if (withStatusbar) {
+        [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:animated?UIStatusBarAnimationFade:UIStatusBarAnimationNone];
+    }
+    [self.navigationController setNavigationBarHidden:hidden animated:YES];
+
+
+	// Animate
+    if (animated) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.35];
+    }
+	if (animated) {
+        [UIView commitAnimations];
+    }
+
+	
+}
+
+
 -(void)showBottomMenu:(BOOL)toShow {
+    [self setControlsHidden:!toShow animated:YES permanent:YES withStatusbar:YES];
     if (!_vMenu) {
         //得到所有的menu并添加事件
         NSArray* views= [[NSBundle mainBundle] loadNibNamed:@"BottomMenu_iphone" owner:self options:nil] ;
@@ -1096,7 +1147,7 @@
 
     if (toShow) {
         CGRect frame=self.view.frame;
-        _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 30, _vJump.frame.size.width, _vJump.frame.size.height);
+        _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 60, _vJump.frame.size.width, _vJump.frame.size.height);
         [self.view addSubview:_vJump];
         isSimpleViewShowing=YES;
     } else {
@@ -1126,7 +1177,7 @@
     
     if (toShow) {
         CGRect frame=self.view.frame;
-        _vFont.frame=CGRectMake((frame.size.width-_vFont.frame.size.width)/2, 30, _vFont.frame.size.width, _vFont.frame.size.height);
+        _vFont.frame=CGRectMake((frame.size.width-_vFont.frame.size.width)/2, 60, _vFont.frame.size.width, _vFont.frame.size.height);
         [self.view addSubview:_vFont];
         isSimpleViewShowing=YES;
     } else {

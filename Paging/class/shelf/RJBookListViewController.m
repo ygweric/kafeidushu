@@ -20,7 +20,7 @@
 
     self = [super init];
     if (self) {
-//        self.view=[[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT)]autorelease];
+
     }
     return self;
 }
@@ -34,8 +34,7 @@
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
     navBar.barStyle = UIBarStyleBlackTranslucent;
-    UIView* aView = [navBar.subviews objectAtIndex:0];
-    aView.hidden = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"shelf_top.png"] forBarMetrics:UIBarMetricsDefault];
     
     [self.navigationController setToolbarHidden:YES animated:TRUE];
 

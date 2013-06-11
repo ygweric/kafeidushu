@@ -31,16 +31,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.tbvBookMarks=[[[UITableView alloc]initWithFrame:self.view.frame]autorelease];
+    self.wantsFullScreenLayout=NO;
+    self.tbvBookMarks=[[[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height)]autorelease];
     _tbvBookMarks.delegate=self;
     _tbvBookMarks.dataSource=self;
     [self.view addSubview:_tbvBookMarks];
     
-
+     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"返回"
+                                   style:UIBarButtonItemStyleBordered
+                                   target:self
+                                   action:@selector(goBack:)];
+    self.navigationItem.leftBarButtonItem = flipButton;
     
 }
-
+-(void)goBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -58,6 +67,7 @@
     }
     BookMark* bm= [ _bookMarks objectAtIndex:indexPath.row];
     cell.textLabel.text=bm.desc;
+    cell.textLabel.font=[UIFont systemFontOfSize:12];
     return cell;
     
 }
