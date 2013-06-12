@@ -206,7 +206,7 @@ enum{
                     break;
                 case 2:
                     [MobClick event:@"rateme"];
-                    [[UIApplication sharedApplication] openURL: [NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=656253132"]];
+                    [[UIApplication sharedApplication] openURL: [NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=661040207"]];
                     break;
                 case 3:
                     [MobClick event:@"sponsorme"];

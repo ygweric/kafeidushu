@@ -13,6 +13,8 @@
 #import "BookMarkViewController.h"
 #import "BookInfo.h"
 #import "BookInfoManage.h"
+#import "BookTheme.h"
+#import "BookThemeManage.h"
 
 /*
  fontSize vs offset  (iphone5)
@@ -75,6 +77,7 @@
     
 }
 @synthesize  lbContent;
+@synthesize vPageBg=_vPageBg;
 @synthesize pageInfoLabel;
 @synthesize text=_text;
 @synthesize filePath=_filePath;
@@ -256,6 +259,8 @@
 #pragma mark - view control
 - (void)viewDidLoad
 {
+    
+    
     preOffset=0;
     currentOffset=0;
     nextOffset=0;
@@ -270,11 +275,17 @@
      NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
     fontSize=[def integerForKey:UDF_FONT_SIZE];
     
+    _vPageBg=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT)];
     
-    lbContent=[[UILabel alloc]initWithFrame:IS_IPAD? CGRectMake(15, 20, 748, 861):CGRectMake(15, 20, 285, SCREEN_HEIGHT-128)];
+    lbContent=[[UILabel alloc]initWithFrame:CGRectMake(15, 40, 285, SCREEN_HEIGHT-80) ];
     pageInfoLabel=[[UILabel alloc]initWithFrame:IS_IPAD?CGRectMake(92, 949, 89, 21):CGRectMake(116, SCREEN_HEIGHT-36, 250, 21)];
     lbContent.numberOfLines = 0;
     lbContent.font=[UIFont systemFontOfSize:fontSize];
+    
+
+    [self updateThemeByTheme:[def stringForKey:UDF_THEME]];
+    
+    [_vPageBg addSubview:lbContent];
     
     pageInfoLabel.font=[UIFont systemFontOfSize:10];
     pageInfoLabel.backgroundColor=[UIColor clearColor];
@@ -353,6 +364,13 @@
     self.navigationItem.title=_fileName;
     
 }
+-(void)updateThemeByTheme:(NSString*)theme{
+    BookTheme* bt=[[BookThemeManage share]getBookThemeByTheme:theme];
+    _vPageBg.backgroundColor=bt.colVBg;
+    lbContent.textColor=bt.colFont;
+    lbContent.backgroundColor=bt.colLbContnetBg;
+}
+
 -(void)goBack:(id)sender{
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -915,7 +933,7 @@
     //NSLog(@"time interval--21--isNext:%d--:%lf",isNext,[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     [self updatePageContent];
     //NSLog(@"time interval--22--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
-    pi.pageView=[VIewUtil clone:lbContent];
+    pi.pageView=[VIewUtil clone:_vPageBg];
     //NSLog(@"time interval--23--:%lf",[[[[NSDate alloc]init]autorelease]timeIntervalSince1970]-timeStart);
     pi.pageLength=currentPageLength;
     pi.isValid=YES;
@@ -927,7 +945,11 @@
 }
 
 
-
+-(void)updatePageView{
+    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
+    long long offset=pi.dataOffset;
+    [self jumpToOffsetWithLeaves:offset];
+}
 
 - (UIImage *) imageWithView:(UIView *)view
 {
@@ -996,6 +1018,10 @@
 #define TAG_SIMPLE_VIEW_FONT 602
 #define TAG_SIMPLE_VIEW_FONT_SLIDE 6021
 
+#define TAG_SIMPLE_VIEW_THEME 603
+#define TAG_SIMPLE_VIEW_THEME_BLACK 6031
+#define TAG_SIMPLE_VIEW_THEME_WHITE 6032
+
 
 #pragma mark -
 -(UIView*)findViewWithTag:(NSArray*)views tag:(int)tag{
@@ -1017,6 +1043,7 @@
     if (isSimpleViewShowing) {
         [self showJumpView:NO];
         [self showFontView:NO];
+        [self showThemeView:NO];
         isYes=YES;
     }
     return isYes;
@@ -1079,6 +1106,10 @@
         
         //add target vMenuJump
         //add target vMenuSetting
+        UIButton* btShowTheme= (UIButton*)[_vMenuSetting viewWithTag:TAG_MENU_VIEW_SETTING_THEME];
+        [btShowTheme addTarget:self action:@selector(showThemeView) forControlEvents:UIControlEventTouchUpInside];
+        
+        
         UIButton* btShowFont= (UIButton*)[_vMenuSetting viewWithTag:TAG_MENU_VIEW_SETTING_FONT];
         [btShowFont addTarget:self action:@selector(showFontView) forControlEvents:UIControlEventTouchUpInside];
         
@@ -1210,7 +1241,7 @@
     if (toShow) {
         [self updateJumpViewData];
         CGRect frame=self.view.frame;
-        _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 60, _vJump.frame.size.width, _vJump.frame.size.height);
+        _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 120, _vJump.frame.size.width, _vJump.frame.size.height);
         [self.view addSubview:_vJump];
         isSimpleViewShowing=YES;
     } else {
@@ -1264,6 +1295,56 @@
     }
     [self showJumpView:NO];
 }
+-(void)showThemeView{
+    [self showThemeView:YES];
+}
+-(void)showThemeView:(BOOL)toShow{
+    if (isBottomMenuShowing) {
+        [self showBottomMenu:NO];
+        isBottomMenuShowing=NO;
+    }
+    if (!self.vTheme) {
+        NSArray* views= [[NSBundle mainBundle] loadNibNamed:@"BottomMenu_iphone" owner:self options:nil] ;
+        self.vTheme= [self findViewWithTag:views tag:TAG_SIMPLE_VIEW_THEME];
+        
+        UIButton* btBlack=(UIButton*)[_vTheme viewWithTag:TAG_SIMPLE_VIEW_THEME_BLACK];
+        [btBlack addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton* btWhite=(UIButton*)[_vTheme viewWithTag:TAG_SIMPLE_VIEW_THEME_WHITE];
+        [btWhite addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        
+        _vTheme.layer.cornerRadius = 6;
+        _vTheme.layer.masksToBounds = YES;
+        
+    }
+    
+    if (toShow) {
+        CGRect frame=self.view.frame;
+        _vTheme.frame=CGRectMake((frame.size.width-_vTheme.frame.size.width)/2, 120, _vTheme.frame.size.width, _vTheme.frame.size.height);
+        [self.view addSubview:_vTheme];
+        isSimpleViewShowing=YES;
+    } else {
+        [_vTheme removeFromSuperview];
+        isSimpleViewShowing=NO;
+    }
+    [UIView commitAnimations];
+}
+-(void)changeTheme:(UIButton*)sender{
+    NSString* theme=nil;
+    switch (sender.tag) {
+        case TAG_SIMPLE_VIEW_THEME_BLACK:
+            theme=THEME_BLACK;
+            break;
+        case TAG_SIMPLE_VIEW_THEME_WHITE:
+            theme=THEME_WRITE;
+            break;
+    }
+    [self updateThemeByTheme:theme];
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    [def setValue:theme forKey:UDF_THEME];
+    [self updatePageView];
+}
 
 -(void)showFontView{
     [self showFontView:YES];
@@ -1288,7 +1369,7 @@
     
     if (toShow) {
         CGRect frame=self.view.frame;
-        _vFont.frame=CGRectMake((frame.size.width-_vFont.frame.size.width)/2, 60, _vFont.frame.size.width, _vFont.frame.size.height);
+        _vFont.frame=CGRectMake((frame.size.width-_vFont.frame.size.width)/2, 120, _vFont.frame.size.width, _vFont.frame.size.height);
         [self.view addSubview:_vFont];
         isSimpleViewShowing=YES;
     } else {

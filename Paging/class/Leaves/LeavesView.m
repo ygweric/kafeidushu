@@ -8,6 +8,9 @@
 
 #import "LeavesView.h"
 
+#import "BookTheme.h"
+#import "BookThemeManage.h"
+
 @interface LeavesView () 
 
 @property (assign) CGFloat leafEdge;
@@ -55,7 +58,9 @@ CGFloat distance(CGPoint a, CGPoint b);
 	topPageReverseImage.contentsScale = scaleValue;
 	
 	topPageReverseOverlay = [[CALayer alloc] init];
-	topPageReverseOverlay.backgroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.8] CGColor];
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    BookTheme* bt=[[BookThemeManage share]getBookThemeByTheme:[def stringForKey:UDF_THEME]];
+	topPageReverseOverlay.backgroundColor = [[bt.colTopPageReverseOverlay colorWithAlphaComponent:0.8] CGColor];
 	topPageReverseOverlay.contentsScale = scaleValue;
 	
 	topPageReverseShading = [[CAGradientLayer alloc] init];

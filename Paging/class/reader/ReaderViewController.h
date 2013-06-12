@@ -10,8 +10,10 @@
 #import "LeavesViewController.h"
 #import "Utilities.h"
 
+
 @interface ReaderViewController : LeavesViewController
 @property (retain, nonatomic) UILabel *lbContent;
+@property (retain, nonatomic) UIView *vPageBg;
 @property (retain, nonatomic) UILabel *lbContentAdapter;
 @property (retain, nonatomic) UILabel *pageInfoLabel;
 @property (retain, nonatomic) NSString* text;

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F0096891768CF0900432DDF /* LableMargin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0096881768CF0900432DDF /* LableMargin.m */; };
+		5F00968C1768D8A500432DDF /* BookTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F00968B1768D8A500432DDF /* BookTheme.m */; };
+		5F00968F1768D91100432DDF /* BookThemeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F00968E1768D91100432DDF /* BookThemeManage.m */; };
 		5F12CA5E17682127004480C2 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12CA5817682127004480C2 /* AboutMeViewController.m */; };
 		5F12CA5F17682127004480C2 /* AboutMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F12CA5917682127004480C2 /* AboutMeViewController.xib */; };
 		5F12CA6017682127004480C2 /* SysSettingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F12CA5B17682127004480C2 /* SysSettingViewController.mm */; };
@@ -212,6 +215,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F0096871768CF0900432DDF /* LableMargin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LableMargin.h; sourceTree = "<group>"; };
+		5F0096881768CF0900432DDF /* LableMargin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LableMargin.m; sourceTree = "<group>"; };
+		5F00968A1768D8A500432DDF /* BookTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookTheme.h; sourceTree = "<group>"; };
+		5F00968B1768D8A500432DDF /* BookTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookTheme.m; sourceTree = "<group>"; };
+		5F00968D1768D91100432DDF /* BookThemeManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookThemeManage.h; sourceTree = "<group>"; };
+		5F00968E1768D91100432DDF /* BookThemeManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookThemeManage.m; sourceTree = "<group>"; };
 		5F12CA5717682127004480C2 /* AboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
 		5F12CA5817682127004480C2 /* AboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
 		5F12CA5917682127004480C2 /* AboutMeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutMeViewController.xib; sourceTree = "<group>"; };
@@ -268,10 +277,10 @@
 		5F12CAB417682431004480C2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5F12CAB617682438004480C2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5F12CAB81768244F004480C2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		5F12CABF176828FC004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		5F12CAC217682907004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5F12CAC417682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		5F12CAC517682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5F12CABF176828FC004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5F12CAC217682907004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5F12CAC417682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5F12CAC517682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5F12CAC7176829A4004480C2 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
 		5F12CAC8176829A4004480C2 /* Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resource.m; sourceTree = "<group>"; };
 		5F12CAC9176829A4004480C2 /* UIButton2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButton2.h; sourceTree = "<group>"; };
@@ -639,6 +648,8 @@
 				5F12CACC176829A4004480C2 /* UILabel2.m */,
 				5F12CACD176829A4004480C2 /* UITextView2.h */,
 				5F12CACE176829A4004480C2 /* UITextView2.m */,
+				5F0096871768CF0900432DDF /* LableMargin.h */,
+				5F0096881768CF0900432DDF /* LableMargin.m */,
 			);
 			path = SimpleControl;
 			sourceTree = "<group>";
@@ -801,6 +812,10 @@
 				5F1D66DD176610850087E2BB /* BookInfo.m */,
 				5F1D66DF176610970087E2BB /* BookInfoManage.h */,
 				5F1D66E0176610970087E2BB /* BookInfoManage.m */,
+				5F00968A1768D8A500432DDF /* BookTheme.h */,
+				5F00968B1768D8A500432DDF /* BookTheme.m */,
+				5F00968D1768D91100432DDF /* BookThemeManage.h */,
+				5F00968E1768D91100432DDF /* BookThemeManage.m */,
 			);
 			name = BookInfo;
 			path = BookMark;
@@ -1204,6 +1219,9 @@
 				5F12CAD0176829A4004480C2 /* UIButton2.m in Sources */,
 				5F12CAD1176829A4004480C2 /* UILabel2.m in Sources */,
 				5F12CAD2176829A4004480C2 /* UITextView2.m in Sources */,
+				5F0096891768CF0900432DDF /* LableMargin.m in Sources */,
+				5F00968C1768D8A500432DDF /* BookTheme.m in Sources */,
+				5F00968F1768D91100432DDF /* BookThemeManage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

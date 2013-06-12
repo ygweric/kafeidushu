@@ -64,6 +64,7 @@
             case 0:
                 //首次初始化
                 [def setInteger:DEFAULT_FONT_SIZE forKey:UDF_FONT_SIZE];
+                [def setInteger:DEFAULT_FONT_SIZE forKey:UDF_FONT_SIZE];
             case 1:
                 break;
         }

@@ -31,8 +31,10 @@ alert = nil;\
 
 //====== constants ======
 #define DEFAULT_FONT_SIZE 14
+#define DEFAULT_THEME @"THEME_WRITE"
 
 #define UDF_FONT_SIZE @"UDF_FONT_SIZE"
+#define UDF_THEME @"UDF_THEME"
 #define UDF_CURRENT_VERSION @"UDF_CURRENT_VERSION"
 
 
