@@ -21,6 +21,9 @@
 @property (retain, nonatomic) NSString* pagingContent; //解析出来的string
 
 @property (retain, nonatomic) UIView* vMenu;
+@property (retain,nonatomic)UIButton* btMenuTool;
+@property (retain,nonatomic)UIButton* btMenuSet;
+
 @property (retain, nonatomic) UIView* vMenuTool;
 @property (retain, nonatomic) UIView* vMenuJump;
 @property (retain, nonatomic) UIView* vMenuSetting;

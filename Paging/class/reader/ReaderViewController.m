@@ -82,6 +82,8 @@
 @synthesize lbContentAdapter=_lbContentAdapter;
 @synthesize pagingContent=_pagingContent;
 @synthesize vMenu=_vMenu;
+@synthesize btMenuSet=_btMenuSet;
+@synthesize btMenuTool=_btMenuTool;
 @synthesize vMenuTool=_vMenuTool;
 @synthesize vMenuJump=_vMenuJump;
 @synthesize vMenuSetting=_vMenuSetting;
@@ -348,6 +350,7 @@
                                    target:self
                                    action:@selector(goBack:)];
     self.navigationItem.leftBarButtonItem = flipButton;
+    self.navigationItem.title=_fileName;
     
 }
 -(void)goBack:(id)sender{
@@ -955,6 +958,10 @@
 
 #define TAG_MENU_MAIN 301
 #define TAG_MENU_SEGMENT 302
+#define TAG_MENU_SEGMENT_TOOL 3021
+#define TAG_MENU_SEGMENT_SET 3022
+
+
 #define TAG_MENU_CONTENT 303
 
 #define TAG_MENU_VIEW_TOOL 304
@@ -1077,9 +1084,27 @@
         
         
         //=============
-        UISegmentedControl* segMenu=(UISegmentedControl*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT];
-        segMenu.selectedSegmentIndex=0;
-        [segMenu addTarget:self action:@selector(changeMenuSegment:) forControlEvents:UIControlEventValueChanged];
+//        UISegmentedControl* segMenu=(UISegmentedControl*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT];
+//        segMenu.selectedSegmentIndex=0;
+//        [segMenu addTarget:self action:@selector(changeMenuSegment:) forControlEvents:UIControlEventValueChanged];
+        
+        
+        self.btMenuTool=(UIButton*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT_TOOL];
+        self.btMenuSet=(UIButton*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT_SET];        
+        [_btMenuTool setBackgroundImage:[UIImage imageNamed:@"menu_segment_bg_selected"] forState:UIControlStateSelected];
+//        [_btMenuTool setBackgroundImage:[UIImage imageNamed:@"menu_segment_bg_selected"] forState:UIControlStateHighlighted];
+        [_btMenuTool setBackgroundImage:[UIImage imageNamed:@"menu_segment_bg"] forState:UIControlStateNormal];
+        
+        [_btMenuSet setBackgroundImage:[UIImage imageNamed:@"menu_segment_bg_selected"] forState:UIControlStateSelected];
+//        [_btMenuSet setBackgroundImage:[UIImage imageNamed:@"menu_segment_bg_selected"] forState:UIControlStateHighlighted];
+        [_btMenuSet setBackgroundImage:[UIImage imageNamed:@"menu_segment_bg"] forState:UIControlStateNormal];
+        
+        [_btMenuTool addTarget:self action:@selector(changeMenuButton:) forControlEvents:UIControlEventTouchUpInside];        
+        [_btMenuSet addTarget:self action:@selector(changeMenuButton:) forControlEvents:UIControlEventTouchUpInside];
+        [self resetAllMenuButton];
+        _btMenuTool.selected=YES;
+//        _btMenuTool.enabled=NO;
+        
     }
     
     CGRect frame=self.view.frame;
@@ -1104,6 +1129,35 @@
     [UIView commitAnimations];
     isBottomMenuShowing=toShow;
 }
+-(void)resetAllMenuButton{
+    _btMenuSet.selected=NO;
+    _btMenuTool.selected=NO;
+//    _btMenuSet.enabled=YES;
+//    _btMenuTool.enabled=YES;
+}
+-(void)changeMenuButton:(UIButton*)sender{
+    [self resetAllMenuButton];
+//    sender.enabled=NO;
+    sender.selected=YES;
+    UIView* vContent=[self.vMenu viewWithTag:TAG_MENU_CONTENT] ;
+    [VIewUtil removeAllSubviews:vContent];
+    switch (sender.tag) {
+        case TAG_MENU_SEGMENT_TOOL:
+        {
+            [vContent addSubview:_vMenuTool];
+        }
+            break;
+        case TAG_MENU_SEGMENT_SET:
+        {
+            [vContent addSubview:_vMenuSetting];
+        }
+            break;
+    }
+    
+    
+}
+
+
 -(void)changeMenuSegment:(UISegmentedControl*)sender{
     UIView* vContent=[self.vMenu viewWithTag:TAG_MENU_CONTENT] ;
     [VIewUtil removeAllSubviews:vContent];
@@ -1143,9 +1197,18 @@
         UIButton* btCancel=(UIButton*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_CANCEL];
         [btCancel addTarget:self action:@selector(jumpOffset:) forControlEvents:UIControlEventTouchUpInside];
         
+        UISlider* sdJump= (UISlider*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_SLIDE];
+        [sdJump addTarget:self action:@selector(changeJumpSlide:) forControlEvents:UIControlEventValueChanged];
+        
+        
+        
+        _vJump.layer.cornerRadius = 6;
+        _vJump.layer.masksToBounds = YES;
+        
     }
 
     if (toShow) {
+        [self updateJumpViewData];
         CGRect frame=self.view.frame;
         _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 60, _vJump.frame.size.width, _vJump.frame.size.height);
         [self.view addSubview:_vJump];
@@ -1155,6 +1218,51 @@
         isSimpleViewShowing=NO;
     }   
     [UIView commitAnimations];
+}
+-(void)updateJumpViewData{
+    UISlider* sdJump= (UISlider*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_SLIDE];
+    PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
+    long long offset=pi.dataOffset;
+    UILabel* lbPerPreDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT];
+    UILabel* lbPerSuffDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT];
+   
+    lbPerPreDot.text=[NSString stringWithFormat:@"%lld",offset*100/fileLength];
+    lbPerSuffDot.text=[NSString stringWithFormat:@"%lld",(offset*10000/fileLength)%100];
+    sdJump.value=(((double)offset)/fileLength);
+}
+
+-(void)changeJumpSlide:(UISlider*)sender{
+    [self jumpToOffsetWithLeaves:(sender.value*fileLength)];
+    UILabel* lbPerPreDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT];
+    UILabel* lbPerSuffDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT];    
+    lbPerPreDot.text=[NSString stringWithFormat:@"%2d",(int)(sender.value*100)];
+    lbPerSuffDot.text=[NSString stringWithFormat:@"%2d",((int) (sender.value*10000))%100];
+}
+
+-(void)jumpOffset:(UIButton*)sender{
+    switch (sender.tag) {
+        case TAG_SIMPLE_VIEW_OK:
+        {
+            UILabel* lbPerPreDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT];
+            UILabel* lbPerSuffDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT];
+            NSString* offsetValue=[NSString stringWithFormat:@"%@.%@",lbPerPreDot.text,lbPerSuffDot.text];
+            float tmpOffset=offsetValue.floatValue;
+            if (tmpOffset>=0 && tmpOffset<=100) {
+                [self jumpToOffsetWithLeaves:(tmpOffset*fileLength/100)];
+            }else{
+                NSLog(@"error input page jump value");
+            }
+            
+        }
+            break;
+        case TAG_SIMPLE_VIEW_CANCEL:
+            
+            break;
+            
+        default:
+            break;
+    }
+    [self showJumpView:NO];
 }
 
 -(void)showFontView{
@@ -1172,6 +1280,9 @@
         [sdFontSize addTarget:self action:@selector(changeFontSize:) forControlEvents:UIControlEventValueChanged];
         NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
         sdFontSize.value=SLIDE_VALUE_WITH_FONT([def integerForKey:UDF_FONT_SIZE]);
+        
+        _vFont.layer.cornerRadius = 6;
+        _vFont.layer.masksToBounds = YES;
         
     }
     
@@ -1197,32 +1308,6 @@
     
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     [self jumpToOffsetWithLeaves:pi.dataOffset];
-}
-
--(void)jumpOffset:(UIButton*)sender{
-    switch (sender.tag) {
-        case TAG_SIMPLE_VIEW_OK:
-        {
-            UILabel* lbPerPreDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_PREFIX_DOT];
-            UILabel* lbPerSuffDot=(UILabel*)[_vJump viewWithTag:TAG_SIMPLE_VIEW_JUMP_PER_SUFFIX_DOT];
-            NSString* offsetValue=[NSString stringWithFormat:@"%@.%@",lbPerPreDot.text,lbPerSuffDot.text];
-            float tmpOffset=offsetValue.floatValue;
-            if (tmpOffset>=0 && tmpOffset<=100) {
-                 [self jumpToOffsetWithLeaves:(tmpOffset*fileLength/100)];
-            }else{
-                NSLog(@"error input page jump value");
-            }
-           
-        }
-            break;
-        case TAG_SIMPLE_VIEW_CANCEL:
-            
-            break;
-            
-        default:
-            break;
-    }
-    [self showJumpView:NO];
 }
 -(void)addBookMark:(id)sender{
     if (isBottomMenuShowing) {

@@ -45,6 +45,7 @@
                                    target:self
                                    action:@selector(goBack:)];
     self.navigationItem.leftBarButtonItem = flipButton;
+    self.navigationItem.title=@"书签管理";
     
 }
 -(void)goBack:(id)sender{

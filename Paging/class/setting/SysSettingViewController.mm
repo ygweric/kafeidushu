@@ -184,9 +184,9 @@ enum{
                     if ([MFMailComposeViewController canSendMail]) {
                         MFMailComposeViewController* controller = [[[MFMailComposeViewController alloc] init]autorelease];
                         controller.mailComposeDelegate = self;
-                        [controller setToRecipients:[NSArray arrayWithObject:@"mzxc@kafeidev.com"]];
+                        [controller setToRecipients:[NSArray arrayWithObject:@"support@kafeidev.com"]];
                         [controller setSubject:@"意见反馈"];
-                        [controller setMessageBody:@"\n\n谢谢您的宝贵意见,我们会尽快改进\n咖啡科技工作室 -- 妹子相册小组" isHTML:NO];
+                        [controller setMessageBody:@"\n\n谢谢您的宝贵意见,我们会尽快改进\n咖啡科技工作室 " isHTML:NO];
                         [self presentModalViewController:controller animated:YES];
                     } else {
                         Alert2(@"您的设备不能发送邮件\n请检查");
