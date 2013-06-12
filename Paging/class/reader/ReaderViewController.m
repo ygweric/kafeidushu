@@ -950,8 +950,8 @@
 #pragma mark menu
 
 #define INDEX_TOOL 0
-#define INDEX_JUMP 1
-#define INDEX_SETTING 2
+#define INDEX_JUMP 1111
+#define INDEX_SETTING 1
 
 #define TAG_MENU_MAIN 301
 #define TAG_MENU_SEGMENT 302

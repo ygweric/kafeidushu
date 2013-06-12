@@ -1,0 +1,49 @@
+"app_name"="Coffee Reader";
+"kafei_studio"="Coffee Technology Studio";
+"app_version"="version:";
+"websit"="websit:";
+"mail"="mailbox:";
+
+
+"newest"="newest";
+"best"="best";
+"tab_pic"="Coffee Reader";
+"tab_cache"="Cache Images";
+"tab_app"="Great APP";
+"tab_setting"="System Set";
+"tab_back"="Back";
+"tab_save"="Store";
+"tab_desk_preview"="Desk";
+"tab_lock_preview"="Lock";
+"tab_share"="Share";
+"set_feedback"="Feedback";
+"set_aboutme"="About us";
+"set_rateme"="Rate for this App";
+"set_vip"="Increase cache images";
+"title_shop"="Shop";
+"iap_1000_desc"="Cost $ 0.99, you can increase the maximum number of cached pictures to 1000 (default 300). \n\n enjoy enjoy the fun offline";
+"iap_3000_desc"="Cost $ 1.99, you can increase the maximum number of cached pictures to 3000 (default 300). \n\n enjoy enjoy the fun offline";
+"bt_buy"="Buy";
+"bt_restore"="Restore";
+"title_cache_desc"="Cache Images Description";
+"title_cache_slogan"="   To see bauties , use Coffee Reader!";
+"cache_desc"="\n\
+Sister album default image 300 can be cached. If you need to increase the maximum number of cache images, you can purchase our vip services.\n\
+Cost $ 0.99, you can increase the maximum number of cached pictures to 1000 (default 300).\n\
+Cost $ 1.99, you can increase the maximum number of cached pictures to 3000 (default 300).\n\
+Operation: System Settings -> Increase the number of cache images -> select and purchase goods .";
+"loading"="loading";
+"alert_remind_later"="Remind me later";
+"alert_rate_now"="Go praise Now ";
+"alert_refuse"="Rejection";
+"alert_rate_desc"="If you like the 'Coffee Reader', Please take one minute to make us a rate \n Thank you for your 'Coffee Reader' support";
+"alert_praise_too_much"="You have rated this album repeatedly \n Please check back later evaluation";
+"alert_unsupport_iap"="Your device does not support the internal purchase";
+"cancel"="Cancel";
+"ok"="OK";
+"success"="success";
+"fail"="fail";
+"opt_success"="Operation successful";
+"opt_fail"="Operation failed";
+"bought"="Bought";
+"iap_no_need_1000_desc"="You have purchased a 3000 storage space, do not need to buy 1,000 of storage space.";

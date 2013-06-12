@@ -40,6 +40,12 @@
 		5F12CAB517682431004480C2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F12CAB417682431004480C2 /* CoreTelephony.framework */; };
 		5F12CAB717682438004480C2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F12CAB617682438004480C2 /* CoreLocation.framework */; };
 		5F12CAB91768244F004480C2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F12CAB81768244F004480C2 /* CFNetwork.framework */; };
+		5F12CABE176828FC004480C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F12CAC0176828FC004480C2 /* Localizable.strings */; };
+		5F12CAC117682907004480C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F12CAC317682907004480C2 /* InfoPlist.strings */; };
+		5F12CACF176829A4004480C2 /* Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12CAC8176829A4004480C2 /* Resource.m */; };
+		5F12CAD0176829A4004480C2 /* UIButton2.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12CACA176829A4004480C2 /* UIButton2.m */; };
+		5F12CAD1176829A4004480C2 /* UILabel2.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12CACC176829A4004480C2 /* UILabel2.m */; };
+		5F12CAD2176829A4004480C2 /* UITextView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12CACE176829A4004480C2 /* UITextView2.m */; };
 		5F139D5E17674053007864D5 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F139D5D17674053007864D5 /* button.png */; };
 		5F1D66721765CAFF0087E2BB /* default_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66201765CAFF0087E2BB /* default_icon.jpg */; };
 		5F1D66731765CAFF0087E2BB /* default_icon@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66211765CAFF0087E2BB /* default_icon@2x.jpg */; };
@@ -256,6 +262,18 @@
 		5F12CAB417682431004480C2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5F12CAB617682438004480C2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5F12CAB81768244F004480C2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5F12CABF176828FC004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5F12CAC217682907004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5F12CAC417682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5F12CAC517682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5F12CAC7176829A4004480C2 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
+		5F12CAC8176829A4004480C2 /* Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resource.m; sourceTree = "<group>"; };
+		5F12CAC9176829A4004480C2 /* UIButton2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButton2.h; sourceTree = "<group>"; };
+		5F12CACA176829A4004480C2 /* UIButton2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButton2.m; sourceTree = "<group>"; };
+		5F12CACB176829A4004480C2 /* UILabel2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabel2.h; sourceTree = "<group>"; };
+		5F12CACC176829A4004480C2 /* UILabel2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabel2.m; sourceTree = "<group>"; };
+		5F12CACD176829A4004480C2 /* UITextView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextView2.h; sourceTree = "<group>"; };
+		5F12CACE176829A4004480C2 /* UITextView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextView2.m; sourceTree = "<group>"; };
 		5F139D5D17674053007864D5 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		5F1D66201765CAFF0087E2BB /* default_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default_icon.jpg; sourceTree = "<group>"; };
 		5F1D66211765CAFF0087E2BB /* default_icon@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default_icon@2x.jpg"; sourceTree = "<group>"; };
@@ -486,6 +504,7 @@
 		5F12CA6B1768232A004480C2 /* openSDK */ = {
 			isa = PBXGroup;
 			children = (
+				5F12CAC6176829A4004480C2 /* SimpleControl */,
 				5F12CA6C17682336004480C2 /* umeng */,
 			);
 			name = openSDK;
@@ -595,6 +614,21 @@
 				5F12CA9617682336004480C2 /* UMSShareListController.xib */,
 			);
 			path = SocialSDKXib;
+			sourceTree = "<group>";
+		};
+		5F12CAC6176829A4004480C2 /* SimpleControl */ = {
+			isa = PBXGroup;
+			children = (
+				5F12CAC7176829A4004480C2 /* Resource.h */,
+				5F12CAC8176829A4004480C2 /* Resource.m */,
+				5F12CAC9176829A4004480C2 /* UIButton2.h */,
+				5F12CACA176829A4004480C2 /* UIButton2.m */,
+				5F12CACB176829A4004480C2 /* UILabel2.h */,
+				5F12CACC176829A4004480C2 /* UILabel2.m */,
+				5F12CACD176829A4004480C2 /* UITextView2.h */,
+				5F12CACE176829A4004480C2 /* UITextView2.m */,
+			);
+			path = SimpleControl;
 			sourceTree = "<group>";
 		};
 		5F1D661E1765CAFF0087E2BB /* image */ = {
@@ -901,6 +935,8 @@
 				F5A7C62A174DAA900040A3CB /* Default.png */,
 				F5A7C62C174DAA900040A3CB /* Default@2x.png */,
 				F5A7C62E174DAA900040A3CB /* Default-568h@2x.png */,
+				5F12CAC317682907004480C2 /* InfoPlist.strings */,
+				5F12CAC0176828FC004480C2 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -940,6 +976,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = F5A7C60C174DAA8F0040A3CB;
 			productRefGroup = F5A7C616174DAA900040A3CB /* Products */;
@@ -1104,6 +1141,8 @@
 				5F12CAA317682336004480C2 /* UMSnsAccountViewController.xib in Resources */,
 				5F12CAA417682336004480C2 /* UMSShareListController.xib in Resources */,
 				5F12CAA517682336004480C2 /* UMSocialSDKResources.bundle in Resources */,
+				5F12CABE176828FC004480C2 /* Localizable.strings in Resources */,
+				5F12CAC117682907004480C2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1137,10 +1176,35 @@
 				5F1D66E1176610970087E2BB /* BookInfoManage.m in Sources */,
 				5F12CA5E17682127004480C2 /* AboutMeViewController.m in Sources */,
 				5F12CA6017682127004480C2 /* SysSettingViewController.mm in Sources */,
+				5F12CACF176829A4004480C2 /* Resource.m in Sources */,
+				5F12CAD0176829A4004480C2 /* UIButton2.m in Sources */,
+				5F12CAD1176829A4004480C2 /* UILabel2.m in Sources */,
+				5F12CAD2176829A4004480C2 /* UITextView2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5F12CAC0176828FC004480C2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5F12CABF176828FC004480C2 /* en */,
+				5F12CAC417682915004480C2 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		5F12CAC317682907004480C2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5F12CAC217682907004480C2 /* en */,
+				5F12CAC517682915004480C2 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F5A7C636174DAA900040A3CB /* Debug */ = {
