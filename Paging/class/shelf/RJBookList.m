@@ -130,7 +130,7 @@
         isTableViewShow = YES;
         if(bookTableView == nil)
         {
-            bookTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45, 320, 480-45)];
+            bookTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45, 320, SCREEN_HEIGHT-45)];
             [bookTableView setDelegate:self];
             [bookTableView setDataSource:self];
             bookTableView.hidden = YES;

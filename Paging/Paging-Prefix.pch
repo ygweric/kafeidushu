@@ -14,4 +14,5 @@
 #import "PubHeader.h"
 #import "VIewUtil.h"
 #import "StringUtil.h"
+#import "MobClick.h"
 #endif

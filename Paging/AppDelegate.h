@@ -10,10 +10,11 @@
 
 @class ReaderViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
 
 @property (retain, nonatomic) UIWindow *window;
 
 @property (retain, nonatomic) UIViewController *viewController;
+@property (retain,nonatomic) UITabBarController * tabBarController;
 
 @end

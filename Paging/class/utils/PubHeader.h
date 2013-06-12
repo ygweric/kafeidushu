@@ -26,6 +26,8 @@ alert = nil;\
 }\
 \
 
+#define LocalizedString(string) NSLocalizedString(string, @"") 
+
 
 //====== constants ======
 #define DEFAULT_FONT_SIZE 14

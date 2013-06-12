@@ -10,12 +10,13 @@
 
 #import "ReaderViewController.h"
 #import "RJBookListViewController.h"
+#import "SysSettingViewController.h"
 
 
 
 
 @implementation AppDelegate
-
+@synthesize tabBarController=_tabBarController;
 - (void)dealloc
 {
     [_window release];
@@ -31,11 +32,23 @@
     
     self.viewController = [[[RJBookListViewController alloc] init] autorelease];
 //    self.viewController =[[[UIViewController alloc]init]autorelease];
-    UINavigationController* navVC=[[[UINavigationController alloc]initWithRootViewController:self.viewController]autorelease];
-    self.window.rootViewController = navVC;
+    UINavigationController* navReader=[[[UINavigationController alloc]initWithRootViewController:self.viewController]autorelease];
+    navReader.tabBarItem.title=@"我的书架";
+    navReader.tabBarItem.image=[UIImage imageNamed:@"tool_reader"];
+    
+    SysSettingViewController * settingVC = [[[SysSettingViewController alloc] initWithNibName:@"SysSettingViewController" bundle:nil]autorelease];
+    UINavigationController * navSetting = [[[UINavigationController alloc] initWithRootViewController:settingVC]autorelease];
+    navSetting.tabBarItem.title=@"系统设置";
+    navSetting.tabBarItem.image=[UIImage imageNamed:@"tool_setting"];
+    
+    NSArray * viewControllers = [NSArray arrayWithObjects:navReader,navSetting,nil];
+    
+    self.tabBarController = [[[UITabBarController alloc]init]autorelease];
+    self.tabBarController.viewControllers = viewControllers;
+    self.tabBarController.selectedIndex=0;
+    self.tabBarController.delegate=self;
+    self.window.rootViewController = _tabBarController;
     [self.window makeKeyAndVisible];
-    
-    
     
     /*
      升级须知

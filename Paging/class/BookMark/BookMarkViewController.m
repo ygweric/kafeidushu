@@ -123,6 +123,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
     BookMark* bi=[_bookMarks objectAtIndex:indexPath.row];
     [_readerVC jumpToOffsetWithLeaves:bi.offset];
     [self.navigationController popViewControllerAnimated:YES];
