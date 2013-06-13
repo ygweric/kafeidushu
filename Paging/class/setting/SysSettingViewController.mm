@@ -7,7 +7,7 @@
 //
 
 #import "SysSettingViewController.h"
-
+#import "WifiViewController.h"
 #import "AboutMeViewController.h"
 
 
@@ -212,7 +212,9 @@ enum{
                     [MobClick event:@"sponsorme"];
                   
                     break;
-
+                     case 4:
+                    controller =[[[WifiViewController alloc]initWithNibName:@"WifiViewController" bundle:nil]autorelease];
+                    break;
             }
         }
             break;

@@ -156,7 +156,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "372"
          endingLineNumber = "372"
-         landmarkName = "-loadStringFrom:length:"
+         landmarkName = "-updateThemeByTheme:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -170,6 +170,32 @@
          startingLineNumber = "268"
          endingLineNumber = "268"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/class/CocoaHTTPServer/Core/HTTPConnection.m"
+         timestampString = "392803850.281895"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1581"
+         endingLineNumber = "1581"
+         landmarkName = "-filePathForURI:allowDirectory:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/class/CocoaHTTPServer/Core/HTTPConnection.m"
+         timestampString = "392803802.465991"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1572"
+         endingLineNumber = "1572"
+         landmarkName = "-filePathForURI:allowDirectory:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
