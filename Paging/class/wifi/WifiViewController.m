@@ -80,7 +80,6 @@
 	{
 		NSLog(@"Error starting HTTP Server: %@", error);
 	}
-
     
 }
 
@@ -89,8 +88,33 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)moveAllFileToDocument{
+//    NSString* srcPath= [[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"web"] stringByDeletingLastPathComponent];
+    NSString* srcPath=[[[NSBundle mainBundle] resourcePath ] stringByAppendingPathComponent:@"web/upload"];
+    
+    NSString *dicpath = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
+    
+    
+    NSFileManager* fm= [NSFileManager defaultManager];
+    NSArray *levelList = [fm contentsOfDirectoryAtPath:srcPath error:nil ] ;
+    
+    for (NSString *fname  in levelList) {
+        NSString *fpath = [NSString stringWithFormat:@"%@/%@",srcPath,fname];
+        NSString* destPath=[NSString stringWithFormat:@"%@/%@",dicpath,fname];
+        if ([fname hasSuffix:@".txt"]) {
+            [fm moveItemAtPath:fpath toPath:destPath error:0];
+            
+        }
+    }
+}
 - (void)dealloc {
+    
+    NSLog(@"WifiViewController---dealloc");
+    [self moveAllFileToDocument];
+    
+    
+    [httpServer stop];
+    [httpServer release];
     [_lbLocalAddress release];
     [super dealloc];
 }
