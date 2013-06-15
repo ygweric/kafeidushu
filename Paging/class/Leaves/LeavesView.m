@@ -34,6 +34,7 @@ CGFloat distance(CGPoint a, CGPoint b);
 	topPage.backgroundColor = [[UIColor whiteColor] CGColor];
 	topPage.contentsScale = scaleValue;
 	
+    //顶页翻页时候自己遮挡自己的阴影
 	topPageOverlay = [[CALayer alloc] init];
 	topPageOverlay.backgroundColor = [[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor];
 	topPageOverlay.contentsScale = scaleValue;
@@ -58,11 +59,10 @@ CGFloat distance(CGPoint a, CGPoint b);
 	topPageReverseImage.contentsScale = scaleValue;
 	
 	topPageReverseOverlay = [[CALayer alloc] init];
-    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
-    BookTheme* bt=[[BookThemeManage share]getBookThemeByTheme:[def stringForKey:UDF_THEME]];
-	topPageReverseOverlay.backgroundColor = [[bt.colTopPageReverseOverlay colorWithAlphaComponent:0.8] CGColor];
+    [self changeTheme];
 	topPageReverseOverlay.contentsScale = scaleValue;
 	
+    //翻页弯曲处的颜色
 	topPageReverseShading = [[CAGradientLayer alloc] init];
 	topPageReverseShading.colors = [NSArray arrayWithObjects:
 									(id)[[[UIColor blackColor] colorWithAlphaComponent:0.6] CGColor],
@@ -77,6 +77,7 @@ CGFloat distance(CGPoint a, CGPoint b);
 	bottomPage.masksToBounds = YES;
 	bottomPage.contentsScale = scaleValue;
 	
+    //next页被上层遮挡的阴影
 	bottomPageShadow = [[CAGradientLayer alloc] init];
 	bottomPageShadow.colors = [NSArray arrayWithObjects:
 							   (id)[[[UIColor blackColor] colorWithAlphaComponent:0.6] CGColor],
@@ -100,6 +101,12 @@ CGFloat distance(CGPoint a, CGPoint b);
 	
 	self.leafEdge = 1.0;
 }
+-(void)changeTheme{
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    BookTheme* bt=[[BookThemeManage share]getBookThemeByTheme:[def stringForKey:UDF_THEME]];
+	topPageReverseOverlay.backgroundColor = [[bt.colTopPageReverseOverlay colorWithAlphaComponent:0.8] CGColor];
+}
+
 
 - (void) initialize {
 	backgroundRendering = NO;

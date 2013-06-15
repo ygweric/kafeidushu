@@ -30,7 +30,7 @@ static BookThemeManage* instance;
         btBlack.colVBg=[UIColor blackColor];
         btBlack.colLbContnetBg=[UIColor blackColor];
         btBlack.colFont=[UIColor whiteColor];
-        btWrite.colTopPageReverseOverlay=[UIColor blackColor];
+        btBlack.colTopPageReverseOverlay=[UIColor blackColor];
         [instance.bookThemes setValue:btBlack forKey:THEME_BLACK];
         
     }

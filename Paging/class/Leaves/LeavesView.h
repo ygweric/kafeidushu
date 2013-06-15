@@ -60,7 +60,7 @@
 
 // refreshes the contents of all pages via the data source methods, much like -[UITableView reloadData]
 - (void) reloadData;
-
+-(void)changeTheme;
 @end
 
 
@@ -90,5 +90,6 @@
 //return whether stop touch
 //YES stop touch chain
 - (BOOL) handlerTouched;
+
 @end
 

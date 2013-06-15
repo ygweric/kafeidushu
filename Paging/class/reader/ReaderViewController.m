@@ -1346,6 +1346,7 @@
     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
     [def setValue:theme forKey:UDF_THEME];
     [self updatePageView];
+    [leavesView changeTheme];
 }
 
 -(void)showFontView{
