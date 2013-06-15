@@ -63,10 +63,89 @@
         [fm createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
     }
     if(error){
-        NSLog(@"createDocumentDirAtPath Error !!!!---%@",[error localizedDescription]);
+        NSLog(@"createDocumentDirAtPath Error !-%s:%d--%@",__FUNCTION__,__LINE__,[error localizedDescription]);
         return NO;
     }else{
         return YES;
+    }
+
+}
+//@type nil means any type
++ (NSMutableDictionary *)recursivePathsWithFolderOfType:(NSString *)type inDirectory:(NSString *)directoryPath{
+    NSArray *filePaths =[self recursivePathsForResourcesOfType:type inDirectory:directoryPath];
+    NSMutableDictionary* fps=[[[NSMutableDictionary alloc]initWithCapacity:3]autorelease];
+    for (NSString* fp in filePaths) {
+        NSRange r=[fp rangeOfString:directoryPath];
+        NSString* simpleFilePath= [fp substringFromIndex:(r.location+r.length)];
+        
+        NSArray* ps=[simpleFilePath componentsSeparatedByString:@"/"];
+        NSString* fname=[ps objectAtIndex:ps.count-1];
+        NSString* newDir =[simpleFilePath stringByReplacingOccurrencesOfString:fname withString:@""];
+        
+        [fps setObject:newDir forKey:fp];
+    }
+    return fps;
+}
+
+
++ (NSArray *)recursivePathsForResourcesOfType:(NSString *)type inDirectory:(NSString *)directoryPath{
+    
+    NSMutableArray *filePaths = [[[NSMutableArray alloc] init]autorelease];
+    
+    // Enumerators are recursive
+    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath:directoryPath] ;
+    
+    NSString *filePath;
+    
+    while ((filePath = [enumerator nextObject]) != nil){
+        
+        // If we have the right type of file, add it to the list
+        // Make sure to prepend the directory path
+        if((type==nil ||  [@"" isEqualToString:type])
+           || [[filePath pathExtension] isEqualToString:type]){
+            [filePaths addObject:[directoryPath stringByAppendingPathComponent:filePath]];
+        }
+    } 
+    return filePaths;
+}
++(void)copyFilesRecursiveOfType:(NSString *)type inDirectory:(NSString *)directoryPath toDir:(NSString*)destDir deleteOldFiles:(BOOL)toDelete {
+    NSDictionary *filePaths =[self recursivePathsWithFolderOfType:type inDirectory:directoryPath];
+    NSFileManager* fm= [NSFileManager defaultManager];
+    NSArray* keys= filePaths.allKeys;
+    for (NSString* srcPath in keys) {
+        [self copyFile:srcPath toDir:destDir withNewDir:[filePaths objectForKey:srcPath]];
+        if (toDelete) {
+            NSError * error=nil;
+            [fm removeItemAtPath:srcPath error:&error];
+            if(error){
+                NSLog(@"error!-%s:%d--%@",__FUNCTION__,__LINE__,[error localizedDescription]);
+            }
+        }
+    }
+    
+    
+    
+}
++(void)copyFile:(NSString*)srcPath toDir:(NSString*)destDir withNewDir:(NSString*)newDir{
+    NSString* destPath=[destDir stringByAppendingPathComponent: newDir];
+    NSFileManager* fm= [NSFileManager defaultManager];
+    NSError * error=nil;
+    [fm createDirectoryAtPath:destPath withIntermediateDirectories:YES attributes:nil error:&error];
+    if(error){
+        NSLog(@"error!-%s:%d--%@",__FUNCTION__,__LINE__,[error localizedDescription]);
+    }
+    [self copyFile:srcPath toDir:destPath];
+}
++(void)copyFile:(NSString*)srcPath toDir:(NSString*)destDir{
+    NSArray* ps=[srcPath componentsSeparatedByString:@"/"];
+    NSString* fname=[ps objectAtIndex:ps.count-1];
+    NSString* destPath=[destDir stringByAppendingPathComponent:fname];
+    
+    NSFileManager* fm= [NSFileManager defaultManager];
+    NSError * error=nil;
+    [fm copyItemAtPath:srcPath toPath:destPath error:&error];
+    if(error){
+        NSLog(@"error!!!!-%s:%d--%@",__FUNCTION__,__LINE__,[error localizedDescription]);
     }
 
 }

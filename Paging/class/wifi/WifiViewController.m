@@ -43,6 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [ [ UIApplication sharedApplication ] setIdleTimerDisabled:YES ] ;
     
     NSNotificationCenter *nc=[NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(handlerPortSuccess:) name:@"HTTPServer_get_port_success" object:nil];
@@ -68,7 +69,7 @@
     //	[httpServer setPort:12345];
 	
 	// Serve files from the standard Sites folder
-	NSString *docRoot = [[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"web"] stringByDeletingLastPathComponent];
+	NSString *docRoot =  [NSString stringWithFormat:@"%@/Library/web",NSHomeDirectory()];
 	NSLog(@"Setting document root: %@", docRoot);
 	
 	[httpServer setDocumentRoot:docRoot];
@@ -90,7 +91,7 @@
 }
 -(void)moveAllFileToDocument{
 //    NSString* srcPath= [[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"web"] stringByDeletingLastPathComponent];
-    NSString* srcPath=[[[NSBundle mainBundle] resourcePath ] stringByAppendingPathComponent:@"web/upload"];
+    NSString* srcPath=[NSString stringWithFormat:@"%@/Library/web/upload",NSHomeDirectory()];
     
     NSString *dicpath = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
     
@@ -111,7 +112,7 @@
     
     NSLog(@"WifiViewController---dealloc");
     [self moveAllFileToDocument];
-    
+    [ [ UIApplication sharedApplication ] setIdleTimerDisabled:NO ] ;
     
     [httpServer stop];
     [httpServer release];

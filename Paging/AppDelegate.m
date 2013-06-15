@@ -11,6 +11,7 @@
 #import "ReaderViewController.h"
 #import "RJBookListViewController.h"
 #import "SysSettingViewController.h"
+#import "FileUtil.h"
 
 
 
@@ -64,7 +65,8 @@
             case 0:
                 //首次初始化
                 [def setInteger:DEFAULT_FONT_SIZE forKey:UDF_FONT_SIZE];
-                [def setInteger:DEFAULT_THEME forKey:UDF_THEME];
+                [def setValue:DEFAULT_THEME forKey:UDF_THEME];
+//                [self copyResources];
             case 1:
                 break;
         }
@@ -77,10 +79,23 @@
     
     
     
-    
+    [self copyResources];
     
     return YES;
 }
+
+-(void)copyResources{
+    NSString* srcPath=[[[NSBundle mainBundle] resourcePath ] stringByAppendingPathComponent:@"web"];
+    
+    NSString *dicpath = [NSString stringWithFormat:@"%@/Library/web",NSHomeDirectory()];
+    
+    [FileUtil copyFilesRecursiveOfType:nil inDirectory:srcPath toDir:dicpath deleteOldFiles:NO];
+
+
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

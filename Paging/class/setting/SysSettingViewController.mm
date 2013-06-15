@@ -208,11 +208,8 @@ enum{
                     [MobClick event:@"rateme"];
                     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=661040207"]];
                     break;
-                case 3:
-                    [MobClick event:@"sponsorme"];
-                  
-                    break;
-                     case 4:
+
+                     case 3:
                     controller =[[[WifiViewController alloc]initWithNibName:@"WifiViewController" bundle:nil]autorelease];
                     break;
             }

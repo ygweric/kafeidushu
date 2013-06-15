@@ -259,7 +259,7 @@
 #pragma mark - view control
 - (void)viewDidLoad
 {
-    
+    [ [ UIApplication sharedApplication ] setIdleTimerDisabled:YES ] ;
     
     preOffset=0;
     currentOffset=0;
@@ -970,6 +970,8 @@
     [_tvJumpTo release];
     [pageInfoManage release];
     [_lbContentAdapter release];
+    
+    [ [ UIApplication sharedApplication ] setIdleTimerDisabled:NO ] ;
     [super dealloc];
 }
 #pragma mark menu
@@ -1241,7 +1243,7 @@
     if (toShow) {
         [self updateJumpViewData];
         CGRect frame=self.view.frame;
-        _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 120, _vJump.frame.size.width, _vJump.frame.size.height);
+        _vJump.frame=CGRectMake((frame.size.width-_vJump.frame.size.width)/2, 100, _vJump.frame.size.width, _vJump.frame.size.height);
         [self.view addSubview:_vJump];
         isSimpleViewShowing=YES;
     } else {
@@ -1321,7 +1323,7 @@
     
     if (toShow) {
         CGRect frame=self.view.frame;
-        _vTheme.frame=CGRectMake((frame.size.width-_vTheme.frame.size.width)/2, 120, _vTheme.frame.size.width, _vTheme.frame.size.height);
+        _vTheme.frame=CGRectMake((frame.size.width-_vTheme.frame.size.width)/2, 100, _vTheme.frame.size.width, _vTheme.frame.size.height);
         [self.view addSubview:_vTheme];
         isSimpleViewShowing=YES;
     } else {
@@ -1369,7 +1371,7 @@
     
     if (toShow) {
         CGRect frame=self.view.frame;
-        _vFont.frame=CGRectMake((frame.size.width-_vFont.frame.size.width)/2, 120, _vFont.frame.size.width, _vFont.frame.size.height);
+        _vFont.frame=CGRectMake((frame.size.width-_vFont.frame.size.width)/2, 100, _vFont.frame.size.width, _vFont.frame.size.height);
         [self.view addSubview:_vFont];
         isSimpleViewShowing=YES;
     } else {

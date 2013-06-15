@@ -12,4 +12,8 @@
 +(NSString*)getDocumentPath;
 +(NSString*)getDocumentFilePathWithFile:(NSString*)fileName dir:(NSString*)dir ,...NS_REQUIRES_NIL_TERMINATION;
 +(NSString*)getLibraryFilePathWithFile:(NSString*)fileName dir:(NSString*)dir ,...NS_REQUIRES_NIL_TERMINATION;
+
++ (NSMutableDictionary *)recursivePathsWithFolderOfType:(NSString *)type inDirectory:(NSString *)directoryPath;
++ (NSArray *)recursivePathsForResourcesOfType:(NSString *)type inDirectory:(NSString *)directoryPath;+(void)copyFilesRecursiveOfType:(NSString *)type inDirectory:(NSString *)directoryPath toDir:(NSString*)destDir deleteOldFiles:(BOOL)toDelete;
++(void)copyFile:(NSString*)srcPath toDir:(NSString*)destDir;
 @end
