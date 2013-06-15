@@ -30,12 +30,17 @@ alert = nil;\
 
 
 //====== constants ======
+#define THEME_BLACK 6031
+#define THEME_WHITE 6032
+
 #define DEFAULT_FONT_SIZE 14
-#define DEFAULT_THEME @"THEME_WRITE"
+#define DEFAULT_THEME THEME_WHITE
 
 #define UDF_FONT_SIZE @"UDF_FONT_SIZE"
 #define UDF_THEME @"UDF_THEME"
 #define UDF_CURRENT_VERSION @"UDF_CURRENT_VERSION"
+
+#define UDF_LAST_READ_BOOK @"UDF_LAST_READ_BOOK"
 
 
 

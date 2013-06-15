@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "BookTheme.h"
 
-#define THEME_WRITE @"THEME_WRITE"
-#define THEME_BLACK @"THEME_BLACK"
 
 @interface BookThemeManage : NSObject
 @property (nonatomic,retain) NSMutableDictionary* bookThemes;

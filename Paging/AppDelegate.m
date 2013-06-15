@@ -24,6 +24,35 @@
     [_viewController release];
     [super dealloc];
 }
+-(BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+
+    /*
+     升级须知
+     每次app生新版本，
+     1、appVersion加一
+     2、然后在case中做对应修改
+     */
+    int appVersion=1;
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    int currentVersion=[def integerForKey:UDF_CURRENT_VERSION];
+    if (appVersion!=currentVersion) { //未升级
+        switch (currentVersion) {
+            case 0:
+                //首次初始化
+                [def setInteger:DEFAULT_FONT_SIZE forKey:UDF_FONT_SIZE];
+                [def setValue:[StringUtil int2String:DEFAULT_THEME] forKey:UDF_THEME];
+                [def setValue:@"" forKey:UDF_LAST_READ_BOOK];
+                [self copyResources];
+            case 1:
+                break;
+        }
+        [def setInteger:appVersion forKey:UDF_CURRENT_VERSION];
+//        [def synchronize];
+    }
+
+    return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -51,35 +80,7 @@
     self.window.rootViewController = _tabBarController;
     [self.window makeKeyAndVisible];
     
-    /*
-     升级须知
-     每次app生新版本，
-     1、appVersion加一
-     2、然后在case中做对应修改
-     */
-    int appVersion=1;
-    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
-    int currentVersion=[def integerForKey:UDF_CURRENT_VERSION];
-    if (appVersion!=currentVersion) { //未升级
-        switch (currentVersion) {
-            case 0:
-                //首次初始化
-                [def setInteger:DEFAULT_FONT_SIZE forKey:UDF_FONT_SIZE];
-                [def setValue:DEFAULT_THEME forKey:UDF_THEME];
-//                [self copyResources];
-            case 1:
-                break;
-        }
-        [def setInteger:appVersion forKey:UDF_CURRENT_VERSION];
-    }
 
-    
-    
-    
-    
-    
-    
-    [self copyResources];
     
     return YES;
 }
@@ -90,7 +91,11 @@
     NSString *dicpath = [NSString stringWithFormat:@"%@/Library/web",NSHomeDirectory()];
     
     [FileUtil copyFilesRecursiveOfType:nil inDirectory:srcPath toDir:dicpath deleteOldFiles:NO];
-
+    NSString* srcPath2=[[[NSBundle mainBundle] resourcePath ] stringByAppendingPathComponent:@"resource"];
+    
+    NSString *dicpath2 = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
+    
+    [FileUtil copyFilesRecursiveOfType:nil inDirectory:srcPath2 toDir:dicpath2 deleteOldFiles:NO];
 
 }
 

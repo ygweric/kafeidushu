@@ -149,4 +149,21 @@
     }
 
 }
+
++(BOOL)deleteFile:(NSString*)filePath{
+     NSFileManager* fm= [NSFileManager defaultManager];
+    NSError* error=nil;
+    [fm removeItemAtPath:filePath error:&error];
+    if(error){
+        NSLog(@"error!!!!-%s:%d--%@",__FUNCTION__,__LINE__,[error localizedDescription]);
+        return NO;
+    }else{
+        return YES;
+    }
+}
++(BOOL)isExistFile:(NSString*)filePath{
+    NSFileManager* fm= [NSFileManager defaultManager];
+    return [fm fileExistsAtPath:filePath];
+   
+}
 @end

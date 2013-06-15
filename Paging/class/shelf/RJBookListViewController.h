@@ -18,5 +18,5 @@
 - (IBAction)doComment:(id)sender;
 - (IBAction)doList:(id)sender;
 - (void) gotoPage:(int) pageNum;
-
+- (IBAction)refreshBooks:(id)sender;
 @end

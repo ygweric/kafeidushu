@@ -8,10 +8,13 @@
 
 #import "RJBookList.h"
 #import "ReaderViewController.h"
+#import "FileUtil.h"
+#import "RJBookListViewController.h"
 
-
-@implementation RJBookList
-@synthesize nc;
+@implementation RJBookList{
+    int longPressTag;
+}
+@synthesize nc,blVC;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -62,7 +65,7 @@
     
     [self addSubview:FirstView];
     
-    
+//    UILongPressGestureRecognizer *longPress = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showDeleteDialog:)]autorelease];
     for(int i=0;i<[bookData.books count];i++)
     {
         
@@ -73,6 +76,10 @@
         button.tag = i;
         [button setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:singleBook.icon ofType:nil]] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(doReadBook:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UILongPressGestureRecognizer *longPress = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showDeleteDialog:)]autorelease];
+        [button addGestureRecognizer:longPress];
+        
         [FirstView addSubview:button];
         [FirstView bringSubviewToFront:button];
         
@@ -104,6 +111,32 @@
      */
 
 }
+-(void)showDeleteDialog:(UILongPressGestureRecognizer*)sender{
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        longPressTag=sender.view.tag;
+        RJSingleBook* singleBook = [bookData.books objectAtIndex:longPressTag];
+        
+        UIAlertView* alert=[[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"确定删除'%@'吗",singleBook.name] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil]autorelease];
+        [alert show];
+    }
+    
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    switch (buttonIndex) {
+        case 1:
+            [alertView dismissWithClickedButtonIndex:-1 animated:NO];
+            NSLog(@"delete book......");
+             RJSingleBook* singleBook = [bookData.books objectAtIndex:longPressTag];
+            [FileUtil deleteFile:singleBook.bookPath];
+            Alert2(@"删除成功");
+            [((RJBookListViewController*)blVC) refreshBooks:nil];
+            break;
+            
+        default:
+            break;
+    }
+}
 
 -(void) doReadBook:(id)sender
 {
@@ -115,13 +148,21 @@
 -(void) readBook:(NSInteger)i
 {
     
-    ReaderViewController *readerVC = [[[ReaderViewController alloc]init]autorelease];
      RJSingleBook* singleBook = [bookData.books objectAtIndex:i];
-    readerVC.filePath=singleBook.bookPath;
-    UINavigationController* navVC=[[[UINavigationController alloc]initWithRootViewController:readerVC]autorelease];
-//	[self.nc pushViewController:readerVC animated:YES];
-    [self.nc presentModalViewController:navVC animated:YES];
+    [self readBookWithPath:singleBook.bookPath];
 }
+-(void) readBookWithPath:(NSString*)bookPath
+{
+    if([FileUtil isExistFile:bookPath]){
+        ReaderViewController *readerVC = [[[ReaderViewController alloc]init]autorelease];
+        readerVC.filePath=bookPath;
+        NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+        [def setValue:bookPath forKey:UDF_LAST_READ_BOOK];
+        UINavigationController* navVC=[[[UINavigationController alloc]initWithRootViewController:readerVC]autorelease];
+        [self.nc presentModalViewController:navVC animated:YES];
+    }
+}
+
 
 -(void) doTableViewShowOrHide
 {

@@ -79,6 +79,8 @@
     
     [self showBookShelf];
     
+//    [self refreshBooks:nil];
+    
 //    rect = CGRectMake(150, 445, 20, 10);
 //    pageControl = [[UIPageControl alloc] initWithFrame:rect];
 //    pageControl.numberOfPages = 1;
@@ -87,6 +89,16 @@
 //    [self.view addSubview:pageControl];
     
 //    [pageControl release];
+//    [self performSelector:@selector(showLastRead) withObject:nil afterDelay:0.5];
+    [self showLastRead];
+    
+}
+-(void)showLastRead{
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    NSString* lastBook=[def valueForKey:UDF_LAST_READ_BOOK];
+    if (![StringUtil isNilOrEmpty:lastBook]) {
+        [listView readBookWithPath:lastBook];
+    }
 }
 -(void)showBookShelf{
     if (listView) {
@@ -97,6 +109,7 @@
     CGRect rect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     self.view.frame = rect;
     listView = [[[RJBookList alloc]initWithFrame:rect] autorelease];
+    listView.blVC=self;
     listView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
     listView.pagingEnabled = YES;
     listView.delegate = self;

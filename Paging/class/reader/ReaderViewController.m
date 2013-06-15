@@ -272,7 +272,7 @@
     isSimpleViewShowing=NO;
     suitableEncoding=INT32_MAX;
     
-     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];    
     fontSize=[def integerForKey:UDF_FONT_SIZE];
     
     _vPageBg=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT)];
@@ -1021,8 +1021,9 @@
 #define TAG_SIMPLE_VIEW_FONT_SLIDE 6021
 
 #define TAG_SIMPLE_VIEW_THEME 603
-#define TAG_SIMPLE_VIEW_THEME_BLACK 6031
-#define TAG_SIMPLE_VIEW_THEME_WHITE 6032
+#define TAG_SIMPLE_VIEW_THEME_BLACK THEME_BLACK //6031
+#define TAG_SIMPLE_VIEW_THEME_WHITE THEME_WHITE //6032
+#define TAG_SIMPLE_VIEW_THEME_CHECK 603001
 
 
 #pragma mark -
@@ -1314,8 +1315,9 @@
         UIButton* btWhite=(UIButton*)[_vTheme viewWithTag:TAG_SIMPLE_VIEW_THEME_WHITE];
         [btWhite addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventTouchUpInside];
 
-        
-        
+        UIImageView* ivCheck=[[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"check"]]autorelease];
+        ivCheck.tag=TAG_SIMPLE_VIEW_THEME_CHECK;
+        [_vTheme addSubview:ivCheck];
         _vTheme.layer.cornerRadius = 6;
         _vTheme.layer.masksToBounds = YES;
         
@@ -1326,27 +1328,34 @@
         _vTheme.frame=CGRectMake((frame.size.width-_vTheme.frame.size.width)/2, 100, _vTheme.frame.size.width, _vTheme.frame.size.height);
         [self.view addSubview:_vTheme];
         isSimpleViewShowing=YES;
+        [self updateThemeCheck];
+        
+        
     } else {
         [_vTheme removeFromSuperview];
         isSimpleViewShowing=NO;
     }
     [UIView commitAnimations];
 }
+-(void)updateThemeCheck{
+    UIImageView* ivCheck=(UIImageView*)[_vTheme viewWithTag:TAG_SIMPLE_VIEW_THEME_CHECK];
+    
+    NSUserDefaults* df=[NSUserDefaults standardUserDefaults];
+    NSString* th=[df valueForKey:UDF_THEME];
+    UIButton* btTheme=(UIButton*)[_vTheme viewWithTag:th.intValue];
+    ivCheck.frame=CGRectMake(btTheme.frame.origin.x+ btTheme.frame.size.width-10, 10,ivCheck.frame.size.width,ivCheck.frame.size.height);
+}
+
 -(void)changeTheme:(UIButton*)sender{
-    NSString* theme=nil;
-    switch (sender.tag) {
-        case TAG_SIMPLE_VIEW_THEME_BLACK:
-            theme=THEME_BLACK;
-            break;
-        case TAG_SIMPLE_VIEW_THEME_WHITE:
-            theme=THEME_WRITE;
-            break;
-    }
-    [self updateThemeByTheme:theme];
+    int theme=sender.tag;
+
+    [self updateThemeByTheme:[StringUtil int2String:theme]];
     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
-    [def setValue:theme forKey:UDF_THEME];
+    [def setValue:[StringUtil int2String:theme] forKey:UDF_THEME];
     [self updatePageView];
     [leavesView changeTheme];
+    
+    [self updateThemeCheck];
 }
 
 -(void)showFontView{

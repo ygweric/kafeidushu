@@ -13,5 +13,5 @@
 +(BOOL)isNilOrEmpty:(NSString*) s;
 +(NSString*)deleteSuffix:(NSString*) suffix withTarget:(NSString*) targetS;
 + (NSString *)createUUID;
-
++(NSString*)int2String:(int)value;
 @end

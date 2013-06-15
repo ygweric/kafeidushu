@@ -35,7 +35,9 @@
     CFRelease(theUUID);
     return [(NSString *)string autorelease];
 }
-
++(NSString*)int2String:(int)value{
+    return [NSString stringWithFormat:@"%d",value];
+}
 
 
 

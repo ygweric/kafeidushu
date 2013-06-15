@@ -24,14 +24,14 @@ static BookThemeManage* instance;
         btWrite.colLbContnetBg=[UIColor whiteColor];
         btWrite.colFont=[UIColor blackColor];
         btWrite.colTopPageReverseOverlay=[UIColor whiteColor];
-        [instance.bookThemes setValue:btWrite forKey:THEME_WRITE];
+        [instance.bookThemes setValue:btWrite forKey:[StringUtil int2String:THEME_WHITE]];
         
         BookTheme* btBlack=[[[BookTheme alloc]init]autorelease];
         btBlack.colVBg=[UIColor blackColor];
         btBlack.colLbContnetBg=[UIColor blackColor];
         btBlack.colFont=[UIColor whiteColor];
         btBlack.colTopPageReverseOverlay=[UIColor blackColor];
-        [instance.bookThemes setValue:btBlack forKey:THEME_BLACK];
+        [instance.bookThemes setValue:btBlack forKey:[StringUtil int2String:THEME_BLACK]];
         
     }
     return instance;
