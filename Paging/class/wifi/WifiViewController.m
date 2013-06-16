@@ -12,6 +12,8 @@
 #import "DDLog.h"
 #import "DDTTYLogger.h"
 #import "MyHTTPConnection.h"
+#import "AppDelegate.h"
+#import "RJBookListViewController.h"
 
 
 
@@ -113,6 +115,9 @@
     NSLog(@"WifiViewController---dealloc");
     [self moveAllFileToDocument];
     [ [ UIApplication sharedApplication ] setIdleTimerDisabled:NO ] ;
+    AppDelegate* delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    RJBookListViewController* vc= (RJBookListViewController*)delegate.viewController;
+    [vc refreshBooks:nil];
     
     [httpServer stop];
     [httpServer release];
