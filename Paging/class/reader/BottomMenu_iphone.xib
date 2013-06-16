@@ -369,7 +369,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="157534397">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="800351009">
@@ -443,7 +443,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 100}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="342260943"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -454,7 +453,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="887945310">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="23765270">
@@ -730,7 +729,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 282}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="23765270"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -1361,7 +1359,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">字体亮度</string>
+						<string key="IBUIText">字体大小</string>
 						<reference key="IBUITextColor" ref="780140442"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
