@@ -89,8 +89,8 @@
 //    [self.view addSubview:pageControl];
     
 //    [pageControl release];
-//    [self performSelector:@selector(showLastRead) withObject:nil afterDelay:0.5];
-    [self showLastRead];
+    [self performSelector:@selector(showLastRead) withObject:nil afterDelay:0.3];
+//    [self showLastRead];
     
 }
 -(void)showLastRead{

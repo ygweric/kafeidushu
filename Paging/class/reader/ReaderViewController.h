@@ -32,6 +32,8 @@
 @property (retain, nonatomic) UIView* vJump;
 @property (retain, nonatomic) UIView* vTheme;
 @property (retain, nonatomic) UIView* vFont;
+@property (retain, nonatomic) UIView* vLight;
+@property (retain, nonatomic) UIView* vCover;
 
 
 

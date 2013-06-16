@@ -31,6 +31,11 @@
 #define FONT_VALUE_WITH_SLIDE(v) (16*v +8)
 #define SLIDE_VALUE_WITH_FONT(v) ((v-8)/16.0)
 
+//#define ALPHA_VALUE_WITH_SLIDE(v) (-0.5*v+0.5)
+//#define SLIDE_VALUE_WITH_ALPHA(v) ((v-0.5)/(-0.5))
+#define ALPHA_VALUE_WITH_SLIDE(v) (-0.8*v+0.8)
+#define SLIDE_VALUE_WITH_ALPHA(v) ((v-0.8)/(-0.8))
+
 
 #define READ_TRY_COUNT_MAX 4
 
@@ -93,6 +98,8 @@
 @synthesize vJump=_vJump;
 @synthesize vTheme=_vTheme;
 @synthesize vFont=_vFont;
+@synthesize vLight=_vLight;
+@synthesize vCover=_vCover;
 
 
 #pragma mark paging
@@ -363,6 +370,13 @@
     self.navigationItem.leftBarButtonItem = flipButton;
     self.navigationItem.title=_fileName;
     
+    self.vCover=[[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT)]autorelease];
+    _vCover.backgroundColor=[UIColor blackColor];    
+    [_vCover setUserInteractionEnabled:NO];
+    _vCover.alpha=[def floatForKey:UDF_ALPHA];
+    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    [mainWindow addSubview: _vCover];
+    
 }
 -(void)updateThemeByTheme:(NSString*)theme{
     BookTheme* bt=[[BookThemeManage share]getBookThemeByTheme:theme];
@@ -372,6 +386,7 @@
 }
 
 -(void)goBack:(id)sender{
+    [_vCover removeFromSuperview];    
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -1004,6 +1019,7 @@
 #define TAG_MENU_VIEW_SETTING_ENCODING 3063
 #define TAG_MENU_VIEW_SETTING_SET 3064
 #define TAG_MENU_VIEW_SETTING_HELP 3065
+#define TAG_MENU_VIEW_SETTING_LIGHT 3066
 
 
 
@@ -1024,6 +1040,9 @@
 #define TAG_SIMPLE_VIEW_THEME_BLACK THEME_BLACK //6031
 #define TAG_SIMPLE_VIEW_THEME_WHITE THEME_WHITE //6032
 #define TAG_SIMPLE_VIEW_THEME_CHECK 603001
+
+#define TAG_SIMPLE_VIEW_LIGHT 604
+#define TAG_SIMPLE_VIEW_LIGHT_SLIDE 6041
 
 
 #pragma mark -
@@ -1047,6 +1066,7 @@
         [self showJumpView:NO];
         [self showFontView:NO];
         [self showThemeView:NO];
+        [self showLightView:NO];
         isYes=YES;
     }
     return isYes;
@@ -1116,11 +1136,12 @@
         UIButton* btShowFont= (UIButton*)[_vMenuSetting viewWithTag:TAG_MENU_VIEW_SETTING_FONT];
         [btShowFont addTarget:self action:@selector(showFontView) forControlEvents:UIControlEventTouchUpInside];
         
+        UIButton* btShowLight= (UIButton*)[_vMenuSetting viewWithTag:TAG_MENU_VIEW_SETTING_LIGHT];
+        [btShowLight addTarget:self action:@selector(showLightView) forControlEvents:UIControlEventTouchUpInside];
+        
         
         //=============
-//        UISegmentedControl* segMenu=(UISegmentedControl*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT];
-//        segMenu.selectedSegmentIndex=0;
-//        [segMenu addTarget:self action:@selector(changeMenuSegment:) forControlEvents:UIControlEventValueChanged];
+
         
         
         self.btMenuTool=(UIButton*)[self.vMenu viewWithTag:TAG_MENU_SEGMENT_TOOL];
@@ -1351,7 +1372,9 @@
 
     [self updateThemeByTheme:[StringUtil int2String:theme]];
     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+//    NSLog(@"changeTheme---begin---theme:%@",[def valueForKey:UDF_THEME]);
     [def setValue:[StringUtil int2String:theme] forKey:UDF_THEME];
+//    NSLog(@"changeTheme---end---theme:%@",[def valueForKey:UDF_THEME]);
     [self updatePageView];
     [leavesView changeTheme];
     
@@ -1402,6 +1425,46 @@
     PageInfo* pi= [pageInfoManage getPageInfoAtIndex:currentPageIndex];
     [self jumpToOffsetWithLeaves:pi.dataOffset];
 }
+-(void)showLightView{
+    [self showLightView:YES];
+}
+-(void)showLightView:(BOOL)toShow{
+    if (isBottomMenuShowing) {
+        [self showBottomMenu:NO];
+        isBottomMenuShowing=NO;
+    }
+    if (!self.vLight) {
+        NSArray* views= [[NSBundle mainBundle] loadNibNamed:@"BottomMenu_iphone" owner:self options:nil] ;
+        self.vLight= [self findViewWithTag:views tag:TAG_SIMPLE_VIEW_LIGHT];
+        UISlider* sdLight= (UISlider*)[_vLight viewWithTag:TAG_SIMPLE_VIEW_LIGHT_SLIDE];
+        [sdLight addTarget:self action:@selector(changeLight:) forControlEvents:UIControlEventValueChanged];
+        NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+        sdLight.value=SLIDE_VALUE_WITH_ALPHA([def floatForKey:UDF_ALPHA]);
+        
+        _vLight.layer.cornerRadius = 6;
+        _vLight.layer.masksToBounds = YES;
+        
+    }
+    
+    if (toShow) {
+        CGRect frame=self.view.frame;
+        _vLight.frame=CGRectMake((frame.size.width-_vLight.frame.size.width)/2, 100, _vLight.frame.size.width, _vLight.frame.size.height);
+        [self.view addSubview:_vLight];
+        isSimpleViewShowing=YES;
+    } else {
+        [_vLight removeFromSuperview];
+        isSimpleViewShowing=NO;
+    }
+    [UIView commitAnimations];
+}
+-(void)changeLight:(UISlider*)sender{
+    float lightValue=ALPHA_VALUE_WITH_SLIDE(sender.value);
+    NSLog(@"changeLight----lightValue:%f",lightValue);
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    [def setFloat:lightValue forKey:UDF_ALPHA];
+    _vCover.alpha=lightValue;
+}
+
 -(void)addBookMark:(id)sender{
     if (isBottomMenuShowing) {
         [self showBottomMenu:NO];

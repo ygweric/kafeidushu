@@ -35,11 +35,14 @@
      */
     int appVersion=1;
     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+//    NSLog(@"UDF_THEME:%@",[def valueForKey:UDF_THEME]);
     int currentVersion=[def integerForKey:UDF_CURRENT_VERSION];
     if (appVersion!=currentVersion) { //未升级
+        NSLog(@"app upgrade appVersion%d,currentVersion:%d",appVersion,currentVersion);
         switch (currentVersion) {
             case 0:
                 //首次初始化
+                [def setFloat:DEFAULT_ALPHA forKey:UDF_ALPHA];
                 [def setInteger:DEFAULT_FONT_SIZE forKey:UDF_FONT_SIZE];
                 [def setValue:[StringUtil int2String:DEFAULT_THEME] forKey:UDF_THEME];
                 [def setValue:@"" forKey:UDF_LAST_READ_BOOK];

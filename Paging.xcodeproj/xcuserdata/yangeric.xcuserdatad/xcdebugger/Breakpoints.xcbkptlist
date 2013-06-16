@@ -7,13 +7,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Paging/class/shelf/RJBookList.m"
-         timestampString = "393008202.244733"
+         filePath = "Paging/class/reader/ReaderViewController.m"
+         timestampString = "393053447.955194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
-         landmarkName = "-initView"
+         startingLineNumber = "1465"
+         endingLineNumber = "1465"
+         landmarkName = "-changeLight:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -21,48 +21,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Paging/class/reader/ReaderViewController.m"
-         timestampString = "393010518.404187"
+         timestampString = "393053729.317536"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1346"
-         endingLineNumber = "1346"
-         landmarkName = "-updateThemeCheck"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Paging/AppDelegate.m"
-         timestampString = "393010729.184305"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "40"
-         endingLineNumber = "40"
-         landmarkName = "-application:willFinishLaunchingWithOptions:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Paging/class/shelf/RJBookListViewController.m"
-         timestampString = "393010842.217693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
-         landmarkName = "-showLastRead"
+         startingLineNumber = "378"
+         endingLineNumber = "378"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
-   <ExceptionBreakpoints>
-      <ExceptionBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         scope = "0"
-         stopOnStyle = "0">
-      </ExceptionBreakpoint>
-   </ExceptionBreakpoints>
 </Bucket>
