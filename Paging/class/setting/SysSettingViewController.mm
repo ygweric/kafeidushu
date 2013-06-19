@@ -9,6 +9,7 @@
 #import "SysSettingViewController.h"
 #import "WifiViewController.h"
 #import "AboutMeViewController.h"
+#import "HelpViewController.h"
 
 
 
@@ -106,13 +107,8 @@ enum{
     NSString* key= [[datasource objectForKey:[self getIndexKey:indexPath.section]] objectAtIndex:indexPath.row];
     lbTitle.frame=CGRectMake(lbTitle.frame.origin.x, lbTitle.frame.origin.y, 250, lbTitle.frame.size.height);
     lbTitle.text =LocalizedString(key);
-    if (indexPath.row==3) {
-        UIImageView* ivIcon=(UIImageView*)[cell viewWithTag:tag_cell_icon];
-        ivIcon.image=[UIImage imageNamed:@"vip"];
-    }
-   
-    
-    
+
+
     
     return cell;
 }
@@ -209,8 +205,11 @@ enum{
                     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=661040207"]];
                     break;
 
-                     case 3:
+                case 3:
                     controller =[[[WifiViewController alloc]initWithNibName:@"WifiViewController" bundle:nil]autorelease];
+                    break;
+                case 4:
+                    controller =[[[HelpViewController alloc]initWithNibName:@"HelpViewController" bundle:nil]autorelease];
                     break;
             }
         }

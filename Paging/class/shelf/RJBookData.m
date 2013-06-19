@@ -67,23 +67,14 @@ static RJBookData *shareBookData = nil;
         if ([fname hasSuffix:@".txt"]) {
             RJSingleBook* singleBook = [[[RJSingleBook alloc]init]autorelease];
             singleBook.name=fname;
-            singleBook.icon =@"default_icon.jpg";
+            singleBook.icon =@"default_icon.png";
             singleBook.bookPath=fpath;
             [books addObject:singleBook];
         }
         
        
     }
-//    for (int i=0; i<60; i++) {
-//        RJSingleBook* singleBook = [[RJSingleBook alloc]init];
-//        singleBook.name=[NSString stringWithFormat:@"name-%d",i];
-//        singleBook.icon =@"default_icon.png";
-//        [books addObject:singleBook];
-//        [singleBook release];
-//
-//        
-//    }
-    
+
     
     
 }

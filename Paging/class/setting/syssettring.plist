@@ -4,10 +4,11 @@
 <dict>
 	<key>syssettring</key>
 	<array>
-		<string>set_feedback</string>
-		<string>set_aboutme</string>
-		<string>set_rateme</string>
-		<string>wifi</string>
+		<string>意见反馈</string>
+		<string>关于我们</string>
+		<string>给我们评分</string>
+		<string>wifi传书</string>
+		<string>帮助</string>
 	</array>
 	<key>sns</key>
 	<array>

@@ -71,7 +71,7 @@
         
         RJSingleBook* singleBook = [bookData.books objectAtIndex:i];
         
-        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138, 65, 85);
+        rect = CGRectMake(20+(i%3*100), 52+(i/3)*138, 68, 68);
         UIButton* button= [[[UIButton alloc]initWithFrame:rect]autorelease];
         button.tag = i;
         [button setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:singleBook.icon ofType:nil]] forState:UIControlStateNormal];
@@ -83,7 +83,7 @@
         [FirstView addSubview:button];
         [FirstView bringSubviewToFront:button];
         
-        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138-35, 65, 40);
+        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138-25, 65, 40);
 //        rect = CGRectMake(20+(i%3*100), 35+(i/3)*138+85, 65, 20);
         UILabel* lbTitle= [[[UILabel alloc]initWithFrame:rect]autorelease];
         lbTitle.text=singleBook.name;

@@ -10,6 +10,10 @@
 		5F0096891768CF0900432DDF /* LableMargin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0096881768CF0900432DDF /* LableMargin.m */; };
 		5F00968C1768D8A500432DDF /* BookTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F00968B1768D8A500432DDF /* BookTheme.m */; };
 		5F00968F1768D91100432DDF /* BookThemeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F00968E1768D91100432DDF /* BookThemeManage.m */; };
+		5F10C7E41771E6200021013D /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F10C7E21771E6200021013D /* HelpViewController.m */; };
+		5F10C7E51771E6200021013D /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F10C7E31771E6200021013D /* HelpViewController.xib */; };
+		5F10C7E81771E7FD0021013D /* default_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F10C7E61771E7FD0021013D /* default_icon.png */; };
+		5F10C7E91771E7FD0021013D /* default_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F10C7E71771E7FD0021013D /* default_icon@2x.png */; };
 		5F117CD5176D7AA200EAF9C1 /* icon_adjust_light_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F117CD3176D7AA200EAF9C1 /* icon_adjust_light_small.png */; };
 		5F117CD6176D7AA200EAF9C1 /* icon_adjust_light_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F117CD4176D7AA200EAF9C1 /* icon_adjust_light_small@2x.png */; };
 		5F117CD9176D8A3100EAF9C1 /* wifi_logo@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F117CD7176D8A3100EAF9C1 /* wifi_logo@2x.jpg */; };
@@ -63,8 +67,6 @@
 		5F14D25E176C815800B40321 /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F14D25C176C815800B40321 /* 57.png */; };
 		5F14D25F176C815800B40321 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F14D25D176C815800B40321 /* 114.png */; };
 		5F14D261176CC64700B40321 /* resource in Resources */ = {isa = PBXBuildFile; fileRef = 5F14D260176CC64700B40321 /* resource */; };
-		5F1D66721765CAFF0087E2BB /* default_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66201765CAFF0087E2BB /* default_icon.jpg */; };
-		5F1D66731765CAFF0087E2BB /* default_icon@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66211765CAFF0087E2BB /* default_icon@2x.jpg */; };
 		5F1D66741765CAFF0087E2BB /* icon_about_us.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66221765CAFF0087E2BB /* icon_about_us.jpg */; };
 		5F1D66751765CAFF0087E2BB /* icon_about_us@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66231765CAFF0087E2BB /* icon_about_us@2x.jpg */; };
 		5F1D66761765CAFF0087E2BB /* icon_add_bookmark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D66241765CAFF0087E2BB /* icon_add_bookmark.jpg */; };
@@ -258,6 +260,11 @@
 		5F00968B1768D8A500432DDF /* BookTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookTheme.m; sourceTree = "<group>"; };
 		5F00968D1768D91100432DDF /* BookThemeManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookThemeManage.h; sourceTree = "<group>"; };
 		5F00968E1768D91100432DDF /* BookThemeManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookThemeManage.m; sourceTree = "<group>"; };
+		5F10C7E11771E6200021013D /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		5F10C7E21771E6200021013D /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		5F10C7E31771E6200021013D /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
+		5F10C7E61771E7FD0021013D /* default_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_icon.png; sourceTree = "<group>"; };
+		5F10C7E71771E7FD0021013D /* default_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_icon@2x.png"; sourceTree = "<group>"; };
 		5F117CD3176D7AA200EAF9C1 /* icon_adjust_light_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_adjust_light_small.png; sourceTree = "<group>"; };
 		5F117CD4176D7AA200EAF9C1 /* icon_adjust_light_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_adjust_light_small@2x.png"; sourceTree = "<group>"; };
 		5F117CD7176D8A3100EAF9C1 /* wifi_logo@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wifi_logo@2x.jpg"; sourceTree = "<group>"; };
@@ -318,8 +325,6 @@
 		5F12CAB417682431004480C2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5F12CAB617682438004480C2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5F12CAB81768244F004480C2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		5F12CABF176828FC004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		5F12CAC217682907004480C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5F12CAC417682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5F12CAC517682915004480C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5F12CAC7176829A4004480C2 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
@@ -340,8 +345,6 @@
 		5F14D25C176C815800B40321 /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
 		5F14D25D176C815800B40321 /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		5F14D260176CC64700B40321 /* resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resource; sourceTree = "<group>"; };
-		5F1D66201765CAFF0087E2BB /* default_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default_icon.jpg; sourceTree = "<group>"; };
-		5F1D66211765CAFF0087E2BB /* default_icon@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default_icon@2x.jpg"; sourceTree = "<group>"; };
 		5F1D66221765CAFF0087E2BB /* icon_about_us.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon_about_us.jpg; sourceTree = "<group>"; };
 		5F1D66231765CAFF0087E2BB /* icon_about_us@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icon_about_us@2x.jpg"; sourceTree = "<group>"; };
 		5F1D66241765CAFF0087E2BB /* icon_add_bookmark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon_add_bookmark.jpg; sourceTree = "<group>"; };
@@ -625,6 +628,9 @@
 				5F12CA5B17682127004480C2 /* SysSettingViewController.mm */,
 				5F12CA5C17682127004480C2 /* SysSettingViewController.xib */,
 				5F12CA5D17682127004480C2 /* syssettring.plist */,
+				5F10C7E11771E6200021013D /* HelpViewController.h */,
+				5F10C7E21771E6200021013D /* HelpViewController.m */,
+				5F10C7E31771E6200021013D /* HelpViewController.xib */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -765,6 +771,8 @@
 		5F1D661E1765CAFF0087E2BB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				5F10C7E61771E7FD0021013D /* default_icon.png */,
+				5F10C7E71771E7FD0021013D /* default_icon@2x.png */,
 				5F117CD7176D8A3100EAF9C1 /* wifi_logo@2x.jpg */,
 				5F117CD8176D8A3100EAF9C1 /* wifi_logo.jpg */,
 				5F117CD3176D7AA200EAF9C1 /* icon_adjust_light_small.png */,
@@ -779,13 +787,11 @@
 				5F12CAD8176846BE004480C2 /* menu_segment_bg_selected@2x.png */,
 				5F12CAD3176830D9004480C2 /* menu_segment_bg.png */,
 				5F12CAD4176830D9004480C2 /* menu_segment_bg@2x.png */,
-				5F1D66201765CAFF0087E2BB /* default_icon.jpg */,
 				5F12CA6317682288004480C2 /* tool_reader.png */,
 				5F12CA6417682288004480C2 /* tool_reader@2x.png */,
 				5F12CA6517682288004480C2 /* tool_setting.png */,
 				5F12CA6617682288004480C2 /* tool_setting@2x.png */,
 				5F139D5D17674053007864D5 /* button.png */,
-				5F1D66211765CAFF0087E2BB /* default_icon@2x.jpg */,
 				5F1D66221765CAFF0087E2BB /* icon_about_us.jpg */,
 				5F1D66231765CAFF0087E2BB /* icon_about_us@2x.jpg */,
 				5F1D66241765CAFF0087E2BB /* icon_add_bookmark.jpg */,
@@ -1281,8 +1287,6 @@
 				5F3AEEE7176388300082BCBE /* BottomMenu_iphone.xib in Resources */,
 				5F3AEEE8176388300082BCBE /* ReaderViewController_ipad.xib in Resources */,
 				5F3AEEE9176388300082BCBE /* ReaderViewController_iphone.xib in Resources */,
-				5F1D66721765CAFF0087E2BB /* default_icon.jpg in Resources */,
-				5F1D66731765CAFF0087E2BB /* default_icon@2x.jpg in Resources */,
 				5F1D66741765CAFF0087E2BB /* icon_about_us.jpg in Resources */,
 				5F1D66751765CAFF0087E2BB /* icon_about_us@2x.jpg in Resources */,
 				5F1D66761765CAFF0087E2BB /* icon_add_bookmark.jpg in Resources */,
@@ -1437,6 +1441,9 @@
 				5F117CD6176D7AA200EAF9C1 /* icon_adjust_light_small@2x.png in Resources */,
 				5F117CD9176D8A3100EAF9C1 /* wifi_logo@2x.jpg in Resources */,
 				5F117CDA176D8A3100EAF9C1 /* wifi_logo.jpg in Resources */,
+				5F10C7E51771E6200021013D /* HelpViewController.xib in Resources */,
+				5F10C7E81771E7FD0021013D /* default_icon.png in Resources */,
+				5F10C7E91771E7FD0021013D /* default_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1506,6 +1513,7 @@
 				F58D4B681769B2A4005FE072 /* DDTTYLogger.m in Sources */,
 				F58D4B691769B2A4005FE072 /* ContextFilterLogFormatter.m in Sources */,
 				F58D4B6A1769B2A4005FE072 /* DispatchQueueLogFormatter.m in Sources */,
+				5F10C7E41771E6200021013D /* HelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1515,7 +1523,6 @@
 		5F12CAC0176828FC004480C2 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5F12CABF176828FC004480C2 /* en */,
 				5F12CAC417682915004480C2 /* zh-Hans */,
 			);
 			name = Localizable.strings;
@@ -1524,7 +1531,6 @@
 		5F12CAC317682907004480C2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5F12CAC217682907004480C2 /* en */,
 				5F12CAC517682915004480C2 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
@@ -1595,7 +1601,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Paging/class/umeng/UMAnalytics\"",
@@ -1619,7 +1625,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paging/Paging-Prefix.pch";
 				INFOPLIST_FILE = "Paging/Paging-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Paging/class/umeng/UMAnalytics\"",
