@@ -95,7 +95,7 @@
 //    NSString* srcPath= [[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"web"] stringByDeletingLastPathComponent];
     NSString* srcPath=[NSString stringWithFormat:@"%@/Library/web/upload",NSHomeDirectory()];
     
-    NSString *dicpath = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
+    NSString *dicpath = [NSString stringWithFormat:@"%@/Library/books",NSHomeDirectory()];
     
     
     NSFileManager* fm= [NSFileManager defaultManager];

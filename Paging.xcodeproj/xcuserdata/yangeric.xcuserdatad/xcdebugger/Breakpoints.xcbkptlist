@@ -29,5 +29,44 @@
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/class/CocoaHTTPServer/Core/HTTPConnection.m"
+         timestampString = "394179127.974194"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1547"
+         endingLineNumber = "1547"
+         landmarkName = "-directoryIndexFileNames"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/class/CocoaHTTPServer/Core/HTTPConnection.m"
+         timestampString = "394179206.628901"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1644"
+         endingLineNumber = "1644"
+         landmarkName = "-filePathForURI:allowDirectory:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Paging/class/CocoaHTTPServer/Core/HTTPConnection.m"
+         timestampString = "394179207.479601"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1649"
+         endingLineNumber = "1649"
+         landmarkName = "-filePathForURI:allowDirectory:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

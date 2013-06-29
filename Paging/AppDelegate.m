@@ -96,7 +96,7 @@
     [FileUtil copyFilesRecursiveOfType:nil inDirectory:srcPath toDir:dicpath deleteOldFiles:NO];
     NSString* srcPath2=[[[NSBundle mainBundle] resourcePath ] stringByAppendingPathComponent:@"resource"];
     
-    NSString *dicpath2 = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
+    NSString *dicpath2 = [NSString stringWithFormat:@"%@/Library/books",NSHomeDirectory()];
     
     [FileUtil copyFilesRecursiveOfType:nil inDirectory:srcPath2 toDir:dicpath2 deleteOldFiles:NO];
 
